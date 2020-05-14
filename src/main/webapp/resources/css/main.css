@@ -1,3 +1,5 @@
+* { font-family: 'Noto Sans KR', sans-serif; }
+
 .wrapper { min-height: 70vh;}
 .pagination {display: block;}
 .pagination li {display: inline-block;}

@@ -23,8 +23,8 @@
 
 			<!-- Links -->
 			<ul class="navbar-nav ml-auto">
-				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/views/login.jsp"> 로그인 </a></li>
-				<li class="nav-item"><a class="nav-link" href="#!"> 회원가입 </a></li>
+				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/views/user/login.jsp"> 로그인 </a></li>
+				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/views/user/signUp.jsp"> 회원가입 </a></li>
 				<!--   <li class="nav-item">
         <a class="nav-link" href="#!">
           <i class="fab fa-instagram" aria-hidden="true"></i>
