@@ -5,24 +5,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Home</title>
-
-<!-- Font Awesome -->
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-<!-- Google Fonts -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
-<!-- Bootstrap core CSS -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
-<!-- Material Design Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.18.0/css/mdb.min.css" rel="stylesheet">
-
+<%@include file="/views/common/common_top.jsp" %>
 <link href="${pageContext.request.contextPath }/resources/css/main.css"	rel="stylesheet">
 </head>
 <body>
-	<%@include file="./module/top.jsp"%>
+	<%@include file="/views/module/top.jsp"%>
 
 	<div class="container wrapper">
 		<h2 style="margin-top: 60px; display: inline-block;">게시판 메인</h2>
-		<div style="width: 100%;">
+		<div class="container" style="width: 100%;">
 			<a>정렬1</a> <a>정렬2</a> <a>정렬3</a> <a>정렬4</a>
 			<form class="form-inline my-2 my-lg-0"
 				style="display: inline-block; width: 80%;">
@@ -39,7 +30,7 @@
 			</form>
 		</div>
 		<hr>
-		<table class="table">
+		<table class="container table">
 			<thead class="black white-text">
 				<tr>
 					<th scope="col" width="10%">카테고리</th>
@@ -53,7 +44,7 @@
 			<tbody>
 				<tr>
 					<th scope="row">1</th>
-					<td>Mark</td>
+					<td><a href="./board/readBoard.jsp">Mark</a></td>
 					<td>Otto</td>
 					<td>2020-02-02</td>
 					<td>@mdo</td>
@@ -61,7 +52,9 @@
 				</tr>
 			</tbody>
 		</table>
-
+		
+		<div class="container text-right"><button style="width: 100px; padding:5px;" class="btn btn-dark mb-3" onclick="location='./board/writeBoard.jsp'">글쓰기</button></div>
+		
 		<!-- Paging -->
 		<nav aria-label="Page navigation example" style="text-align: center;">
 			<ul class="pagination pg-blue" style="width: 100%;">
@@ -83,8 +76,9 @@
 		</nav>
 	</div>
 	
-
-
-	<%@include file="./module/bottom.jsp"%>
+	
+	<%@include file="/views/module/bottom.jsp"%>
+	
+	<%@include file="/views/common/common_bottom.jsp" %>
 </body>
 </html>
