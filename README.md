@@ -1,2 +1,2 @@
-# BoardWeb
+# WebBoard
 Spring_BoardWeb_TeamProject
