@@ -12,7 +12,7 @@
 <body>
 <div class="container wrapper">
 <!-- Default form contact -->
-<form class="text-center border border-light p-5" action="#!">
+<form class="text-center border border-light p-5" action="../index.jsp">
 
     <p class="h4 mb-4">Read Board</p>
 
@@ -27,7 +27,11 @@
     <div id="defaultContactFormEmail" class="text-left mb-4"><i class="fas fa-clone"></i> 카테고리</div>
 	
 	<!-- Title -->
-    <input type="email" id="defaultContactFormEmail" class="form-control mb-4" placeholder="Title">
+	<div style="text-align: left;">
+	    <input type="text" id="defaultContactFormEmail" class="form-control mb-4" placeholder="Title" style="width: 70%; margin-right: 5%; display: inline-block;">
+	    <button type="button" class="btn btn-amber px-4"><i class="far fa-thumbs-up" aria-hidden="true"></i></button>
+	    <button type="button" class="btn btn-rounded btn-brown"><i class="fas fa-redo pr-2" aria-hidden="true" onclick="#!"></i>목록으로</button>
+    </div>
     
     <!-- Content -->
     <div class="form-group mb-5">
@@ -64,5 +68,5 @@
 </div>
 <%@include file="/views/module/bottom.jsp" %>
 <%@include file="/views/common/common_bottom.jsp" %>
-</body>s
+</body>
 </html>
