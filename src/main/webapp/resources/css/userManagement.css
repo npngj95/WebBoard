@@ -1,0 +1,13 @@
+* { font-family: 'Noto Sans KR', sans-serif; }
+* { box-shadow: 0 0!important;}
+
+.wrapper { margin: 100px auto;}
+.wrapper tr { height: 65px;}
+
+.wrapper button { font-size: 15px!important;}
+
+.wrapper .custom-control-label::before, .custom-control-label::after 
+	{width: 25px!important; height: 25px!important; display:inline-block; vertical-align: top;
+	left:0; right:0;}
+	
+	

@@ -1,4 +1,6 @@
 * { font-family: 'Noto Sans KR', sans-serif; }
 * { box-shadow: 0 0!important;}
 
-.wrapper { margin: 100px auto;}
+.wrapper { margin: 250px auto; width: 800px;}
+
+.btn { font-size: 20px;}
