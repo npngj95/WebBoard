@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>loginForm</title>
+<title>로그인</title>
 <%@include file="/views/common/common_top.jsp" %>
 <link href="${pageContext.request.contextPath }/resources/css/login.css" rel="stylesheet">
 </head>

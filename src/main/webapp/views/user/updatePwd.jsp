@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>비밀번호 수정</title>
 <%@include file="/views/common/common_top.jsp" %>
 
 <link href="${pageContext.request.contextPath }/resources/css/login.css" rel="stylesheet">
