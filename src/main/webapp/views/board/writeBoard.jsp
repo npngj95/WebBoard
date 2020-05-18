@@ -11,35 +11,35 @@
 </head>
 <body>
 <div class="container wrapper">
-<form class="text-center border border-light p-5" action="#!">
+<form class="text-center border border-light p-5" action="writeBoard.do">
 
     <p class="h4 mb-4">Write Board</p>
 
     <!-- Name -->
-    <input type="text" id="defaultContactFormName" class="form-control mb-4" placeholder="Name" readonly>
+    <input type="text" name="u_name" class="form-control mb-4" placeholder="Name" readonly>
 
     <!-- Email -->
-    <input type="email" id="defaultContactFormEmail" class="form-control mb-4" placeholder="E-mail" readonly>
+    <input type="email" name="u_email" class="form-control mb-4" placeholder="E-mail" readonly>
 	
 	<hr>
     <!-- Category -->
-    <select class="browser-default custom-select mb-4">
+    <select name="b_category" class="browser-default custom-select mb-4">
         <option selected hidden="true">Category</option>
         <option value="1">질문</option>
         <option value="2">후기</option>
     </select>
 	
 	<!-- Title -->
-    <input type="email" id="defaultContactFormEmail" class="form-control mb-4" placeholder="Title">
+    <input type="text" name="b_title" class="form-control mb-4" placeholder="Title">
     
     <!-- Content -->
     <div class="form-group">
-        <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="10" placeholder="Content"></textarea>
+        <textarea class="form-control rounded-0" name="b_content" rows="10" placeholder="Content"></textarea>
     </div>
 	
 	<div class="container text-right">
-		<button style="width: 100px; padding:5px;" class="btn btn-dark mb-3" onclick="location='#">글쓰기</button>
-		<button style="width: 100px; padding:5px;" class="btn btn-dark mb-3" onclick="location='../index.jsp'">취소</button>
+		<button type="button" style="width: 100px; height:40px; padding:5px;" class="btn btn-dark mb-3" onclick="#">글쓰기</button>
+		<button type="button" style="width: 100px; height:40px; padding:5px;" class="btn btn-dark mb-3" onclick="location='../index.jsp'">취소</button>
 	</div>
 </form>
 </div>

@@ -17,9 +17,9 @@
 		</button>
 
 		<div class="collapse navbar-collapse" id="navbarColor01">
-			<ul class="navbar-nav mr-auto">
+			<!-- <ul class="navbar-nav mr-auto">
 				<li class="nav-item"><a class="nav-link" href="#">공지사항</a></li>
-			</ul>
+			</ul> -->
 
 			<!-- Links -->
 			<ul class="navbar-nav ml-auto">
