@@ -43,10 +43,10 @@
 	<div class="bg-default py-2 mb-3 d-flex justify-content-between align-items-center">
 		<!-- 전체 선택 -->
 		<div>
-			<button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2" id="checkAll"></button>
+			<button type="button" class="btn btn-outline-white btn-rounded btn-sm p-2 ml-3" id="checkAll"></button>
 		</div>
 		
-		<span class="white-text font-weight-bold">공지글 관리</span>
+		<span class="h5 m-0 white-text  font-weight-bold">공지글 관리</span>
 		
 		<!-- 삭제버튼 -->
 		<div>
@@ -64,32 +64,32 @@
 				<!--Table head-->
 				<thead>
 					<tr>
-						<th width="3%" class="text-center"></th>
-						<th width="5%" class="text-center">Category</th>
-						<th class="text-left">Title</th>
-						<th width="10%" class="text-center">Writer</th>
-						<th width="10%" class="text-center">Input Date</th>
+						<th width="5%" class="h6 text-center"></th>
+						<th width="5%" class="h6 text-center">Category</th>
+						<th class="text-left h6">Title</th>
+						<th width="10%" class="h6 text-center">Writer</th>
+						<th width="10%" class="h6 text-center">Input Date</th>
 					</tr>
 				</thead>
 				<!--Table body-->
 				<tbody>
 					<tr>
-						<th scope="row">
-							<input class="form-check-input ml-0" type="checkbox" name="noticeCheck" value="게시글번호1">
+						<th class="position-relative">
+							<input class="form-check-input m-0 w-50 h-50" type="checkbox" name="noticeCheck" value="게시글번호1">
 						</th>
-						<td class="text-center">공지</td>
-						<td><a href="updateNotice.jsp">게시판 이용수칙</a></td>
-						<td class="text-center">@admin</td>
-						<td class="text-center">2020-05-15</td>
+						<td class="h6 text-center">공지</td>
+						<td class="h6"><a href="updateNotice.jsp">게시판 이용수칙</a></td>
+						<td class="h6 text-center">@admin</td>
+						<td class="h6 text-center">2020-05-15</td>
 					</tr>
 					<tr>
-						<th scope="row">
-							<input class="form-check-input ml-0" type="checkbox" name="noticeCheck" value="게시글번호2">
+						<th class="position-relative">
+							<input class="form-check-input m-0 w-50 h-50" type="checkbox" name="noticeCheck" value="게시글번호2">
 						</th>
-						<td class="text-center">공지</td>
-						<td><a href="updateNotice.jsp">제재 회원 목록</a></td>
-						<td class="text-center">@admin</td>
-						<td class="text-center">2020-05-14</td>
+						<td class="h6 text-center">공지</td>
+						<td class="h6"><a href="updateNotice.jsp">제재 회원 목록</a></td>
+						<td class="h6 text-center">@admin</td>
+						<td class="h6 text-center">2020-05-14</td>
 					</tr>
 				</tbody>
 				<!--Table body-->

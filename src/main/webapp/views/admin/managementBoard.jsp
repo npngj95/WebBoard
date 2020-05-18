@@ -44,10 +44,10 @@
 	<div class="bg-default py-2 mb-3 d-flex justify-content-between align-items-center">
 		<!-- 전체 선택 -->
 		<div>
-			<button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2" id="checkAll"></button>
+			<button type="button" class="btn btn-outline-white btn-rounded btn-sm p-2 ml-3" id="checkAll"></button>
 		</div>
 	
-	 	<span class="white-text font-weight-bold">게시글 관리</span>
+	 	<span class="h5 m-0 white-text font-weight-bold">게시글 관리</span>
 	
 		<!-- 삭제버튼 -->
 	  	<div>
@@ -65,32 +65,32 @@
 				<!--Table head-->
 			    <thead>
 		        	<tr>
-						<th width="3%" class="text-center">  </th>
-				        <th width="5%" class="text-center">Category</th>
-				        <th class="text-left">Title</th>
-				        <th width="10%" class="text-center">Writer</th>
-				    	<th width="10%" class="text-center">Input Date</th>
+						<th width="5%" class="h6 text-center">  </th>
+				        <th width="5%" class="h6 text-center">Category</th>
+				        <th class="text-left h6">Title</th>
+				        <th width="10%" class="h6 text-center">Writer</th>
+				    	<th width="10%" class="h6 text-center">Input Date</th>
 		          	</tr>
 	        	</thead>
 	        	<!--Table body-->
 	        	<tbody>
 	          		<tr>
-		            	<th scope="row">
-		              		<input class="form-check-input ml-0" type="checkbox" name="boardCheck" value="게시글번호1">
-		            	</th>
-	            		<td class="text-center">질문</td>
-	            		<td>####집 어때요?</td>
-	            		<td class="text-center">@mdo</td>
-	            		<td class="text-center">2020-05-15</td>
+		            	<th class="position-relative">
+							<input class="form-check-input m-0 w-50 h-50" type="checkbox" name="boardCheck" value="게시글번호1">
+						</th>
+	            		<td class="h6 text-center">질문</td>
+	            		<td class="h6">####집 어때요?</td>
+	            		<td class="h6 text-center">@mdo</td>
+	            		<td class="h6 text-center">2020-05-15</td>
 	          		</tr>
 	          		<tr>
-	            		<th scope="row">
-	              			<input class="form-check-input ml-0" type="checkbox" name="boardCheck" value="게시글번호2">
-	            		</th>
-	            		<td class="text-center">리뷰</td>
-	            		<td><a href="../board/readBoard.jsp">@@@집 후기입니다 ~</a></td>
-	            		<td class="text-center">@fat</td>
-	            		<td class="text-center">2020-05-14</td>
+	            		<th class="position-relative">
+							<input class="form-check-input m-0 w-50 h-50" type="checkbox" name="boardCheck" value="게시글번호1">
+						</th>
+	            		<td class="h6 text-center">리뷰</td>
+	            		<td class="h6"><a href="../board/readBoard.jsp">@@@집 후기입니다 ~</a></td>
+	            		<td class="h6 text-center">@fat</td>
+	            		<td class="h6 text-center">2020-05-14</td>
 	          		</tr>
 	        	</tbody>
 	        	<!--Table body-->

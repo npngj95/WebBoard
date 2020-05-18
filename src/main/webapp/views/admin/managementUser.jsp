@@ -35,7 +35,7 @@
 	</div>
 	
 	<p class="h2 mb-4 text-center"><a href="./adminMain.jsp">Admin Main</a></p>
-    <p class="h4 mb-4 text-center">유저 조회</p>
+    <p class="h4 mb-4 font-weight-bold text-center">유저 조회</p>
 	
 	<div class="text-right">
 		<button id="checkAll" class="btn btn-primary border-fil">전체 선택</button>
