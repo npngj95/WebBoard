@@ -17,33 +17,29 @@
     		
 		    <div class="text-left mb-4">
 		      <div>ID</div>
-		      <span class="form-control">나의 아이디</span>
+		      <span class="form-control">${user.u_id }나의 아이디</span>
 		    </div>
 		    <div class="text-left mb-4">
 		      <div>Name</div>
-		      <span class="form-control">나의 이름</span>
+		      <span class="form-control">${user.u_name }나의 이름</span>
 		    </div>
 		    <div class="text-left mb-4">
 		      <div>E-Mail</div>
-		      <span class="form-control">나의 이메일</span>
-		    </div>
-		    <div class="text-left mb-4">
-		      <div>Phone</div>
-		      <span class="form-control">나의 전화번호</span>
+		      <span class="form-control">${user.u_email }나의 이메일</span>
 		    </div>
 		    <div class="text-left mb-4">
 		      <div>Gender</div>
-		      <span class="form-control">나의 성별</span>
+		      <span class="form-control">${user.u_gender }나의 성별</span>
 		    </div>
 		    <div class="text-left mb-5">
 		      <div>Input Date</div>
-		      <span class="form-control">나의 가입일</span>
+		      <span class="form-control">${user.u_inputdate }나의 가입일</span>
 		    </div>
 		    
-		    <!-- Sign up button -->
-		    <button class="form-control btn-success btn-block mb-3" type="submit">비밀 번호 변경</button>
-    		<button class="form-control btn-info btn-block mb-3" type="submit">회원 정보 수정</button>
-    		<button class="form-control btn-dark btn-block" type="submit">회원 탈퇴</button>
+		    <!-- button -->
+		    <button class="form-control btn-success btn-block mb-3" type="button" onclick="updatePwd.do?u_id=${user.u_id }">비밀 번호 변경</button>
+    		<button class="form-control btn-info btn-block mb-3" type="button" onclick="updateUser.do?u_id=${user.u_id }">회원 정보 수정</button>
+    		<button class="form-control btn-dark btn-block" type="button" onclick="deleteUser.do?u_id=${user.u_id }">회원 탈퇴</button>
 	</div>
 </div>
 

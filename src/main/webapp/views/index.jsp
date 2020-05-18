@@ -15,8 +15,8 @@
 		<h2 style="margin-top: 60px; display: inline-block;">게시판 메인</h2>
 		<div class="container" style="width: 100%;">
 			<a>정렬1</a> <a>정렬2</a> <a>정렬3</a> <a>정렬4</a>
-			<form class="form-inline my-2 my-lg-0"
-				style="display: inline-block; width: 80%;">
+			<form action="searchBoard.do" method="post"
+				class="form-inline my-2 my-lg-0" style="display: inline-block; width: 80%;">
 				<div style="text-align: right;">
 					<select class="mdb-select md-form colorful-select dropdown-primary">
 					  <option value="1">제 목</option>

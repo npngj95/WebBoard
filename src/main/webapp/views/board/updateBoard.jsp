@@ -11,10 +11,11 @@
 </head>
 <body>
 <div class="container wrapper">
-<form class="text-center border border-light p-5" action="updateBoard.do">
-
+<form class="text-center border border-light p-5" action="updateBoard.do" method="post">
+	<input type="hidden" name="b_num" value="${board.b_num }">
+	
     <p class="h4 mb-4">Update Board</p>
-
+    
     <!-- Category -->
     <select name="b_category" class="browser-default custom-select mb-4">
         <option selected hidden="true">Category</option>
@@ -23,15 +24,15 @@
     </select>
 	
 	<!-- Title -->
-    <input type="text" name="b_title" class="form-control mb-4" placeholder="Title">
+    <input type="text" name="b_title" class="form-control mb-4" placeholder="Title" value="${board.b_title }">
     
     <!-- Content -->
     <div class="form-group">
-        <textarea class="form-control rounded-0" name="b_content" rows="10" placeholder="Content"></textarea>
+        <textarea class="form-control rounded-0" name="b_content" rows="10" placeholder="Content" >${board.b_content }</textarea>
     </div>
 	
 	<div class="container text-right">
-		<button type="button" style="width: 100px; height:40px; padding:5px;" class="btn btn-dark mb-3" onclick="location='#">글 수정</button>
+		<button type="submit" style="width: 100px; height:40px; padding:5px;" class="btn btn-dark mb-3">글 수정</button>
 		<button type="button" style="width: 100px; height:40px; padding:5px;" class="btn btn-dark mb-3" onclick="history.back()">취소</button>
 	</div>
 </form>

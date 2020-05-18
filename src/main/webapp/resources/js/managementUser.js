@@ -15,7 +15,7 @@ $(document).ready(function() {
 	});
 	
 	$("#deleteUser").click(function() {
-		document.userManagement.submit();
+		document.managementUser.submit();
 	});
 	
 	

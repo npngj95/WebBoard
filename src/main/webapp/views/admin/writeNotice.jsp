@@ -12,24 +12,24 @@
 <body>
 <div class="container wrapper">
 <!-- Default form contact -->
-<form class="text-center border border-light p-5" action="#!">
+<form class="text-center border border-light p-5" action="writeBoard.do">
 
     <p class="h4 mb-4">Notice Write</p>
 
     <!-- Name -->
-    <input type="text" id="defaultContactFormName" class="form-control mb-4" value="관리자" readonly>
+    <input type="text" name="b_writer" class="form-control mb-4" value="${admin.a_id }" readonly>
 	
 	<!-- Category -->
-    <input type="text" id="defaultContactFormName" class="form-control mb-4" value="공지" readonly>
+    <input type="text" name="b_category" class="form-control mb-4" value="공지" readonly>
     
 	<hr>
 	
 	<!-- Title -->
-    <input type="email" id="defaultContactFormEmail" class="form-control mb-4" placeholder="Title">
+    <input type="text" name="b_title" class="form-control mb-4" placeholder="Title">
     
     <!-- Content -->
     <div class="form-group">
-        <textarea class="form-control rounded-0 mb-4" id="exampleFormControlTextarea2" rows="10" placeholder="Content"></textarea>
+        <textarea name="b_content" class="form-control rounded-0 mb-4" rows="10" placeholder="Content"></textarea>
     </div>
 
 	<hr>

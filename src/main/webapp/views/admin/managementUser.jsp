@@ -40,7 +40,7 @@
 			<button class="btn btn-danger" data-toggle="modal" data-target="#myModal">선택 삭제</button>
 		</div>
 		
-		<form name="userManagement" action="./deleteUser.jsp" method="post">
+		<form name="managementUser" action="./deleteUser.jsp" method="post">
 		<table class="table border border-dark text-center">
 			<thead>
 				<tr>
@@ -77,7 +77,8 @@
 		</table>
 		</form>
 	</div>
+	<%@include file="/views/module/bottom.jsp"%>
 	<%@include file="/views/common/common_bottom.jsp"%>
-	<script src="${pageContext.request.contextPath }/resources/js/userManagement.js" ></script>
+	<script src="${pageContext.request.contextPath }/resources/js/managementUser.js" ></script>
 </body>
 </html>

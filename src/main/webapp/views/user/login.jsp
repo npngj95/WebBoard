@@ -11,7 +11,7 @@
 <body>
 <div class="container wrapper">
 <!-- Default form login -->
-<form class="text-center border border-light p-5" action="#!">
+<form class="text-center border border-light p-5" action="login.do" method="post">
 
     <p class="h2 mb-4"><a href="../index.jsp">Board Main</a></p>
 	<p class="h4 mb-4">로그인</p>

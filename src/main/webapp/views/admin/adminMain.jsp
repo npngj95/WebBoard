@@ -17,12 +17,12 @@
 			<p class="h4 m-0 py-3 bg-primary text-white"><i class="fas fa-bullhorn mr-3"></i>공지</p>
 			<div class="row-sm">
 				<button type="button" class="h4 btn border-bottom border-linght waves-effect mx-0 my-0 w-100"
-					onclick="location='./noticeWrite.jsp'">
+					onclick="location='./writeNotice.jsp'">
 				공지글 작성</button>
 			</div>
 			<div class="row-sm">
 				<button type="button" class="btn waves-effect mx-0 my-0 w-100" 
-					onclick="location='./noticeManagement.jsp'">
+					onclick="location='./managementNotice.jsp'">
   				공지글 관리</button>
 			</div>
 		</div>
@@ -31,12 +31,12 @@
 			<p class="h4 m-0 py-3 bg-primary text-white"><i class="fas fa-user prefix mr-3"></i>회원</p>
 			<div class="row-sm">
 				<button type="button" class="h4 btn border-bottom border-linght waves-effect mx-0 my-0 w-100"
-					onclick="location='./userManagement.jsp'">
+					onclick="location='./managementUser.jsp'">
 				회원 관리</button>
 			</div>
 			<div class="row-sm">
 				<button type="button" class="btn waves-effect mx-0 my-0 w-100"
-					onclick="location='./boardManagement.jsp'">
+					onclick="location='./managementBoard.jsp'">
   				게시글 관리</button>
 			</div>
 		</div>

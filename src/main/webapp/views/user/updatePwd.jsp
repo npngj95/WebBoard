@@ -16,16 +16,16 @@
 	<p class="h2 mb-4"><a href="../index.jsp">Board Main</a></p>
     <p class="h4 mb-4">비밀번호 변경</p>
     <!-- Password -->
-    <input type="password" id="defaultRegisterFormPassword" class="form-control mb-4" placeholder="Before Password" aria-describedby="defaultRegisterFormPasswordHelpBlock">
+    <input type="password" name="old_pwd" class="form-control mb-4" placeholder="Old Password">
    
 	<!-- Password -->
-    <input type="password" id="defaultRegisterFormPassword" class="form-control mb-4" placeholder="New Password" aria-describedby="defaultRegisterFormPasswordHelpBlock">
+    <input type="password" name="new_pwd" class="form-control mb-4" placeholder="New Password">
    
 	 <!-- Password check -->
-    <input type="password" id="defaultRegisterFormPassword" class="form-control mb-4" placeholder="Password Check" aria-describedby="defaultRegisterFormPasswordHelpBlock">
+    <input type="password" name="new_pwd2" class="form-control mb-4" placeholder="Password Check">
     
     <!-- Password in button -->
-    <button class="btn btn-info btn-block my-4" type="submit">비밀번호 변경</button>
+    <button class="btn btn-info btn-block my-4" type="button" onclick="updatePwd()">비밀번호 변경</button>
 </form>
 
 <%@include file="/views/common/common_bottom.jsp" %>
