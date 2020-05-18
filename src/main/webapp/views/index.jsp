@@ -13,23 +13,31 @@
 
 	<div class="container wrapper">
 		<h2 style="margin-top: 60px; display: inline-block;">게시판 메인</h2>
-		<div class="container" style="width: 100%;">
-			<a>정렬1</a> <a>정렬2</a> <a>정렬3</a> <a>정렬4</a>
-			<form class="form-inline my-2 my-lg-0"
-				style="display: inline-block; width: 80%;">
-				<div style="text-align: right;">
-					<select class="mdb-select md-form colorful-select dropdown-primary">
-					  <option value="1">제 목</option>
-					  <option value="2">글쓴이</option>
-					  <option value="3">내용</option>
-					</select>
-					<input class="form-control mr-sm-2" type="text"
-						placeholder="Search">
-					<button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+
+		<nav class="navbar navbar-expand-lg  md-color">
+			<!-- Navbar brand -->
+			<div class="mb-2">
+				<a class="navbar-brand" href="#">정렬1</a>
+				<a class="navbar-brand"	href="#">정렬2</a> 
+				<a class="navbar-brand" href="#">정렬3</a>
+			</div>
+			
+			<form class="form-inline ml-auto" action="searchBoard.do" method="post">
+				<select class="browser-default custom-select mr-2 mb-2">
+				  <option value="1" selected>제목</option>
+				  <option value="2">글쓴이</option>
+				  <option value="3">내용</option>
+				</select>
+				<div class="row mx-0">
+					<input class="col form-control mt-1" type="text"	placeholder="Search" aria-label="Search">
+					<button class="col btn btn-default my-0 mb-2 ml-3" type="submit">Search</button>
 				</div>
 			</form>
-		</div>
+			<!-- Collapsible content -->
+		</nav>
+
 		<hr>
+		<!-- table -->
 		<table class="container table">
 			<thead class="black white-text">
 				<tr>
@@ -53,7 +61,9 @@
 			</tbody>
 		</table>
 		
-		<div class="container text-right"><button style="width: 100px; padding:5px;" class="btn btn-dark mb-3" onclick="location='./board/writeBoard.jsp'">글쓰기</button></div>
+		<div class="container text-right">
+			<button style="width: 100px; padding:5px;" class="btn btn-dark mb-3" onclick="location='./board/writeBoard.jsp'">글쓰기</button>
+		</div>
 		
 		<!-- Paging -->
 		<nav aria-label="Page navigation example" style="text-align: center;">

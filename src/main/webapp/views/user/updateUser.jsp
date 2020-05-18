@@ -17,16 +17,13 @@
     <p class="h4 mb-4">회원 정보 수정</p>
 	
 	<!-- ID -->
-    <input type="text" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="ID" readonly>
+    <input type="text" name="u_id" class="form-control mb-4" placeholder="ID" readonly>
     
     <!-- Name -->
-    <input type="text" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="Name">
+    <input type="text" name="u_name" class="form-control mb-4" placeholder="Name">
  	
     <!-- E-mail -->
-    <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail">
-
-    <!-- Phone number -->
-    <input type="text" id="defaultRegisterPhonePassword" class="form-control mb-5" placeholder="Phone number" aria-describedby="defaultRegisterFormPhoneHelpBlock">
+    <input type="email" name="u_email" class="form-control mb-4" placeholder="E-mail">
 
     <!-- Sign up button -->
     <button class="btn btn-info btn-block" type="submit">Sign Up</button>

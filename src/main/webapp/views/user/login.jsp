@@ -4,30 +4,30 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>loginForm</title>
+<title>로그인</title>
 <%@include file="/views/common/common_top.jsp" %>
 <link href="${pageContext.request.contextPath }/resources/css/login.css" rel="stylesheet">
 </head>
 <body>
 <div class="container wrapper">
 <!-- Default form login -->
-<form class="text-center border border-light p-5" action="#!">
+<form class="text-center border border-light p-5" action="login.do" method="post">
 
     <p class="h2 mb-4"><a href="../index.jsp">Board Main</a></p>
 	<p class="h4 mb-4">로그인</p>
 	
     <!-- Email -->
-    <input type="text" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="ID">
+    <input type="text" name="u_id" class="form-control mb-4" placeholder="ID">
 
     <!-- Password -->
-    <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password">
+    <input type="password" name="u_pwd" class="form-control mb-4" placeholder="Password">
 
     <div class="d-flex justify-content-around">
         <div>
             <!-- Remember me -->
             <div class="custom-control custom-checkbox text-left">
-                <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember">
-                <label class="custom-control-label" for="defaultLoginFormRemember">Remember me</label>
+                <input type="checkbox" class="custom-control-input" id="RememberMe">
+                <label class="custom-control-label" for="RememberMe">Remember me</label>
             </div>
         </div>
     </div>
