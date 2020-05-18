@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>새 글 작성</title>
+<title>글 내용 수정</title>
 <%@include file="/views/common/common_top.jsp" %>
 <%@include file="/views/module/top.jsp" %>
 <link href="${pageContext.request.contextPath }/resources/css/board.css" rel="stylesheet"> 
@@ -13,15 +13,8 @@
 <div class="container wrapper">
 <form class="text-center border border-light p-5" action="#!">
 
-    <p class="h4 mb-4">Write Board</p>
+    <p class="h4 mb-4">Update Board</p>
 
-    <!-- Name -->
-    <input type="text" id="defaultContactFormName" class="form-control mb-4" placeholder="Name" readonly>
-
-    <!-- Email -->
-    <input type="email" id="defaultContactFormEmail" class="form-control mb-4" placeholder="E-mail" readonly>
-	
-	<hr>
     <!-- Category -->
     <select class="browser-default custom-select mb-4">
         <option selected hidden="true">Category</option>
@@ -38,7 +31,7 @@
     </div>
 	
 	<div class="container text-right">
-		<button style="width: 100px; padding:5px;" class="btn btn-dark mb-3" onclick="location='#">글쓰기</button>
+		<button style="width: 100px; padding:5px;" class="btn btn-dark mb-3" onclick="location='#">글 수정</button>
 		<button style="width: 100px; padding:5px;" class="btn btn-dark mb-3" onclick="location='../index.jsp'">취소</button>
 	</div>
 </form>
