@@ -1,27 +1,27 @@
-package com.web.board.paging;
+ï»¿package com.web.board.paging;
 
 public class PageCriteria {
-	private int page; //ÇöÀç ÆäÀÌÁö
-	private int pageSize; // ÇÑÆäÀÌÁö¿¡ Ç¥½ÃµÉ °Ô½Ã±ÛÀÇ ¼ö
+	private int page; //í˜„ì¬ í˜ì´ì§€
+	private int pageSize; // í•œí˜ì´ì§€ì— í‘œì‹œë  ê²Œì‹œê¸€ì˜ ìˆ˜
 	
 	public int getPageStart() {
 		return (this.page - 1) * this.pageSize;
 	}
 	
-	//±âº»»ı¼ºÀÚ Á¤ÀÇ
-	//±âº» °´Ã¼ »ı¼º½Ã ÃÊ±â°ªÀ» ÁöÁ¤ÇÑ´Ù (1 ÆäÀÌÁö¿¡¼­ 10°³)
+	//ê¸°ë³¸ìƒì„±ì ì •ì˜
+	//ê¸°ë³¸ ê°ì²´ ìƒì„±ì‹œ ì´ˆê¸°ê°’ì„ ì§€ì •í•œë‹¤ (1 í˜ì´ì§€ì—ì„œ 10ê°œ)
 	public PageCriteria() {
-		this.page = 1; // »ç¿ëÀÚ°¡ Á÷Á¢ Á¤ÀÇÇÏÁö ¾ÊÀ¸¸é 1
-		this.pageSize = 10; // ÆäÀÌÁö´ç 10°³¾¿ Ãâ·Â
+		this.page = 1; // ì‚¬ìš©ìê°€ ì§ì ‘ ì •ì˜í•˜ì§€ ì•Šìœ¼ë©´ 1
+		this.pageSize = 10; // í˜ì´ì§€ë‹¹ 10ê°œì”© ì¶œë ¥
 	}
 
-	//ÇöÀç ÆäÀÌÁöÀÇ getter, setter
+	//í˜„ì¬ í˜ì´ì§€ì˜ getter, setter
 	public int getPage() {
 		return page;
 	}
 
 	public void setPage(int page) {
-		//»ç¿ëÀÚÀÇ URLÁ÷Á¢ ÀÔ·Â µî Àß¸øµÈ ÆäÀÌÁö·Î ÀÌµ¿½Ã ÆäÀÌÁö¸¦ 1·Î Àç¼³Á¤
+		//ì‚¬ìš©ìì˜ URLì§ì ‘ ì…ë ¥ ë“± ì˜ëª»ëœ í˜ì´ì§€ë¡œ ì´ë™ì‹œ í˜ì´ì§€ë¥¼ 1ë¡œ ì¬ì„¤ì •
 		if(page < 1) {
 			this.page = 1;
 		} else {
@@ -29,7 +29,7 @@ public class PageCriteria {
 		}
 	}
 	
-	//ÆäÀÌÁö »çÀÌÁîÀÇ getter, setter
+	//í˜ì´ì§€ ì‚¬ì´ì¦ˆì˜ getter, setter
 	public int getPageSize() {
 		return pageSize;
 	}

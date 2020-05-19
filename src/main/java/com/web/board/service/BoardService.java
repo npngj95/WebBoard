@@ -1,4 +1,4 @@
-package com.web.board.service;
+ï»¿package com.web.board.service;
 
 import java.util.List;
 
@@ -12,9 +12,9 @@ public interface BoardService {
 	
 	int boardTotalCount();
 	
-	//BoardVO ¾È¿¡ Á¤·ÄÁ¶°Ç, °Ë»öÁ¶°Ç, °Ë»öÅ°¿öµå¸¦ Æ÷ÇÔÇÏ¿© vo·Î ¹Ş°í
-	//ÆäÀÌÂ¡¿¡ ÇÊ¿äÇÑ Limit ÀıÀÇ ½ÃÀÛRow¸¦ start º¯¼ö¿¡ ÇÒ´ç
-	//ÆäÀÌÂ¡¿¡ ÇÊ¿äÇÑ Limit ÀıÀÇ Å©±â¸¦ size º¯¼ö¿¡ ÇÒ´ç
+	//BoardVO ì•ˆì— ì •ë ¬ì¡°ê±´, ê²€ìƒ‰ì¡°ê±´, ê²€ìƒ‰í‚¤ì›Œë“œë¥¼ í¬í•¨í•˜ì—¬ voë¡œ ë°›ê³ 
+	//í˜ì´ì§•ì— í•„ìš”í•œ Limit ì ˆì˜ ì‹œì‘Rowë¥¼ start ë³€ìˆ˜ì— í• ë‹¹
+	//í˜ì´ì§•ì— í•„ìš”í•œ Limit ì ˆì˜ í¬ê¸°ë¥¼ size ë³€ìˆ˜ì— í• ë‹¹
 	List<BoardVO> selectAllBoard(BoardVO vo, int start, int size);
 	
 	void updateBoard(BoardVO vo);

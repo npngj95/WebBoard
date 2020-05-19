@@ -1,22 +1,22 @@
-package com.web.board.paging;
+ï»¿package com.web.board.paging;
 
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 public class PageMaker {
-	private PageCriteria pc; // page, pageSize¸¦ Æ÷ÇÔÇÏ´Â Å¬·¡½º¸¦ ÇÊµåº¯¼ö·Î °¡Áü
-	private int totalCount; // ÀüÃ¼ °Ô½Ã±ÛÀÇ ¼ö
-	private int startBlock; // º¸¿©Áö´Â ºí·ÏÀÇ ½ÃÀÛ ¹øÈ£
-	private int endBlock; // º¸¿©Áö´Â ºí·ÏÀÇ ¸¶Áö¸· ¹øÈ£
-	private boolean prev; // ÀÌÀü¹öÆ°À» ´©¸¦ ¼ö ÀÖ´ÂÁö ¿©ºÎ
-	private boolean next; // ´ÙÀ½¹öÆ°À» ´©¸¦ ¼ö ÀÖ´ÂÁö ¿©ºÎ
-	private int blockSize = 10; // È­¸éÇÏ´Ü¿¡ º¸¿©Áö´Â ºí·ÏÀÇ °³¼ö
+	private PageCriteria pc; // page, pageSizeë¥¼ í¬í•¨í•˜ëŠ” í´ë˜ìŠ¤ë¥¼ í•„ë“œë³€ìˆ˜ë¡œ ê°€ì§
+	private int totalCount; // ì „ì²´ ê²Œì‹œê¸€ì˜ ìˆ˜
+	private int startBlock; // ë³´ì—¬ì§€ëŠ” ë¸”ë¡ì˜ ì‹œì‘ ë²ˆí˜¸
+	private int endBlock; // ë³´ì—¬ì§€ëŠ” ë¸”ë¡ì˜ ë§ˆì§€ë§‰ ë²ˆí˜¸
+	private boolean prev; // ì´ì „ë²„íŠ¼ì„ ëˆ„ë¥¼ ìˆ˜ ìˆëŠ”ì§€ ì—¬ë¶€
+	private boolean next; // ë‹¤ìŒë²„íŠ¼ì„ ëˆ„ë¥¼ ìˆ˜ ìˆëŠ”ì§€ ì—¬ë¶€
+	private int blockSize = 10; // í™”ë©´í•˜ë‹¨ì— ë³´ì—¬ì§€ëŠ” ë¸”ë¡ì˜ ê°œìˆ˜
 	private int totalBlock;
 	
 	public void setTotalCount(int totalCount) {
 		this.totalCount = totalCount;
-		calcData(); //ÀüÃ¼ ÇÊµå º¯¼öµé ¼¼ÆÃ
-					 //ÀüÃ¼ °Ô½Ã±Û ¼öÀÇ setter°¡ È£ÃâµÉ ¶§ ÀüÃ¼ ¼¼ÆÃµÇµµ·Ï ÇÔ
+		calcData(); //ì „ì²´ í•„ë“œ ë³€ìˆ˜ë“¤ ì„¸íŒ…
+					 //ì „ì²´ ê²Œì‹œê¸€ ìˆ˜ì˜ setterê°€ í˜¸ì¶œë  ë•Œ ì „ì²´ ì„¸íŒ…ë˜ë„ë¡ í•¨
 	}
 	
 	private void calcData() {
@@ -28,13 +28,13 @@ public class PageMaker {
 			endBlock = totalBlock;
 		}
 		
-		//1 ÆäÀÌÁöÀÎ °æ¿ì ÀÌÀü(false)  
+		//1 í˜ì´ì§€ì¸ ê²½ìš° ì´ì „(false)  
 		prev = startBlock == 1 ? false : true;
 		next = endBlock * pc.getPageSize() >= totalCount ? false : true;
 	}
 	
-	// jsp¿¡¼­ ÆäÀÌÂ¡ Ã³¸®¸¦ À§ÇØ
-	// ÆäÀÌÁö¿¡ µû¶ó aÅÂ±×¸¦ ÀÌ¿ëÇØ¼­ href ¸µÅ©¸¦ Á¤ÀÇÇÏ´Â URL°æ·Î ¼³Á¤À» À§ÇØ ½ºÇÁ¸µ¿¡¼­ Áö¿øÇÏ´Â UriCommponent°´Ã¼¸¦ È°¿ë
+	// jspì—ì„œ í˜ì´ì§• ì²˜ë¦¬ë¥¼ ìœ„í•´
+	// í˜ì´ì§€ì— ë”°ë¼ aíƒœê·¸ë¥¼ ì´ìš©í•´ì„œ href ë§í¬ë¥¼ ì •ì˜í•˜ëŠ” URLê²½ë¡œ ì„¤ì •ì„ ìœ„í•´ ìŠ¤í”„ë§ì—ì„œ ì§€ì›í•˜ëŠ” UriCommponentê°ì²´ë¥¼ í™œìš©
 	public String makeQuery(int page) {
 		UriComponents uriComponent = UriComponentsBuilder.newInstance().queryParam("page", page).queryParam("pageSize", pc.getPageSize()).build();
 		return uriComponent.toString();

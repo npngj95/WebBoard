@@ -1,4 +1,4 @@
-package com.web.board.vo;
+﻿package com.web.board.vo;
 
 public class AdminVO {
 	private String a_id;

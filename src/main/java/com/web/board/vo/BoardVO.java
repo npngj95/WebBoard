@@ -1,4 +1,4 @@
-package com.web.board.vo;
+ï»¿package com.web.board.vo;
 
 import java.sql.Timestamp;
 
@@ -15,7 +15,7 @@ public class BoardVO {
 	private int b_recommend;
 	private int b_report;
 	
-	//Non-Mapping Variable (Á¤·ÄÁ¶°Ç / °Ë»öÁ¶°Ç / °Ë»öÅ°¿öµå)
+	//Non-Mapping Variable (ì •ë ¬ì¡°ê±´ / ê²€ìƒ‰ì¡°ê±´ / ê²€ìƒ‰í‚¤ì›Œë“œ)
 	private String b_sort;
 	private String b_searchCondition;
 	private String b_searchKeyword;

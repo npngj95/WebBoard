@@ -1,4 +1,4 @@
-package com.web.board.vo;
+﻿package com.web.board.vo;
 
 import java.sql.Timestamp;
 

@@ -1,4 +1,4 @@
-package com.web.board.service;
+ï»¿package com.web.board.service;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import com.web.board.vo.UsersVO;
 
 public interface UsersService {
 
-	//À¯Àú °³ÀÎÀÌ »ç¿ëÇÏ´Â ¸Ş¼­µå
+	//ìœ ì € ê°œì¸ì´ ì‚¬ìš©í•˜ëŠ” ë©”ì„œë“œ
 	void insertUsers(UsersVO vo);
 	
 	UsersVO selectUsers(UsersVO vo);
@@ -15,7 +15,7 @@ public interface UsersService {
 	
 	void deleteUsers(UsersVO vo);
 	
-	//°ü¸®ÀÚ
+	//ê´€ë¦¬ì
 	void deleteUsers(List<UsersVO> userList);
 	
 	List<UsersVO> selectAllUsers();
