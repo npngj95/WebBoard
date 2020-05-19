@@ -37,9 +37,9 @@
 	<hr>
 	
 	<!-- Back button -->
-	<div style="width: 100%; text-align: center; padding: 0 1%;">
-		<button type="submit" class="btn btn-primary" style="width: 75%; margin-right: 5%;">수정하기</button>
-		<button type="button" class="btn btn-danger waves-effect" style="width: 15%;">삭제하기</button>
+	<div style="row">
+		<button type="submit" class="btn btn-primary col-lg-8">수정</button>
+		<button type="button" class="btn btn-danger col-lg-3">삭제</button>
 	</div>
     
     

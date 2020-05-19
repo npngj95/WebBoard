@@ -38,7 +38,7 @@
 
 		<hr>
 		<!-- table -->
-		<table class="container table">
+		<table class="table">
 			<thead class="black white-text">
 				<tr>
 					<th scope="col" width="10%">카테고리</th>

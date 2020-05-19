@@ -10,7 +10,7 @@
 	<!-- Footer -->
 	<footer class="page-footer font-small unique-color-dark">
 	
-	  <div style="background-color: #6351ce;">
+	  <div class="bg-primary">
 	    <div class="container">
 	
 	      <!-- Grid row-->
@@ -32,7 +32,7 @@
 	
 	        <!-- Content -->
 	        <h6 class="text-uppercase font-weight-bold">Company name</h6>
-	        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+	        <hr class="bg-primary accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
 	        <p>KOREA IT Academy <br> Spring Board Team Project</p>
 	
 	      </div>
@@ -43,7 +43,7 @@
 	
 	        <!-- Links -->
 	        <h6 class="text-uppercase font-weight-bold">Sangik Jo</h6>
-	        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+	        <hr class="bg-primary accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
 	        <p>
 	          	<i class="fas fa-phone mr-3"></i>010 - 4456 - 9934
 	        </p>
@@ -60,7 +60,7 @@
 	
 	        <!-- Links -->
 	        <h6 class="text-uppercase font-weight-bold">Gyuho Lee</h6>
-	        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+	        <hr class="bg-primary accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
 	        <p>
 	          	<i class="fas fa-phone mr-3"></i>010 - 2350 - 1378
 	        </p>
@@ -77,7 +77,7 @@
 	
 	        <!-- Links -->
 	        <h6 class="text-uppercase font-weight-bold">Chikyoung Woo</h6>
-	        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+	        <hr class="bg-primary accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
 	        <p>
 	          	<i class="fas fa-phone mr-3"></i>010 - 8603 - 5058
 	        </p>
