@@ -6,10 +6,10 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- DataSource 설정 -->
-	<context:property-placeholder location="classpath: config/db.properties" />
+	<context:property-placeholder location="classpath:config/spring/db.properties" />
 	
-	<bean id="dataSoruce" class="org.apache.commons.dbcp2.BasicDataSource">
-		<property name="driver" value="${jdbc.driverClassName}" />
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
 		<property name="url" value="${jdbc.url}" />
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />

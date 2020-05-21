@@ -6,8 +6,8 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSoruce" />
-		<property name="configLocation" value="classpath:config/mybatis-config" />
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:config/mybatis/mybatis-config.xml" />
 	</bean>	
 	
 	<bean class="org.mybatis.spring.SqlSessionTemplate">

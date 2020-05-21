@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminDAO">
+
+	<select id="selectAdmin" parameterType="UsersVO" resultType="UsersVO">
+		SELECT * FROM users
+		WHERE u_id = #{u_id}
+	</select>
+
+	<insert id="insertUsers" parameterType="UsersVO">
+		INSERT INTO users (u_id, u_pwd, u_name, u_email, u_gender, u_email_code)
+		VALUES(#{u_id}, #{u_pwd}, #{u_name}, #{u_email}, #{u_gender}, #{u_email_code})
+	</insert>
+
+	<update id="updateUsers" parameterType="UsersVO">
+		UPDATE users
+		SET
+		u_name = #{u_name}, u_email = #{u_email}
+		WHERE
+		u_id = #{u_id} AND u_pwd = #{u_pwd}
+	</update>
+
+	<delete id="deleteUsers" parameterType="UsersVO">
+		DELETE FROM users WHERE
+		u_id = #{u_id}
+	</delete>
+	
+</mapper>
