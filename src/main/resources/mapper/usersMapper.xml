@@ -21,9 +21,14 @@
 
 	<insert id="insertUsers" parameterType="UsersVO">
 		INSERT INTO users (u_id, u_pwd, u_name, u_email, u_gender, u_email_code)
-		VALUES(#{u_id}, #{u_pwd}, #{u_name}, #{u_email}, #{u_gender}, #{u_email_code})
+		VALUES(#{u_id}, #{u_pwd}, #{u_name}, #{u_email}, #{u_gender}, "임시값")
 	</insert>
-
+	
+	<select id="idCheck" resultType="String">
+		SELECT count(*) FROM users
+		WHERE u_id = #{u_id}
+	</select>
+	
 	<update id="updateUsers" parameterType="UsersVO">
 		UPDATE users
 		SET

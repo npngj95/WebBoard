@@ -28,6 +28,10 @@ public class UsersDAO {
 	public void insertUsers(UsersVO vo) {
 		mybatis.insert("UsersDAO.insertUsers", vo);
 	}
+	
+	public String idCheck(String u_id) {
+		return mybatis.selectOne("UsersDAO.idCheck", u_id);
+	}
 
 	public void updateUsers(UsersVO vo) {
 		mybatis.update("UsersDAO.updateUsers", vo);

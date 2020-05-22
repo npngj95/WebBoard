@@ -2,6 +2,8 @@ package com.koreait.webboard.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.koreait.webboard.service.BoardService;
 import com.koreait.webboard.service.ReplyService;
@@ -14,9 +16,17 @@ public class BoardController {
 	@Autowired
 	private ReplyService replySerivce;
 	
+	
+	// 게시판 글 쓰기
+	@RequestMapping(value="/board/writeBoard", method=RequestMethod.GET)
+	public String insertBoard() {
+		return "board/writeBoard";
+	}
+	
+	@RequestMapping(value="/board/writeBoard", method=RequestMethod.POST)
 	public String insertBoard(BoardVO vo) {
 		
-		return null;
+		return "board/readBoard";
 	}
 	
 	public String selectBoard(BoardVO vo, Model model) {

@@ -35,6 +35,11 @@ public class UsersServiceImpl implements UsersService {
 	}
 
 	@Override
+	public String idCheck(String u_id) {
+		return usersDAO.idCheck(u_id);
+	}
+	
+	@Override
 	public void updateUsers(UsersVO vo) {
 		usersDAO.updateUsers(vo);
 	}

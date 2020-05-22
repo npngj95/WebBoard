@@ -21,7 +21,8 @@
 	
 	    <!-- Password -->
 	    <input type="password" name="u_pwd" class="form-control mb-4" placeholder="Password">
-	
+		
+		<p class="text-danger" style="font-size: 13px">${alert }</p>
 	    <div class="d-flex justify-content-around">
 	        <div>
 	            <!-- Remember me -->

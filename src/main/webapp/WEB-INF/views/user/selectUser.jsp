@@ -39,9 +39,9 @@
 		    </div>
 		    
 		    <!-- button -->
-		    <button class="form-control btn-success btn-block mb-3" type="button" onclick="updatePwd.do?u_id=${users.u_id }">비밀 번호 변경</button>
-    		<button class="form-control btn-info btn-block mb-3" type="button" onclick="updateUser.do?u_id=${users.u_id }">회원 정보 수정</button>
-    		<button class="form-control btn-dark btn-block" type="button" onclick="deleteUser.do?u_id=${users.u_id }">회원 탈퇴</button>
+		    <button class="form-control btn-success btn-block mb-3" type="button" onclick="location='updatePwd.do?u_id=${users.u_id }'">비밀 번호 변경</button>
+    		<button class="form-control btn-info btn-block mb-3" type="button" onclick="location='updateUser.do?u_id=${users.u_id }'">회원 정보 수정</button>
+    		<button class="form-control btn-dark btn-block" type="button" onclick="location='deleteUser?u_id=${users.u_id }'">회원 탈퇴</button>
 	</div>
 </div>
 

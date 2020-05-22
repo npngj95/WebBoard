@@ -14,6 +14,8 @@ public interface UsersService {
 	
 	void insertUsers(UsersVO vo);
 	
+	String idCheck(String u_id);
+	
 	void updateUsers(UsersVO vo);
 	
 	//유저 개인이 사용하는 메서드

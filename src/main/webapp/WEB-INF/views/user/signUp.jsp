@@ -11,33 +11,40 @@
 </head>
 <body>
 <div class="container wrapper">
-	<form class="text-center border border-light p-5" action="signUp" method="post">
+	<form class="text-center border border-light p-5" action="signUp" method="post" onsubmit="return signUp()">
 		<p class="h2 mb-4"><a href="index">Board Main</a></p>
 	    <p class="h4 mb-4">회원가입</p>
 		
 		<!-- ID -->
-		<div class="form-row mb-4">
-	        <div style="width: 70%; padding-left: 5px; margin-right: 5%">
-	    		<input type="text" name="u_id" class="form-control" placeholder="ID" required>
-	        </div>
-	        <div style="width: 25%; padding-right: 5px;">
-	            <input type="button" class="form-control btn-info btn-block" style="font-size: 0.8em; margin-top: 2px;" value="중복확인" 
-	            	onclick="userIdCheck()">
-	        </div>
+		<div class="mb-4">
+	    	<input type="text" id="u_id" name="u_id" class="form-control" placeholder="ID" onblur="idCheck()" size="20" required>
+	    	<p id="alertId" class="m-0 ml-2 text-left" style="font-size: 13px;"></p>
 	    </div>
 	    
 	    <!-- Name -->
-	    <input type="text" name="u_name" class="form-control mb-4" placeholder="Name" required>
+	    <div class="mb-4">
+	    	<input type="text" name="u_name" id="u_name" class="form-control" placeholder="Name" onblur="nameCheck()" required>
+	    	<p id="alertName" class="m-0 ml-2 text-left text-danger" style="font-size: 13px;"></p>
+	 	</div>
 	 	
 	    <!-- E-mail -->
-	    <input type="email" name="u_email" class="form-control mb-4" placeholder="E-mail" required>
-	
-	    <!-- Password -->
-	    <input type="password" name="u_pwd" class="form-control mb-4" placeholder="Password" required>
-	   
+	    <div class="mb-4">
+	    	<input type="email" name="u_email" id="u_email" class="form-control" placeholder="E-mail" onblur="emailCheck()" required>
+	    	<p id="alertEmail" class="m-0 ml-2 text-left text-danger" style="font-size: 13px;"></p>
+	 	</div>
+		
+		<!-- Password -->
+		<div class="mb-4">
+	    	<input type="password" id="u_pwd" name="u_pwd" class="form-control" placeholder="Password" onkeypress="capslock(event)" onblur="pwdCheck(); isSame()" size="20" required>
+	    	<p id="alertPwd1" class="m-0 ml-2 text-left text-danger" style="font-size: 13px;"></p>
+	    </div>
+	   	
 		 <!-- Password check -->
-	    <input type="password" name="u_pwd2" class="form-control mb-4" placeholder="Password Check" required>
-	
+	    <div class="mb-4">
+	    	<input type="password" id="u_pwd2" name="u_pwd2" class="form-control" placeholder="Password Check" onkeypress="capslock(event)" onblur="isSame()" size="20" required>
+	    	<p id="alertPwd2" class="m-0 ml-2 text-left text-danger" style="font-size: 13px;"></p>
+	    </div>
+		
 		<!-- Gender -->
 		<!-- 남성 -->
 		<div class="custom-control custom-radio custom-control-inline">
@@ -58,5 +65,6 @@
 </div>
 
 <%@include file="../common/common_bottom.jsp"%>
+<script src="${pageContext.request.contextPath }/resources/js/signUp.js"></script>
 </body>
 </html>
