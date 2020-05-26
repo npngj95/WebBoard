@@ -30,6 +30,13 @@ public class UsersController {
 		return "admin/managementUser";
 	}
 	
+	// 관리자 - 유저 정보삭제
+	
+	public String deleteUsers(List<UsersVO> usersList) {
+		usersService.deleteUsers(usersList);
+		return null;
+	}
+	
 	// 로그인
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String login() {
@@ -38,10 +45,10 @@ public class UsersController {
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String login(UsersVO vo, HttpSession session, Model model) {
-		UsersVO user = usersService.login(vo);
+		UsersVO user = usersService.usersCheck(vo);
 		
 		if(user != null) {
-			session.setAttribute("users", usersService.login(vo));
+			session.setAttribute("users", user);
 			return "redirect:index";
 		} else {
 			model.addAttribute("alert", "가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.");
@@ -68,11 +75,24 @@ public class UsersController {
 		return "redirect:index";
 	}
 	
-	// 아이디 중복 체크
+	// 아이디 중복 체크 - Ajax처리
 	@RequestMapping(value="/idCheck")
 	@ResponseBody
 	public String idCheck(@RequestParam String u_id) {
 		return usersService.idCheck(u_id);
+	}
+	
+	// 유저 비밀번호 체크
+	@RequestMapping(value="/user/usersCheck")
+	@ResponseBody
+	public String usersCheck(UsersVO vo) {
+		UsersVO user = usersService.usersCheck(vo);
+		
+		if(user != null) {
+			return "1";
+		} else {
+			return "0";
+		}
 	}
 	
 	// 유저 정보 조회
@@ -90,8 +110,12 @@ public class UsersController {
 	}
 	
 	@RequestMapping(value="/user/updatePwd", method=RequestMethod.POST)
-	public String updatePwd(UsersVO vo) {
-		return "user/updatePwd";
+	public String updatePwd(UsersVO vo, HttpSession session) {
+		UsersVO user = (UsersVO)session.getAttribute("users");
+		user.setU_pwd(vo.getU_pwd());
+		usersService.updatePwd(user);
+		
+		return "redirect:/user/selectUser";
 	}
 	
 	// 유저 정보수정
@@ -103,6 +127,7 @@ public class UsersController {
 	@RequestMapping(value="/user/updateUser", method=RequestMethod.POST)
 	public String updateUsers(UsersVO vo) {
 		usersService.updateUsers(vo);
+		
 		return "redirect:/user/selectUser";
 	}
 	
@@ -113,10 +138,6 @@ public class UsersController {
 		
 		return "redirect:/index";
 	}
-
-	public String deleteUsers(List<UsersVO> usersList) {
-		usersService.deleteUsers(usersList);
-		return null;
-	}
+	
 	
 }

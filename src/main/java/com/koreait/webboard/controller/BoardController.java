@@ -1,21 +1,30 @@
 package com.koreait.webboard.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.koreait.webboard.service.BoardService;
 import com.koreait.webboard.service.ReplyService;
 import com.koreait.webboard.vo.BoardVO;
 
-//@Controller
+@Controller
 public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	@Autowired
 	private ReplyService replySerivce;
 	
+	// Home - index
+	@RequestMapping({"/", "/index"})
+	public String home(BoardVO vo, Model model) {
+		
+		model.addAttribute("boardList", boardService.selectAllBoard(vo, 0, 10));
+		return "index";
+	}
 	
 	// 게시판 글 쓰기
 	@RequestMapping(value="/board/writeBoard", method=RequestMethod.GET)
@@ -25,14 +34,15 @@ public class BoardController {
 	
 	@RequestMapping(value="/board/writeBoard", method=RequestMethod.POST)
 	public String insertBoard(BoardVO vo) {
-		
+		boardService.insertBoard(vo);
 		return "board/readBoard";
 	}
 	
+	@RequestMapping("/board/readBoard")
 	public String selectBoard(BoardVO vo, Model model) {
-		
-		
-		return "asdnkl.do";
+		System.out.println(vo);
+		model.addAttribute("board", boardService.selectBoard(vo));
+		return "board/readBoard";
 	}
 	
 	public String boardTotalCount() {
@@ -57,4 +67,5 @@ public class BoardController {
 		
 		return null;
 	}
+	
 }

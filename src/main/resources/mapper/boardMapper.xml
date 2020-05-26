@@ -2,37 +2,34 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="#package.#mapperinterfacename">
+<mapper namespace="BoardDAO">
 
-	<select id="getSomething" parameterType="int" resultType="#package.#modelname">
-		SELECT
-		columnname1,
-		columnname2,
-		columnname3
-		FROM tablename1
-		WHERE columnname1 = #{value}
+	<select id="selectBoard" parameterType="BoardVO" resultType="BoardVO">
+		SELECT *
+		FROM board
+		WHERE b_num = #{b_num}
 	</select>
 
-	<select id="getAll" resultType="YourResultSet">
-		SELECT * FROM tablename1
+	<select id="selectAllBoard" resultType="BoardVO">
+		SELECT * FROM board ORDER BY b_regdate DESC
 	</select>
 
-	<insert id="insertSomething" parameterType="#modelname">
-		INSERT INTO tablename1 (columnname1, columnname2, columnname3)
-		VALUES(#{value1},#{value2},#{value3})
+	<insert id="insertBoard" parameterType="BoardVO">
+		INSERT INTO board (b_category, b_writer, b_email, b_title, b_content)
+		VALUES(#{b_category},#{b_writer},#{b_email},#{b_title},#{b_content})
 	</insert>
 
-	<update id="updateSomething" parameterType="#modelname">
-		UPDATE tablename1
-		SET
-		columnname1=#{param1}
-		WHERE
-		columnname2 = #{param2}
-	</update>
+<!-- 	<update id="updateSomething" parameterType="#modelname"> -->
+<!-- 		UPDATE tablename1 -->
+<!-- 		SET -->
+<!-- 		columnname1=#{param1} -->
+<!-- 		WHERE -->
+<!-- 		columnname2 = #{param2} -->
+<!-- 	</update> -->
 
-	<delete id="deleteSomething" parameterType="int">
-		DELETE FROM tablename1 WHERE
-		columnname1 = #{param1}
-	</delete>
+<!-- 	<delete id="deleteSomething" parameterType="int"> -->
+<!-- 		DELETE FROM tablename1 WHERE -->
+<!-- 		columnname1 = #{param1} -->
+<!-- 	</delete> -->
 
 </mapper>

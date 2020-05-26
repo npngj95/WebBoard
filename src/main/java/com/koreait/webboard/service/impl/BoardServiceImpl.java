@@ -16,14 +16,12 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public BoardVO selectBoard(BoardVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		return boardDAO.selectBoard(vo);
 	}
 	
 	@Override
 	public List<BoardVO> selectAllBoard(BoardVO vo, int start, int size) {
-		// TODO Auto-generated method stub
-		return null;
+		return boardDAO.selectAllBoard(vo, start, size);
 	}
 	
 	@Override
@@ -34,8 +32,7 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public void insertBoard(BoardVO vo) {
-		// TODO Auto-generated method stub
-		
+		boardDAO.insertBoard(vo);
 	}
 
 	@Override

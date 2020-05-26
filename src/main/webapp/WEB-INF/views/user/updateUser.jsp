@@ -10,28 +10,35 @@
 <link href="${pageContext.request.contextPath }/resources/css/login.css" rel="stylesheet">
 </head>
 <body>
-<div class="container wrapper">
+<div class="container wrapper text-center border border-light p-5">
 <!-- Default form register -->
-<form class="text-center border border-light p-5" action="#!">
-	<p class="h2 mb-4"><a href="index">Board Main</a></p>
+
+	<p class="h2 mb-4"><a href="${pageContext.request.contextPath }/index">Board Main</a></p>
     <p class="h4 mb-4">회원 정보 수정</p>
+	<form action="updateUser" method="post" onsubmit="return updateUser()">
+		<!-- ID -->
+	    <input type="text" id="u_id" name="u_id" class="form-control mb-4" placeholder="ID" value="${users.u_id }" readonly>
+	    
+	    <!-- Name -->
+	    <div class="mb-4">
+		    <input type="text" id="u_name" name="u_name" class="form-control" placeholder="Name" value="${users.u_name }" onblur="nameCheck()">
+		    <p id="alertName" class="text-danger text-left"></p>
+	    </div>
+	 	
+	    <!-- E-mail -->
+	    <div class="mb-4">
+		    <input type="email" id="u_email" name="u_email" class="form-control" placeholder="E-mail" value="${users.u_email }" onblur="emailCheck()">
+		    <p id="alertEmail" class="text-danger text-left"></p>
+	    </div>
+		
+	    <!-- Sign up button -->
+	    <button class="btn btn-info btn-block" type="submit">수정하기</button>
 	
-	<!-- ID -->
-    <input type="text" name="u_id" class="form-control mb-4" placeholder="ID" value="${user.u_id }userID" readonly>
-    
-    <!-- Name -->
-    <input type="text" name="u_name" class="form-control mb-4" placeholder="Name" value="${user.u_name }userName">
- 	
-    <!-- E-mail -->
-    <input type="email" name="u_email" class="form-control mb-4" placeholder="E-mail" value="${user.u_email }userEmail">
-
-    <!-- Sign up button -->
-    <button class="btn btn-info btn-block" type="submit">Sign Up</button>
-
-</form>
+	</form>
 <!-- Default form register -->
 </div>
 
 <%@include file="../common/common_bottom.jsp"%>
+<script src="${pageContext.request.contextPath }/resources/js/updateUser.js"></script>
 </body>
 </html>

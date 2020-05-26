@@ -13,8 +13,8 @@ public class UsersDAO {
 	@Autowired
 	private SqlSession mybatis;
 
-	public UsersVO login(UsersVO vo) {
-		return mybatis.selectOne("UsersDAO.login", vo);
+	public UsersVO usersCheck(UsersVO vo) {
+		return mybatis.selectOne("UsersDAO.usersCheck", vo);
 	}
 	
 	public UsersVO selectUsers(UsersVO vo) {
@@ -35,6 +35,10 @@ public class UsersDAO {
 
 	public void updateUsers(UsersVO vo) {
 		mybatis.update("UsersDAO.updateUsers", vo);
+	}
+	
+	public void updatePwd(UsersVO vo) {
+		mybatis.update("UsersDAO.updatePwd", vo);
 	}
 
 	// 회원이 직접 탈퇴시

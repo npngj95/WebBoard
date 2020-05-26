@@ -15,8 +15,8 @@ public class UsersServiceImpl implements UsersService {
 	private UsersDAO usersDAO;
 	
 	@Override
-	public UsersVO login(UsersVO vo) {
-		return usersDAO.login(vo);
+	public UsersVO usersCheck(UsersVO vo) {
+		return usersDAO.usersCheck(vo);
 	}
 	
 	@Override
@@ -42,6 +42,11 @@ public class UsersServiceImpl implements UsersService {
 	@Override
 	public void updateUsers(UsersVO vo) {
 		usersDAO.updateUsers(vo);
+	}
+	
+	@Override
+	public void updatePwd(UsersVO vo) {
+		usersDAO.updatePwd(vo);
 	}
 
 	@Override // 회원이 직접 탈퇴시

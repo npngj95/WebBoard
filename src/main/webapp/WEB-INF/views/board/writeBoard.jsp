@@ -16,10 +16,10 @@
 	    <p class="h4 mb-4">Write Board</p>
 	
 	    <!-- Name -->
-	    <input type="text" name="u_name" class="form-control mb-4" placeholder="Name" value="${sessionScope.user.getU_id() }" readonly>
+	    <input type="text" name="b_writer" class="form-control mb-4" placeholder="Writer" value="${users.u_id }" readonly>
 	
 	    <!-- Email -->
-	    <input type="email" name="u_email" class="form-control mb-4" placeholder="E-mail" value="${sessionScope.user.getU_email() }" readonly>
+	    <input type="email" name="b_email" class="form-control mb-4" placeholder="E-mail" value="${users.u_email }" readonly>
 		
 		<hr>
 	    <!-- Category -->
@@ -34,12 +34,12 @@
 	    
 	    <!-- Content -->
 	    <div class="form-group">
-	        <textarea class="form-control rounded-0" name="b_content" rows="10" placeholder="Content" required></textarea>
+	        <textarea name="b_content" class="form-control rounded-0" rows="10" placeholder="Content" required></textarea>
 	    </div>
 		
 		<div class="container text-right">
 			<button type="submit" style="width: 100px; height:40px; padding:5px;" class="btn btn-dark mb-3">글쓰기</button>
-			<button type="button" style="width: 100px; height:40px; padding:5px;" class="btn btn-dark mb-3" onclick="location='../index.jsp'">취소</button>
+			<button type="button" style="width: 100px; height:40px; padding:5px;" class="btn btn-dark mb-3" onclick="location='../index'">취소</button>
 		</div>
 	</form>
 </div>

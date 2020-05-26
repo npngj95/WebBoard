@@ -4,7 +4,7 @@
 
 <mapper namespace="UsersDAO">
 	
-	<select id="login" parameterType="UsersVO" resultType="UsersVO">
+	<select id="usersCheck" parameterType="UsersVO" resultType="UsersVO">
 		SELECT * FROM users
 		WHERE u_id = #{u_id} AND u_pwd = #{u_pwd}
 	</select>
@@ -34,7 +34,15 @@
 		SET
 		u_name = #{u_name}, u_email = #{u_email}
 		WHERE
-		u_id = #{u_id} AND u_pwd = #{u_pwd}
+		u_id = #{u_id}
+	</update>
+	
+	<update id="updatePwd" parameterType="UsersVO">
+		UPDATE users
+		SET
+		u_pwd = #{u_pwd}
+		WHERE
+		u_id = #{u_id}
 	</update>
 
 	<delete id="deleteUsers" parameterType="UsersVO">

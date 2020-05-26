@@ -6,7 +6,7 @@ import com.koreait.webboard.vo.UsersVO;
 
 public interface UsersService {
 
-	UsersVO login(UsersVO vo);
+	UsersVO usersCheck(UsersVO vo);
 	
 	UsersVO selectUsers(UsersVO vo);
 	
@@ -17,6 +17,8 @@ public interface UsersService {
 	String idCheck(String u_id);
 	
 	void updateUsers(UsersVO vo);
+	
+	void updatePwd(UsersVO vo);
 	
 	//유저 개인이 사용하는 메서드
 	void deleteUsers(UsersVO vo);

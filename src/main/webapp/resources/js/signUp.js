@@ -123,7 +123,7 @@ function capslock(e){
 	keyCode = e.keyCode;
 	shiftKey = e.shiftKey;
 	
-	if(((keyCode >= 65 && keyCode <90) && !shiftKey) || ((keyCode >= 97 && keyCode <= 112) && shiftKey)){
+	if(((keyCode >= 65 && keyCode <90) && !shiftKey) || ((keyCode >= 97 && keyCode <= 122) && shiftKey)){
 		target.next().text("CapsLock이 걸려있습니다.");
 	}else{
 		target.next().text("");

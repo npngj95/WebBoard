@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,23 +43,30 @@
 		<table class="table">
 			<thead class="black white-text">
 				<tr>
-					<th scope="col" width="10%">카테고리</th>
+					<th class="text-center" scope="col" width="10%">카테고리</th>
 					<th scope="col">제목</th>
-					<th scope="col" width="15%">작성자</th>
-					<th scope="col" width="20%">작성일</th>
-					<th scope="col" width="7%">조회수</th>
-					<th scope="col" width="7%">추천수</th>
+					<th class="text-center" scope="col" width="15%">작성자</th>
+					<th class="text-center" scope="col" width="10%">작성일</th>
+					<th class="text-center" scope="col" width="9%">조회수</th>
+					<th class="text-center" scope="col" width="9%">추천수</th>
 				</tr>
 			</thead>
 			<tbody>
+				<c:forEach items="${boardList }" var="board">
 				<tr>
-					<th scope="row">1</th>
-					<td><a href="./board/readBoard.jsp">Mark</a></td>
-					<td>Otto</td>
-					<td>2020-02-02</td>
-					<td>@mdo</td>
-					<td>@mdo</td>
+					<th class="text-center" scope="row">
+						<c:if test="${board.b_category == 1}">질문</c:if>
+						<c:if test="${board.b_category == 2}">후기</c:if>
+						<c:if test="${board.b_category == 3}">공지</c:if>
+					</th>
+					
+					<td><a href="board/readBoard?b_num=${board.b_num }">${board.b_title }</a></td>
+					<td class="text-center">${board.b_writer }</td>
+					<td class="text-center"><fmt:formatDate pattern="yyyy-MM-dd" value="${board.b_regdate }"/></td>
+					<td class="text-center">${board.b_readcount }</td>
+					<td class="text-center">${board.b_recommend }</td>
 				</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 		
