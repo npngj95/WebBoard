@@ -21,7 +21,6 @@ function pwdCheck() {
 		// dataType : 서버측에서 전송받은 데이터의 형식 (default : xml, json, script, text, html)
 		
 		success : function(result) {
-			console.log(result);
 			if(result < 1) {
 				$("#alertPwd").text("비밀번호가 맞지 않습니다.")
 			}

@@ -12,8 +12,8 @@ public class BoardVO {
 	private Timestamp b_regdate;
 	private int b_readcount;
 	private int b_replycount;
-	private int b_recommend;
-	private int b_report;
+	private int b_like;
+	private int b_hate;
 	
 	//Non-Mapping Variable (정렬조건 / 검색조건 / 검색키워드)
 	private String b_sort;
@@ -92,25 +92,25 @@ public class BoardVO {
 	public void setB_replycount(int b_replycount) {
 		this.b_replycount = b_replycount;
 	}
-	public int getB_recommend() {
-		return b_recommend;
+	public int getB_like() {
+		return b_like;
 	}
-	public void setB_recommend(int b_recommend) {
-		this.b_recommend = b_recommend;
+	public void setB_like(int b_like) {
+		this.b_like = b_like;
 	}
-	public int getB_report() {
-		return b_report;
+	public int getB_hate() {
+		return b_hate;
 	}
-	public void setB_report(int b_report) {
-		this.b_report = b_report;
+	public void setB_hate(int b_hate) {
+		this.b_hate = b_hate;
 	}
 	
 	@Override
 	public String toString() {
 		return "BoardVO [b_num=" + b_num + ", b_category=" + b_category + ", b_writer=" + b_writer + ", b_email="
 				+ b_email + ", b_title=" + b_title + ", b_content=" + b_content + ", b_regdate=" + b_regdate
-				+ ", b_readcount=" + b_readcount + ", b_replycount=" + b_replycount + ", b_recommend=" + b_recommend
-				+ ", b_report=" + b_report + ", b_sort=" + b_sort + ", b_searchCondition=" + b_searchCondition
+				+ ", b_readcount=" + b_readcount + ", b_replycount=" + b_replycount + ", b_like=" + b_like
+				+ ", b_hate=" + b_hate + ", b_sort=" + b_sort + ", b_searchCondition=" + b_searchCondition
 				+ ", b_searchKeyword=" + b_searchKeyword + "]";
 	}
 }

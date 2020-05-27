@@ -1,5 +1,6 @@
 ﻿package com.koreait.webboard.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
@@ -16,6 +17,26 @@ public class BoardDAO {
 
 	public BoardVO selectBoard(BoardVO vo) {
 		return mybatis.selectOne("BoardDAO.selectBoard", vo);
+	}
+	
+	public void updateReadCount(BoardVO vo) {
+		mybatis.update("BoardDAO.updateReadCount", vo);
+	}
+	
+	public int selectLike_log(HashMap<String, Object> map) {
+		return mybatis.selectOne("BoardDAO.selectLike_log", map);
+	}
+	
+	public void insertLike_log(HashMap<String, Object> map) {
+		mybatis.insert("BoardDAO.insertLike_log", map);
+	}
+	
+	public void updateLike(BoardVO vo) {
+		mybatis.update("BoardDAO.updateLike", vo);
+	}
+	
+	public void updateHate(BoardVO vo) {
+		mybatis.update("BoardDAO.updateHate", vo);
 	}
 	
 	public List<BoardVO> selectAllBoard(BoardVO vo, int start, int size) {

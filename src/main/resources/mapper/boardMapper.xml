@@ -9,27 +9,61 @@
 		FROM board
 		WHERE b_num = #{b_num}
 	</select>
+	
+	<update id="updateReadCount" parameterType="BoardVO">
+		UPDATE board
+		SET b_readcount=b_readcount+1
+		WHERE b_num=#{b_num}
+	</update>
 
 	<select id="selectAllBoard" resultType="BoardVO">
 		SELECT * FROM board ORDER BY b_regdate DESC
 	</select>
 
-	<insert id="insertBoard" parameterType="BoardVO">
+	<insert id="insertBoard" parameterType="BoardVO" useGeneratedKeys="true" keyProperty="b_num">
 		INSERT INTO board (b_category, b_writer, b_email, b_title, b_content)
 		VALUES(#{b_category},#{b_writer},#{b_email},#{b_title},#{b_content})
 	</insert>
 
-<!-- 	<update id="updateSomething" parameterType="#modelname"> -->
-<!-- 		UPDATE tablename1 -->
-<!-- 		SET -->
-<!-- 		columnname1=#{param1} -->
-<!-- 		WHERE -->
-<!-- 		columnname2 = #{param2} -->
-<!-- 	</update> -->
+	<delete id="deleteBoard" parameterType="BoardVO">
+		DELETE FROM board
+		WHERE b_num = #{b_num}
+	</delete>
+	
+	<update id="updateBoard" parameterType="BoardVO">
+		UPDATE board
+		SET b_category=#{b_category}, b_title=#{b_title}, b_content=#{b_content}
+		WHERE b_num = #{b_num}
+	</update>
 
-<!-- 	<delete id="deleteSomething" parameterType="int"> -->
-<!-- 		DELETE FROM tablename1 WHERE -->
-<!-- 		columnname1 = #{param1} -->
-<!-- 	</delete> -->
+	<select id="selectLike_log" parameterType="HashMap" resultType="int">
+		SELECT count(*) FROM like_log
+		WHERE u_id=#{users} AND b_num=#{board}
+	</select>
+
+	<insert id="insertLike_log" parameterType="HashMap">
+		INSERT like_log
+		VALUES (#{users}, #{board})
+	</insert>
+
+	<update id="updateLike" parameterType="BoardVO">
+		UPDATE board
+		SET b_like=b_like+1
+		WHERE b_num = #{b_num}
+		
+		<selectKey keyProperty="b_like" resultType="int" order="AFTER">
+	    	SELECT b_like FROM board WHERE b_num=#{b_num}
+	  	</selectKey>
+	</update>
+
+	<update id="updatehate" parameterType="BoardVO">
+		UPDATE board
+		SET b_hate=b_hate+1
+		WHERE b_num = #{b_num}
+		
+		<selectKey keyProperty="b_hate" resultType="int" order="AFTER">
+    		SELECT b_hate FROM board WHERE b_num=#{b_num}
+  		</selectKey>
+	</update>
 
 </mapper>

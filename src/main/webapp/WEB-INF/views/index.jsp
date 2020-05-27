@@ -64,13 +64,13 @@
 					<td class="text-center">${board.b_writer }</td>
 					<td class="text-center"><fmt:formatDate pattern="yyyy-MM-dd" value="${board.b_regdate }"/></td>
 					<td class="text-center">${board.b_readcount }</td>
-					<td class="text-center">${board.b_recommend }</td>
+					<td class="text-center">${board.b_like }</td>
 				</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 		
-		<div class="container text-right">
+		<div class="text-right">
 			<button style="width: 100px; padding:5px;" class="btn btn-dark mb-3" onclick="location='board/writeBoard'">글쓰기</button>
 		</div>
 		

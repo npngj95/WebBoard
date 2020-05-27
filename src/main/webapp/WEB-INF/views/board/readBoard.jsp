@@ -1,3 +1,5 @@
+<%@page import="com.koreait.webboard.vo.BoardVO"%>
+<%@page import="com.koreait.webboard.vo.UsersVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -7,16 +9,6 @@
 <head>
 <meta charset="UTF-8">
 <title>글 내용 조회</title>
-
-<script>
-	function deleteBoard(b_num) {
-		var deleteCheck = confirm("글을 삭제하면 다시 복구할 수 없습니다.\r\n정말 게시글을 삭제할까요?");
-		
-		if(deleteCheck) {
-			location = "deleteBoard.do?b_num="+board.b_num;
-		}
-	}
-</script>
 <%@include file="../common/common_top.jsp"%>
 <link href="${pageContext.request.contextPath }/resources/css/board.css" rel="stylesheet"> 
 </head>
@@ -24,6 +16,27 @@
 <%@include file="../module/top.jsp"%>
 
 <div class="container wrapper">
+	<!-- modal-check-pwd  -->
+	<div class="modal" id="myModal">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">게시글 삭제</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					해당 게시글을 삭제 하시겠습니까?
+				</div>	
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" onclick="location='deleteBoard?b_num=${board.b_num}'">확인</button>
+					<button type="button" class="btn btn-dark" data-dismiss="modal">취소</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<div class="text-center">
 	    <p class="h4 mb-4">Read Board</p>
 	    <!-- Name -->
@@ -50,18 +63,25 @@
 		<pre class="form-control rounded-0 mb-3 text-left" style="overflow: auto; white-space: pre-wrap; min-height:300px; height:100%;">${board.b_content }</pre>
 	    
 	    <!-- 수정 / 삭제 버튼 -->
-	    <div class="text-right mb-3 ">
-			<button type="button" style="float: left;" class="btn btn-dark mb-3" onclick="history.back()">게시글 목록</button>
-			<button type="button" class="btn btn-dark mb-3" onclick="location='updateBoard?b_num=${board.b_num }'">글수정</button>
-			<button type="button" class="btn btn-dark mb-3" onclick="deleteBoard(${board.b_num })">글삭제</button>
-		</div>
+		    <div class="text-right mb-3">
+				<button type="button" style="float: left;" class="btn btn-dark mb-3" onclick="location='../index'">게시글 목록</button>
+				 <c:if test="${board.b_writer == users.u_id}">
+					<button type="button" class="btn btn-dark mb-3" onclick="location='updateBoard?b_num=${board.b_num }'">글수정</button>
+					<button type="button" class="btn btn-dark mb-3" data-toggle="modal" data-target="#myModal">글삭제</button>
+				</c:if>
+			</div>
+		
 	</div>
 
-	<!--  좋아요 / 신고 버튼 -->
-	<div class="text-center mb-5" style="clear:both;">
+	<!--  좋아요 / 싫어요 버튼 -->
+	<div id="like_log" class="text-center mb-5" style="clear:both;">
 		<!-- Thumbs up -->
-	     <button type="button" class="btn btn-primary px-4" onclick="recommend()">${board.b_recommend }<i class="far fa-thumbs-up ml-2" aria-hidden="true"></i></button>
-	     <button type="button" class="btn btn-danger px-4" onclick="report()"><i class="fas fa-exclamation-triangle mr-2" aria-hidden="true"></i>${board.b_report }</button>
+	     <button type="button" class="btn btn-primary px-4" onclick="updateLike(${board.b_num}, ${board.b_like })">
+	     	<i class="far fa-thumbs-up mr-2" aria-hidden="true"></i> <span id="like">${board.b_like }</span>
+	     </button>
+	     <button type="button" class="btn btn-danger px-4" onclick="updateHate(${board.b_num}, ${board.b_hate })">
+	     	<i class="far fa-thumbs-down mr-2" aria-hidden="true"></i> <span id="hate">${board.b_hate }</span>
+	     </button>
 	</div>
     
 	<!-- 댓글  -->
@@ -101,5 +121,46 @@
 </div>
 <%@include file="../module/bottom.jsp"%>
 <%@include file="../common/common_bottom.jsp"%>
+<script>
+function updateLike(b_num, now_like) {
+	$.ajax({
+		type : 'POST',
+		url : "updateLike",
+		data : {
+			"b_num": b_num
+		},
+		
+		success : function(result) {
+			// ajax처리 이후, html Body의 일부분 (div영역)만 리로딩 하기 위해 .load()함수를 사용
+			$("#like_log").load(window.location.href + " #like_log");
+			// == $("#like_log").load(document.URL + " #like_log")
+			if(now_like == result){
+				alert("게시글 평가는 1회만 가능합니다.");
+			}
+			$("#like").text(result);
+		}
+	});
+	
+}
+
+function updateHate(b_num, now_hate) {
+	$.ajax({
+		type : 'POST',
+		url : "updateHate",
+		data : {
+			"b_num": b_num
+		},
+		
+		success : function(result) {
+			if(now_hate == result){
+				alert("게시글 평가는 1회만 가능합니다.");
+			}
+			$("#thumbs_up").text(result);
+		}
+	});
+	
+}
+
+</script>
 </body>
 </html>

@@ -1,5 +1,6 @@
 ﻿package com.koreait.webboard.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,31 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
+	public void updateReadCount(BoardVO vo) {
+		boardDAO.updateReadCount(vo);
+	}
+	
+	@Override
+	public int selectLike_log(HashMap<String, Object> map) {
+		return boardDAO.selectLike_log(map);
+	}
+	
+	@Override
+	public void insertLike_log(HashMap<String, Object> map) {
+		boardDAO.insertLike_log(map);
+	}
+	
+	@Override
+	public void updateLike(BoardVO vo) {
+		boardDAO.updateLike(vo);
+	}
+	
+	@Override
+	public void updateHate(BoardVO vo) {
+		boardDAO.updateHate(vo);
+	}
+	
+	@Override
 	public List<BoardVO> selectAllBoard(BoardVO vo, int start, int size) {
 		return boardDAO.selectAllBoard(vo, start, size);
 	}
@@ -37,14 +63,12 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public void updateBoard(BoardVO vo) {
-		// TODO Auto-generated method stub
-		
+		boardDAO.updateBoard(vo);
 	}
 
 	@Override
 	public void deleteBoard(BoardVO vo) {
-		// TODO Auto-generated method stub
-		
+		boardDAO.deleteBoard(vo);
 	}
 
 }

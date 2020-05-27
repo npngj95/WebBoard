@@ -10,17 +10,16 @@
 </head>
 <body>
 <%@include file="../module/top.jsp"%>
-<div class="container wrapper">
-<form class="text-center border border-light p-5" action="updateBoard.do" method="post">
+<div class="container wrapper text-center border border-light p-5">
+<form action="updateBoard" method="post">
 	<input type="hidden" name="b_num" value="${board.b_num }">
 	
     <p class="h4 mb-4">Update Board</p>
     
     <!-- Category -->
     <select name="b_category" class="browser-default custom-select mb-4">
-        <option selected hidden="true">Category</option>
-        <option value="1">질문</option>
-        <option value="2">후기</option>
+        <option value="1" <c:if test="${board.b_category == 1}">selected</c:if> >질문</option>
+        <option value="2" <c:if test="${board.b_category == 2}">selected</c:if> >후기</option>
     </select>
 	
 	<!-- Title -->
@@ -28,7 +27,7 @@
     
     <!-- Content -->
     <div class="form-group">
-        <textarea class="form-control rounded-0" name="b_content" rows="10" placeholder="Content" >${board.b_content }</textarea>
+        <textarea class="form-control rounded-0" name="b_content" rows="10" placeholder="Content" style="resize: none;">${board.b_content }</textarea>
     </div>
 	
 	<div class="container text-right">
