@@ -56,7 +56,7 @@
 	  	</selectKey>
 	</update>
 
-	<update id="updatehate" parameterType="BoardVO">
+	<update id="updateHate" parameterType="BoardVO">
 		UPDATE board
 		SET b_hate=b_hate+1
 		WHERE b_num = #{b_num}

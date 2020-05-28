@@ -2,6 +2,9 @@ package com.koreait.webboard.controller;
 
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,19 +40,36 @@ public class UsersController {
 		return null;
 	}
 	
-	// 로그인
+	// 로그인 (로그인한 후, index가 아닌 로그인을 하기 전 페이지로 돌아가게 구현) == 쿠키사용
 	@RequestMapping(value="/login", method=RequestMethod.GET)
-	public String login() {
+	public String login(HttpServletRequest request, HttpServletResponse response) {
+		String prevUrl = request.getHeader("referer"); //요청된 이전 페이지의 URL을 구함
+		String serverPath = request.getContextPath() + "/"; //최상위 서버 path 이름을 지정 ("/WebBoard" + "/" : subString시의 시작인덱스를 구하기위해 + "/"를 함)
+		String moveUrl = prevUrl.substring(prevUrl.indexOf(serverPath)+serverPath.length()); //이동할 URL 주소를 잘라냄 
+		
+		response.addCookie(new Cookie("moveUrl", moveUrl)); //잘라낸 URL을 쿠키에 추가
+		
 		return "user/login";
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String login(UsersVO vo, HttpSession session, Model model) {
+	public String login(UsersVO vo, Model model, HttpServletRequest request, HttpServletResponse response) {
+		String moveUrl = "";
+		Cookie[] cookies = request.getCookies(); //로그인 페이지에서 얻을 수 있는 모든 쿠키획득
+		
+		for(Cookie c : cookies) {
+			if(c.getName().equals("moveUrl")) { //이동 URL을 저장하는 쿠키일때
+				moveUrl = c.getValue();
+				c.setMaxAge(0); //setMaxAge(0) == 삭제될 쿠키로 설정
+				response.addCookie(c); // response에 추가해서 쿠키에 설정된 옵션들 처리(삭제)
+			}
+		}
+		
 		UsersVO user = usersService.usersCheck(vo);
 		
 		if(user != null) {
-			session.setAttribute("users", user);
-			return "redirect:index";
+			model.addAttribute("users", user);
+			return "redirect:" + moveUrl;
 		} else {
 			model.addAttribute("alert", "가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.");
 			return "user/login";
@@ -58,9 +78,13 @@ public class UsersController {
 	
 	// 로그아웃
 	@RequestMapping("/logout")
-	public String logout(SessionStatus sessionStatus) {
+	public String logout(SessionStatus sessionStatus, HttpServletRequest request) {
+		String prevUrl = request.getHeader("referer");
+		String serverPath = request.getContextPath() + "/";
+		String moveUrl = prevUrl.substring(prevUrl.indexOf(serverPath)+serverPath.length()); 
+		
 		sessionStatus.setComplete();
-		return "redirect:index";
+		return "redirect:" + moveUrl;
 	}
 	
 	// 회원가입

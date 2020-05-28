@@ -2,6 +2,9 @@ package com.koreait.webboard.controller;
 
 import java.util.HashMap;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,11 +50,14 @@ public class BoardController {
 	// 글 상세보기
 	@RequestMapping("/board/readBoard")
 	public String selectBoard(BoardVO vo, Model model) {
-		boardService.updateReadCount(vo);
+		boardService.updateReadCount(vo);	
 		model.addAttribute("board", boardService.selectBoard(vo));
+//		model.addAttribute("replyList", replySerivce.selectReply(vo));
+		
 		return "board/readBoard";
 	}
 	
+	// 글 좋아요 기능
 	@RequestMapping("/board/updateLike")
 	@ResponseBody
 	public String updateLike(BoardVO vo, HttpSession session) {
@@ -70,7 +76,8 @@ public class BoardController {
 		
 		return String.valueOf(vo.getB_like());
 	}
-	
+
+	// 글 싫어요 기능
 	@RequestMapping("/board/updateHate")
 	@ResponseBody
 	public String updateHate(BoardVO vo, HttpSession session) {

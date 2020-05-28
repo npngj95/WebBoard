@@ -12,7 +12,6 @@
 <body>
 <div class="container wrapper">
 	<form class="text-center border border-light p-5" action="login" method="post">
-	
 	    <p class="h2 mb-4"><a href="index">Board Main</a></p>
 		<p class="h4 mb-4">로그인</p>
 		

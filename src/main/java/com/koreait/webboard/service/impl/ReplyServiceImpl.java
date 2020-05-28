@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.koreait.webboard.dao.ReplyDAO;
 import com.koreait.webboard.service.ReplyService;
+import com.koreait.webboard.vo.BoardVO;
 import com.koreait.webboard.vo.ReplyVO;
 
 @Service("replyService")
@@ -15,27 +16,18 @@ public class ReplyServiceImpl implements ReplyService {
 	private ReplyDAO replyDAO;
 
 	@Override
-	public List<ReplyVO> selectReply(ReplyVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ReplyVO> selectReply(BoardVO vo) {
+		return replyDAO.selectReply(vo);
 	}
 	
 	@Override
 	public void insertReply(ReplyVO vo) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void updateReply(ReplyVO vo) {
-		// TODO Auto-generated method stub
-		
+		replyDAO.insertReply(vo);
 	}
 
 	@Override
 	public void deleteReply(ReplyVO vo) {
-		// TODO Auto-generated method stub
-		
+		replyDAO.deleteReply(vo);
 	}
 
 }
