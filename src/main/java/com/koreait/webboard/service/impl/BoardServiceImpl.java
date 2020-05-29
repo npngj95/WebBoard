@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.koreait.webboard.common.paging.PageCriteria;
 import com.koreait.webboard.dao.BoardDAO;
 import com.koreait.webboard.service.BoardService;
 import com.koreait.webboard.vo.BoardVO;
@@ -14,6 +15,21 @@ import com.koreait.webboard.vo.BoardVO;
 public class BoardServiceImpl implements BoardService {
 	@Autowired
 	private BoardDAO boardDAO;
+	
+//	@Override
+//	public List<BoardVO> selectAllBoard(BoardVO vo, int start, int size) {
+//		return boardDAO.selectAllBoard(vo, start, size);
+//	}
+
+	@Override
+	public List<BoardVO> selectAllBoard(PageCriteria pc) {
+		return boardDAO.selectAllBoard(pc);
+	}
+	
+	@Override
+	public int boardTotalCount() {
+		return boardDAO.boardTotalCount();
+	}
 	
 	@Override
 	public BoardVO selectBoard(BoardVO vo) {
@@ -45,16 +61,6 @@ public class BoardServiceImpl implements BoardService {
 		boardDAO.updateHate(vo);
 	}
 	
-	@Override
-	public List<BoardVO> selectAllBoard(BoardVO vo, int start, int size) {
-		return boardDAO.selectAllBoard(vo, start, size);
-	}
-	
-	@Override
-	public int boardTotalCount() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 	
 	@Override
 	public void insertBoard(BoardVO vo) {

@@ -1,7 +1,6 @@
 function openModal(path) {
 	$("#path").val(path);
 	$("#myModal1").modal("show");
-	
 }
 
 

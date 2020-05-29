@@ -2,9 +2,6 @@ package com.koreait.webboard.controller;
 
 import java.util.HashMap;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.koreait.webboard.common.paging.PageCriteria;
+import com.koreait.webboard.common.paging.PageMaker;
 import com.koreait.webboard.service.BoardService;
-import com.koreait.webboard.service.ReplyService;
 import com.koreait.webboard.vo.BoardVO;
 import com.koreait.webboard.vo.UsersVO;
 
@@ -23,14 +21,18 @@ import com.koreait.webboard.vo.UsersVO;
 public class BoardController {
 	@Autowired
 	private BoardService boardService;
-	@Autowired
-	private ReplyService replySerivce;
 	
 	// Home - index
 	@RequestMapping({"/", "/index"})
-	public String home(BoardVO vo, Model model) {
+	public String home(BoardVO vo, Model model, PageCriteria pageCriteria) {
+		PageMaker pagemaker = new PageMaker();
 		
-		model.addAttribute("boardList", boardService.selectAllBoard(vo, 0, 10));
+		pagemaker.setPc(pageCriteria);
+		pagemaker.setTotalCount(boardService.boardTotalCount());
+		
+		model.addAttribute("pageMaker", pagemaker);
+		model.addAttribute("boardList", boardService.selectAllBoard(pageCriteria));
+		
 		return "index";
 	}
 	
@@ -52,8 +54,6 @@ public class BoardController {
 	public String selectBoard(BoardVO vo, Model model) {
 		boardService.updateReadCount(vo);	
 		model.addAttribute("board", boardService.selectBoard(vo));
-//		model.addAttribute("replyList", replySerivce.selectReply(vo));
-		
 		return "board/readBoard";
 	}
 	

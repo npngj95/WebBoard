@@ -22,12 +22,14 @@ public class ReplyController {
 		return replyService.selectReply(vo);
 	}
 	
-	@RequestMapping("/board/insertReply")
+	@RequestMapping("/board/writeReply")
+	@ResponseBody
 	public void insertReply(ReplyVO vo) {
 		replyService.insertReply(vo);
 	}
 
 	@RequestMapping("/board/deleteReply")
+	@ResponseBody
 	public void deleteReply(ReplyVO vo) {
 		replyService.deleteReply(vo);
 	}

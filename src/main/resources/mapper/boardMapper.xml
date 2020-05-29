@@ -3,7 +3,22 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="BoardDAO">
-
+	
+	<!-- 글 목록 보기 -->
+	<!-- 생략가능한 parameterType을 준 이유 : xml파일만 보고 어떤 클래스인지 명시. -->
+	<select id="selectAllBoard" parameterType="PageCriteria" resultType="BoardVO">	
+		SELECT * FROM board ORDER BY b_num DESC
+		
+		LIMIT #{pageStart}, #{pageSize}
+		<>
+	</select>
+	
+	<!-- 글 전체 개수 구하기 -->
+	<select id="selectTotalCount" resultType="int">
+		SELECT count(*)	FROM board
+	</select>
+	
+	<!-- 글상세보기 -->
 	<select id="selectBoard" parameterType="BoardVO" resultType="BoardVO">
 		SELECT *
 		FROM board
@@ -16,9 +31,6 @@
 		WHERE b_num=#{b_num}
 	</update>
 
-	<select id="selectAllBoard" resultType="BoardVO">
-		SELECT * FROM board ORDER BY b_regdate DESC
-	</select>
 
 	<insert id="insertBoard" parameterType="BoardVO" useGeneratedKeys="true" keyProperty="b_num">
 		INSERT INTO board (b_category, b_writer, b_email, b_title, b_content)

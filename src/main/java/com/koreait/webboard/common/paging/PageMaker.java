@@ -20,9 +20,10 @@ public class PageMaker {
 	}
 	
 	private void calcData() {
-		endBlock = (int)(pc.getPage() / (double)blockSize) * blockSize;
+		endBlock = (int)(Math.ceil(pc.getPage() / (double)blockSize)) * blockSize;
 		startBlock = (endBlock - blockSize) + 1;
-		this.totalBlock =  (int) (totalCount / (double) pc.getPageSize());
+		totalBlock =  (int) (totalCount / (double) pc.getPageSize());
+		if(totalCount%pc.getPageSize() != 0)	totalBlock += 1;
 		
 		if(endBlock > totalBlock) {
 			endBlock = totalBlock;
@@ -36,12 +37,11 @@ public class PageMaker {
 	// jsp에서 페이징 처리를 위해
 	// 페이지에 따라 a태그를 이용해서 href 링크를 정의하는 URL경로 설정을 위해 스프링에서 지원하는 UriCommponent객체를 활용
 	public String makeQuery(int page) {
-		UriComponents uriComponent = UriComponentsBuilder.newInstance().queryParam("page", page).queryParam("pageSize", pc.getPageSize()).build();
+		UriComponents uriComponent = UriComponentsBuilder.newInstance().queryParam("page", page).build();
 		return uriComponent.toString();
 		
-		//return "?page=" + page + "&pageSize=" + pc.getPageSize();
+		//return "?page=" + page;
 	}
-
 	
 	public PageCriteria getPc() {
 		return pc;

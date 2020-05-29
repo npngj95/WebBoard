@@ -3,6 +3,7 @@
 public class PageCriteria {
 	private int page; //현재 페이지
 	private int pageSize; // 한페이지에 표시될 게시글의 수
+	private int pageStart;
 	
 	//기본생성자 정의
 	//기본 객체 생성시 초기값을 지정한다 (1 페이지에서 10개)
@@ -12,6 +13,7 @@ public class PageCriteria {
 	}
 
 	public int getPageStart() {
+		pageStart = (this.page - 1) * this.pageSize;
 		return (this.page - 1) * this.pageSize;
 	}
 	
@@ -37,4 +39,5 @@ public class PageCriteria {
 	public void setPageSize(int pageSize) {
 			this.pageSize = 10;
 	}
+	
 }

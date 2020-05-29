@@ -76,21 +76,21 @@
 		
 		<!-- Paging -->
 		<nav aria-label="Page navigation example" style="text-align: center;">
-			<ul class="pagination pg-blue" style="width: 100%;">
-				<li class="page-item disabled"><a class="page-link" tabindex="-1">First</a></li>
-				<li class="page-item disabled"><a class="page-link" tabindex="-1">Prev</a></li>
-				<li class="page-item active"><a class="page-link">1</a></li>
-				<li class="page-item"><a class="page-link">2</a></li>
-				<li class="page-item"><a class="page-link">3</a></li>
-				<li class="page-item"><a class="page-link">4</a></li>
-				<li class="page-item"><a class="page-link">5</a></li>
-				<li class="page-item"><a class="page-link">6</a></li>
-				<li class="page-item"><a class="page-link">7</a></li>
-				<li class="page-item"><a class="page-link">8</a></li>
-				<li class="page-item"><a class="page-link">9</a></li>
-				<li class="page-item"><a class="page-link">10</a></li>
-				<li class="page-item"><a class="page-link">Next</a></li>
-				<li class="page-item"><a class="page-link">Last</a></li>
+			<ul class="pagination" style="width: 100%;">
+				<li class="page-item <c:if test="${!pageMaker.prev }">disabled</c:if>"><a class="page-link" href="index${pageMaker.makeQuery(1) }">First</a></li>
+				<li class="page-item <c:if test="${!pageMaker.prev }">disabled</c:if>"><a class="page-link" href="index${pageMaker.makeQuery(pageMaker.startBlock-1) }">Prev</a></li>
+				
+				<c:forEach begin="${pageMaker.startBlock }"  end="${pageMaker.endBlock }" var="i">
+					<c:if test="${pageMaker.pc.page == i}">
+						<li class="page-item active disabled"><a class="page-link white-text">${i}</a></li>
+					</c:if>
+					<c:if test="${pageMaker.pc.page != i}">
+						<li class="page-item"><a class="page-link" href="index${pageMaker.makeQuery(i) }">${i}</a></li>
+					</c:if>
+				</c:forEach>
+				
+				<li class="page-item <c:if test="${!pageMaker.next }">disabled</c:if>"><a class="page-link" href="index${pageMaker.makeQuery(pageMaker.endBlock+1) }">Next</a></li>
+				<li class="page-item <c:if test="${!pageMaker.next }">disabled</c:if>"><a class="page-link" href="index${pageMaker.makeQuery(pageMaker.totalBlock) }">Last</a></li>
 			</ul>
 		</nav>
 	</div>
