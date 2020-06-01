@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.koreait.webboard.common.paging.PageCriteria;
+import com.koreait.webboard.common.paging.PageCriteriaSearch;
 import com.koreait.webboard.dao.BoardDAO;
 import com.koreait.webboard.service.BoardService;
 import com.koreait.webboard.vo.BoardVO;
@@ -22,13 +22,13 @@ public class BoardServiceImpl implements BoardService {
 //	}
 
 	@Override
-	public List<BoardVO> selectAllBoard(PageCriteria pc) {
+	public List<BoardVO> selectAllBoard(PageCriteriaSearch pc) {
 		return boardDAO.selectAllBoard(pc);
 	}
 	
 	@Override
-	public int boardTotalCount() {
-		return boardDAO.boardTotalCount();
+	public int boardTotalCount(PageCriteriaSearch pageCriteria) {
+		return boardDAO.boardTotalCount(pageCriteria);
 	}
 	
 	@Override

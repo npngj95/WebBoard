@@ -1,5 +1,5 @@
 
-var isPass = [false, false];
+var isPass = [true, true];
 
 
 function updateUser() {

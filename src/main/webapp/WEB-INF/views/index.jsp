@@ -19,19 +19,19 @@
 		<nav class="navbar navbar-expand-lg  md-color">
 			<!-- Navbar brand -->
 			<div class="mb-2">
-				<a class="navbar-brand" href="#">정렬1</a>
-				<a class="navbar-brand"	href="#">정렬2</a> 
-				<a class="navbar-brand" href="#">정렬3</a>
+				<a class="navbar-brand" href="index${pageMaker.makeQuery(1) }&sort=b_num">작성일순</a>
+				<a class="navbar-brand"	href="index${pageMaker.makeQuery(1) }&sort=b_like">좋아요순</a> 
+				<a class="navbar-brand" href="index${pageMaker.makeQuery(1) }&sort=b_readcount">조회수순</a>
 			</div>
 			
-			<form class="form-inline ml-auto" action="searchBoard.do" method="post">
-				<select class="browser-default custom-select mr-2 mb-2">
-				  <option value="1" selected>제목</option>
-				  <option value="2">글쓴이</option>
-				  <option value="3">내용</option>
+			<form class="form-inline ml-auto" action="index" method="get">
+				<select name="condition" class="browser-default custom-select mr-2 mb-2">
+				  <option value="b_title" selected>제목</option>
+				  <option value="b_writer">글쓴이</option>
+				  <option value="b_content">내용</option>
 				</select>
 				<div class="row mx-0">
-					<input class="col form-control mt-1" type="text"	placeholder="Search" aria-label="Search">
+					<input class="col form-control mt-1" type="text" name="keyword" placeholder="Search">
 					<button class="col btn btn-default my-0 mb-2 ml-3" type="submit">Search</button>
 				</div>
 			</form>
@@ -77,20 +77,20 @@
 		<!-- Paging -->
 		<nav aria-label="Page navigation example" style="text-align: center;">
 			<ul class="pagination" style="width: 100%;">
-				<li class="page-item <c:if test="${!pageMaker.prev }">disabled</c:if>"><a class="page-link" href="index${pageMaker.makeQuery(1) }">First</a></li>
-				<li class="page-item <c:if test="${!pageMaker.prev }">disabled</c:if>"><a class="page-link" href="index${pageMaker.makeQuery(pageMaker.startBlock-1) }">Prev</a></li>
+				<li class="page-item <c:if test="${!pageMaker.prev }">disabled</c:if>"><a class="page-link" href="index${pageMaker.makeQuery(1) }&sort=${sort}">First</a></li>
+				<li class="page-item <c:if test="${!pageMaker.prev }">disabled</c:if>"><a class="page-link" href="index${pageMaker.makeQuery(pageMaker.startBlock-1) }&sort=${sort}">Prev</a></li>
 				
 				<c:forEach begin="${pageMaker.startBlock }"  end="${pageMaker.endBlock }" var="i">
 					<c:if test="${pageMaker.pc.page == i}">
 						<li class="page-item active disabled"><a class="page-link white-text">${i}</a></li>
 					</c:if>
 					<c:if test="${pageMaker.pc.page != i}">
-						<li class="page-item"><a class="page-link" href="index${pageMaker.makeQuery(i) }">${i}</a></li>
+						<li class="page-item"><a class="page-link" href="index${pageMaker.makeQuery(i) }&sort=${pageMaker.pc.sort}">${i}</a></li>
 					</c:if>
 				</c:forEach>
 				
-				<li class="page-item <c:if test="${!pageMaker.next }">disabled</c:if>"><a class="page-link" href="index${pageMaker.makeQuery(pageMaker.endBlock+1) }">Next</a></li>
-				<li class="page-item <c:if test="${!pageMaker.next }">disabled</c:if>"><a class="page-link" href="index${pageMaker.makeQuery(pageMaker.totalBlock) }">Last</a></li>
+				<li class="page-item <c:if test="${!pageMaker.next }">disabled</c:if>"><a class="page-link" href="index${pageMaker.makeQuery(pageMaker.endBlock+1) }&sort=${sort}">Next</a></li>
+				<li class="page-item <c:if test="${!pageMaker.next }">disabled</c:if>"><a class="page-link" href="index${pageMaker.makeQuery(pageMaker.totalBlock) }&sort=${sort}">Last</a></li>
 			</ul>
 		</nav>
 	</div>

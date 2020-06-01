@@ -38,6 +38,7 @@ public class BoardVO {
 	public void setB_searchKeyword(String b_searchKeyword) {
 		this.b_searchKeyword = b_searchKeyword;
 	}
+	
 	public int getB_num() {
 		return b_num;
 	}

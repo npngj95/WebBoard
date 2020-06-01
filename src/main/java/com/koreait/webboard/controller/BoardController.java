@@ -9,9 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.koreait.webboard.common.paging.PageCriteria;
+import com.koreait.webboard.common.paging.PageCriteriaSearch;
 import com.koreait.webboard.common.paging.PageMaker;
 import com.koreait.webboard.service.BoardService;
 import com.koreait.webboard.vo.BoardVO;
@@ -21,21 +22,10 @@ import com.koreait.webboard.vo.UsersVO;
 public class BoardController {
 	@Autowired
 	private BoardService boardService;
+	@Autowired
+	private PageMaker pageMaker;
 	
-	// Home - index
-	@RequestMapping({"/", "/index"})
-	public String home(BoardVO vo, Model model, PageCriteria pageCriteria) {
-		PageMaker pagemaker = new PageMaker();
-		
-		pagemaker.setPc(pageCriteria);
-		pagemaker.setTotalCount(boardService.boardTotalCount());
-		
-		model.addAttribute("pageMaker", pagemaker);
-		model.addAttribute("boardList", boardService.selectAllBoard(pageCriteria));
-		
-		return "index";
-	}
-	
+	// *** 관리자 영역 ***
 	//BoardVO 안에 정렬조건, 검색조건, 검색키워드를 포함하여 vo로 받고
 	//페이징에 필요한 Limit 절의 시작Row를 start 변수에 할당
 	//페이징에 필요한 Limit 절의 크기를 size 변수에 할당
@@ -49,7 +39,22 @@ public class BoardController {
 		return null;
 	}
 	
-	// 글 상세보기
+	// *** 유저 영역 ***
+	// Home - index
+	@RequestMapping({"/", "/index"})
+	public String home(Model model, PageCriteriaSearch pageCriteria) {
+		pageMaker.setPc(pageCriteria);
+		pageMaker.setTotalCount(boardService.boardTotalCount(pageCriteria));
+		
+		model.addAttribute("pageMaker", pageMaker);
+		model.addAttribute("boardList", boardService.selectAllBoard(pageCriteria));
+//		model.addAttribute("sort", sort);
+		
+		System.out.println(pageCriteria);
+		return "index";
+	}
+	
+	// 게시판 글 상세보기
 	@RequestMapping("/board/readBoard")
 	public String selectBoard(BoardVO vo, Model model) {
 		boardService.updateReadCount(vo);	
@@ -57,7 +62,7 @@ public class BoardController {
 		return "board/readBoard";
 	}
 	
-	// 글 좋아요 기능
+	// 게시판 글 좋아요 기능
 	@RequestMapping("/board/updateLike")
 	@ResponseBody
 	public String updateLike(BoardVO vo, HttpSession session) {
@@ -77,7 +82,7 @@ public class BoardController {
 		return String.valueOf(vo.getB_like());
 	}
 
-	// 글 싫어요 기능
+	// 게시판 글 싫어요 기능
 	@RequestMapping("/board/updateHate")
 	@ResponseBody
 	public String updateHate(BoardVO vo, HttpSession session) {
@@ -110,7 +115,7 @@ public class BoardController {
 		return "redirect:readBoard?b_num=" + vo.getB_num();
 	}
 	
-	// 글 수정
+	// 게시판 글 수정
 	@RequestMapping(value="/board/updateBoard", method=RequestMethod.GET)
 	public String updateBoard(BoardVO vo, Model model) {
 		model.addAttribute("board", boardService.selectBoard(vo));
@@ -123,7 +128,7 @@ public class BoardController {
 		return "redirect:readBoard?b_num=" + vo.getB_num();
 	}
 	
-	// 글 삭제
+	// 게시판 글 삭제
 	@RequestMapping("/board/deleteBoard")
 	public String deleteBoard(BoardVO vo) {
 		boardService.deleteBoard(vo);

@@ -7,7 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.koreait.webboard.common.paging.PageCriteria;
+import com.koreait.webboard.common.paging.PageCriteriaSearch;
 import com.koreait.webboard.vo.BoardVO;
 
 @Repository
@@ -19,12 +19,12 @@ public class BoardDAO {
 //		return mybatis.selectList("BoardDAO.selectAllBoard", vo, new RowBounds(start, size));
 //	}
 	
-	public List<BoardVO> selectAllBoard(PageCriteria pc) {
+	public List<BoardVO> selectAllBoard(PageCriteriaSearch pc) {
 		return mybatis.selectList("BoardDAO.selectAllBoard", pc);
 	}
 	
-	public int boardTotalCount() {
-		return mybatis.selectOne("BoardDAO.selectTotalCount");
+	public int boardTotalCount(PageCriteriaSearch pageCriteria) {
+		return mybatis.selectOne("BoardDAO.selectTotalCount", pageCriteria);
 	}
 	
 	public BoardVO selectBoard(BoardVO vo) {

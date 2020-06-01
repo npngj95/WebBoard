@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.koreait.webboard.common.paging.PageCriteria;
+import com.koreait.webboard.common.paging.PageCriteriaSearch;
 import com.koreait.webboard.vo.BoardVO;
 
 public interface BoardService {
@@ -12,9 +13,9 @@ public interface BoardService {
 	//페이징에 필요한 Limit 절의 시작Row를 start 변수에 할당
 	//페이징에 필요한 Limit 절의 크기를 size 변수에 할당
 //	List<BoardVO> selectAllBoard(BoardVO vo, int start, int size);
-	List<BoardVO> selectAllBoard(PageCriteria pc);
+	List<BoardVO> selectAllBoard(PageCriteriaSearch pc);
 	
-	int boardTotalCount();
+	int boardTotalCount(PageCriteriaSearch pageCriteria);
 	
 	BoardVO selectBoard(BoardVO vo);
 	
