@@ -103,7 +103,7 @@
 	    
 	    <!-- 수정 / 삭제 버튼 -->
 		    <div class="text-right mb-3">
-				<button type="button" style="float: left;" class="btn btn-dark mb-3" onclick="location='../index'">게시글 목록</button>
+				<button type="button" style="float: left;" class="btn btn-dark mb-3" onclick="location='../index${url }'">게시글 목록</button>
 				 <c:if test="${board.b_writer == users.u_id}">
 					<button type="button" class="btn btn-dark mb-3" onclick="location='updateBoard?b_num=${board.b_num }'">글수정</button>
 					<button type="button" class="btn btn-dark mb-3" data-toggle="modal" data-target="#myModal">글삭제</button>

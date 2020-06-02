@@ -4,7 +4,7 @@ import com.koreait.webboard.vo.AdminVO;
 
 public interface AdminService {
 	
-	AdminVO selectAdmin(AdminVO vo);
+	AdminVO adminCheck(AdminVO vo);
 	
 	void insertAdmin(AdminVO vo);
 	

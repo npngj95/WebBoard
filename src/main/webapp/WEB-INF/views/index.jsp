@@ -19,19 +19,19 @@
 		<nav class="navbar navbar-expand-lg  md-color">
 			<!-- Navbar brand -->
 			<div class="mb-2">
-				<a class="navbar-brand" href="index${pageMaker.makeQuery(1) }&sort=b_num">작성일순</a>
+				<a class="navbar-brand" href="index${pageMaker.makeQuery(1) }&sort=b_regdate">작성일순</a>
 				<a class="navbar-brand"	href="index${pageMaker.makeQuery(1) }&sort=b_like">좋아요순</a> 
 				<a class="navbar-brand" href="index${pageMaker.makeQuery(1) }&sort=b_readcount">조회수순</a>
 			</div>
 			
 			<form class="form-inline ml-auto" action="index" method="get">
 				<select name="condition" class="browser-default custom-select mr-2 mb-2">
-				  <option value="b_title" selected>제목</option>
-				  <option value="b_writer">글쓴이</option>
-				  <option value="b_content">내용</option>
+				  <option value="b_title" <c:if test="${pageMaker.pc.condition=='b_title'}">selected</c:if> >제목</option>
+				  <option value="b_writer" <c:if test="${pageMaker.pc.condition=='b_writer' }">selected</c:if> >글쓴이</option>
+				  <option value="b_content" <c:if test="${pageMaker.pc.condition=='b_content' }">selected</c:if> >내용</option>
 				</select>
 				<div class="row mx-0">
-					<input class="col form-control mt-1" type="text" name="keyword" placeholder="Search">
+					<input class="col form-control mt-1" type="text" name="keyword" placeholder="Search" value="${pageMaker.pc.keyword }">
 					<button class="col btn btn-default my-0 mb-2 ml-3" type="submit">Search</button>
 				</div>
 			</form>
@@ -60,7 +60,7 @@
 						<c:if test="${board.b_category == 3}">공지</c:if>
 					</th>
 					
-					<td><a href="board/readBoard?b_num=${board.b_num }">${board.b_title }</a></td>
+					<td><a href="board/readBoard${pageMaker.makeQuery(pageMaker.pc.page) }&sort=${pageMaker.pc.sort}&b_num=${board.b_num }">${board.b_title }</a></td>
 					<td class="text-center">${board.b_writer }</td>
 					<td class="text-center"><fmt:formatDate pattern="yyyy-MM-dd" value="${board.b_regdate }"/></td>
 					<td class="text-center">${board.b_readcount }</td>
@@ -77,8 +77,8 @@
 		<!-- Paging -->
 		<nav aria-label="Page navigation example" style="text-align: center;">
 			<ul class="pagination" style="width: 100%;">
-				<li class="page-item <c:if test="${!pageMaker.prev }">disabled</c:if>"><a class="page-link" href="index${pageMaker.makeQuery(1) }&sort=${sort}">First</a></li>
-				<li class="page-item <c:if test="${!pageMaker.prev }">disabled</c:if>"><a class="page-link" href="index${pageMaker.makeQuery(pageMaker.startBlock-1) }&sort=${sort}">Prev</a></li>
+				<li class="page-item <c:if test="${!pageMaker.prev }">disabled</c:if>"><a class="page-link" href="index${pageMaker.makeQuery(1) }&sort=${pageMaker.pc.sort}">First</a></li>
+				<li class="page-item <c:if test="${!pageMaker.prev }">disabled</c:if>"><a class="page-link" href="index${pageMaker.makeQuery(pageMaker.startBlock-1) }&sort=${pageMaker.pc.sort}">Prev</a></li>
 				
 				<c:forEach begin="${pageMaker.startBlock }"  end="${pageMaker.endBlock }" var="i">
 					<c:if test="${pageMaker.pc.page == i}">
@@ -89,8 +89,8 @@
 					</c:if>
 				</c:forEach>
 				
-				<li class="page-item <c:if test="${!pageMaker.next }">disabled</c:if>"><a class="page-link" href="index${pageMaker.makeQuery(pageMaker.endBlock+1) }&sort=${sort}">Next</a></li>
-				<li class="page-item <c:if test="${!pageMaker.next }">disabled</c:if>"><a class="page-link" href="index${pageMaker.makeQuery(pageMaker.totalBlock) }&sort=${sort}">Last</a></li>
+				<li class="page-item <c:if test="${!pageMaker.next }">disabled</c:if>"><a class="page-link" href="index${pageMaker.makeQuery(pageMaker.endBlock+1) }&sort=${pageMaker.pc.sort}">Next</a></li>
+				<li class="page-item <c:if test="${!pageMaker.next }">disabled</c:if>"><a class="page-link" href="index${pageMaker.makeQuery(pageMaker.totalBlock) }&sort=${pageMaker.pc.sort}">Last</a></li>
 			</ul>
 		</nav>
 	</div>

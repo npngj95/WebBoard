@@ -51,7 +51,6 @@ public class BoardDAO {
 		mybatis.update("BoardDAO.updateHate", vo);
 	}
 	
-	
 	public void insertBoard(BoardVO vo) {
 		mybatis.insert("BoardDAO.insertBoard", vo);
 	}

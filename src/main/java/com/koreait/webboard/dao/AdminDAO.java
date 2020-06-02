@@ -11,12 +11,12 @@ public class AdminDAO {
 	@Autowired
 	private SqlSession mybatis;
 	
-	public AdminVO selectAdmin(AdminVO vo) {
-		return mybatis.selectOne("AdminDAO.selectAdmin", vo);
+	public AdminVO adminCheck(AdminVO vo) {
+		return mybatis.selectOne("AdminDAO.adminCheck", vo);
 	}
 
 	public void insertAdmin(AdminVO vo) {
-		mybatis.insert("AdminDAO.insertAdmin", vo);
+		mybatis.insert("UsersDAO.insertAdmin", vo);
 	}
 
 	public void updateAdmin(AdminVO vo) {

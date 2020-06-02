@@ -1,6 +1,4 @@
-
-var isPass = [true, true];
-
+var isPass = [false, false];
 
 function updateUser() {
 	return (isPass[0] && isPass[1]);

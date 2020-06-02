@@ -16,6 +16,10 @@ function updateLike(b_num, u_id) {
 			"b_num": b_num
 		},
 		
+		beforeSend : function(request){
+			request.setRequestHeader("AJAX", "true");
+		},
+		
 		success : function(result) {
 			// ajax처리 이후, html Body의 일부분 (div영역)만 리로딩 하기 위해 .load()함수를 사용
 			//$("#like-log").load(window.location.href + " #like-hate-btn");
@@ -24,6 +28,10 @@ function updateLike(b_num, u_id) {
 				openModal(2);
 			}
 			$("#like").text(result);
+		},
+		
+		error : function() {
+			location.href="../login";
 		}
 	});
 	
@@ -46,11 +54,19 @@ function updateHate(b_num, u_id) {
 			"b_num": b_num
 		},
 		
+		beforeSend : function(request){
+			request.setRequestHeader("AJAX", "true");
+		},
+		
 		success : function(result) {
 			if(now_hate == result){
 				openModal(2);
 			} 
 			$("#hate").text(result);
+		},
+		
+		error : function() {
+			location.href="../login";
 		}
 	});
 	
@@ -78,7 +94,6 @@ function frame(r_writer, r_content, r_regdate, r_num) { //댓글 row작성 메�
 	}
 	html += "</td></tr>";
 	
-	console.log(html);
 	return html;
 }
 
@@ -128,7 +143,7 @@ function writeReplyLogin(u_id) {
 //댓글 쓰기 메서드
 function writeReply(b_num, u_id) {
 	r_content = $("#r_content").val();
-
+	
 	if(!r_content) { //입력내용이 없으면 Modal.show 후 return으로 댓글입력 생략
 		$("#modal2_title").text("댓글 작성");
 		$("#modal2-body-text").text("댓글내용을 입력해야 합니다.");
@@ -145,10 +160,21 @@ function writeReply(b_num, u_id) {
 			"r_content" : r_content,
 			"b_num": b_num
 		},
+		
+		beforeSend : function(request){
+			request.setRequestHeader("AJAX", "true");
+		},
+		
 		success : function() {
+			console.log("success : ");
 			selectReply(); //댓글 입력 후 댓글 다시 조회
 			$("#r_content").val("");
+		},
+		
+		error : function() {
+			location.href="../login";
 		}
+		
 	});
 	
 }
@@ -166,10 +192,18 @@ function deleteReply(r_num) {
 		data : {
 			"r_num": r_num
 		},
+		beforeSend : function(request){
+			request.setRequestHeader("AJAX", "true");
+		},
+		
 		
 		success : function(result) {
 			selectReply(); // 댓글 삭제 후 댓글 다시 조회
 			closeModal(1);
+		},
+		
+		error : function() {
+			location.href="../login";
 		}
 	});
 }

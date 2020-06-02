@@ -21,29 +21,41 @@
 		<div class="collapse navbar-collapse" id="navbarColor01">
 			<!-- Links -->
 			<ul class="navbar-nav ml-auto">
-				<c:if test="${users == null}">
-					<li class="nav-item">
-						<a class="nav-link" href="${pageContext.request.contextPath }/login">
-						로그인 </a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="${pageContext.request.contextPath }/signUp">
-						회원가입 </a>
-					</li>				
-				</c:if>
-				<c:if test="${users != null}">
-					<li class="nav-item">
-						<div class="text-white p-2">${users.u_name }님</div>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="${pageContext.request.contextPath }/user/selectUser">
-						회원정보관리 </a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="${pageContext.request.contextPath }/logout">
-						로그아웃 </a>
-					</li>				
-				</c:if>
+				<c:choose>
+					<c:when test="${admin != null}">
+						<li class="nav-item">
+							<a class="nav-link" href="${pageContext.request.contextPath }/admin/logout">
+							로그아웃</a>
+						</li>
+					</c:when>
+					
+					<c:otherwise>
+						<c:if test="${users == null}">
+							<li class="nav-item">
+								<a class="nav-link" href="${pageContext.request.contextPath }/login">
+								로그인 </a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="${pageContext.request.contextPath }/signUp">
+								회원가입 </a>
+							</li>				
+						</c:if>
+						
+						<c:if test="${users != null}">
+							<li class="nav-item">
+								<div class="text-white p-2">${users.u_name }님</div>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="${pageContext.request.contextPath }/user/selectUser">
+								회원정보관리 </a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="${pageContext.request.contextPath }/logout">
+								로그아웃 </a>
+							</li>				
+						</c:if>	
+					</c:otherwise>
+				</c:choose>
 			</ul>
 			<!-- Links -->
 		</div>

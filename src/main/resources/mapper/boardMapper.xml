@@ -8,19 +8,11 @@
 	<select id="selectAllBoard" resultType="BoardVO">
 		SELECT * FROM board 
 		
-		<if test="condition!=null">
+		<if test="condition != null">
 			WHERE ${condition} like '%${keyword}%'
 		</if>
 		
-		<choose>
-			<when test="sort != '' and sort != null">
-				ORDER BY ${sort} DESC
-			</when>
-			
-			<otherwise>
-				ORDER BY b_num DESC
-			</otherwise>
-		</choose>
+		ORDER BY ${sort} DESC
 		
 		LIMIT #{pageStart}, #{pageSize}
 	</select>
@@ -28,13 +20,10 @@
 	<!-- 글 전체 개수 구하기 -->
 	<select id="selectTotalCount" resultType="int">
 		SELECT count(*)	FROM board
-		<if test="condition!=null">
+		
+		<if test="condition != null">
 			WHERE ${condition} like '%${keyword}%'
 		</if>
-		<if test="sort!='' and sort != null">
-			ORDER BY ${sort} DESC
-		</if>
-		
 	</select>
 	
 	<!-- 글상세보기 -->

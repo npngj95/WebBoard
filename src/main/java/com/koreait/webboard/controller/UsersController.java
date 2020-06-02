@@ -46,6 +46,11 @@ public class UsersController {
 		String prevUrl = request.getHeader("referer"); //요청된 이전 페이지의 URL을 구함
 		String serverPath = request.getContextPath() + "/"; //최상위 서버 path 이름을 지정 ("/WebBoard" + "/" : subString시의 시작인덱스를 구하기위해 + "/"를 함)
 		String moveUrl = prevUrl.substring(prevUrl.indexOf(serverPath)+serverPath.length()); //이동할 URL 주소를 잘라냄 
+
+		if(moveUrl.equals("")) {	// localhost/{serverPath}/ 로 들어왔을 때
+			moveUrl = "index";
+		}
+		System.out.println(moveUrl);
 		
 		response.addCookie(new Cookie("moveUrl", moveUrl)); //잘라낸 URL을 쿠키에 추가
 		
@@ -57,18 +62,20 @@ public class UsersController {
 		String moveUrl = "";
 		Cookie[] cookies = request.getCookies(); //로그인 페이지에서 얻을 수 있는 모든 쿠키획득
 		
-		for(Cookie c : cookies) {
-			if(c.getName().equals("moveUrl")) { //이동 URL을 저장하는 쿠키일때
-				moveUrl = c.getValue();
-				c.setMaxAge(0); //setMaxAge(0) == 삭제될 쿠키로 설정
-				response.addCookie(c); // response에 추가해서 쿠키에 설정된 옵션들 처리(삭제)
-			}
-		}
-		
 		UsersVO user = usersService.usersCheck(vo);
 		
 		if(user != null) {
+			for(Cookie c : cookies) {
+				if(c.getName().equals("moveUrl")) { //이동 URL을 저장하는 쿠키일때
+					moveUrl = c.getValue();
+					System.out.println(moveUrl);
+					c.setMaxAge(0); //setMaxAge(0) == 삭제될 쿠키로 설정
+					response.addCookie(c); // response에 추가해서 쿠키에 설정된 옵션들 처리(삭제)
+				}
+			}
 			model.addAttribute("users", user);
+			System.out.println(moveUrl);
+			
 			return "redirect:" + moveUrl;
 		} else {
 			model.addAttribute("alert", "가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.");

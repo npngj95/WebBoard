@@ -4,27 +4,9 @@
 
 <mapper namespace="AdminDAO">
 
-	<select id="selectAdmin" parameterType="UsersVO" resultType="UsersVO">
-		SELECT * FROM users
-		WHERE u_id = #{u_id}
+	<select id="adminCheck" parameterType="AdminVO" resultType="AdminVO">
+		SELECT * FROM admin
+		WHERE a_id = #{a_id} and a_pwd = #{a_pwd}
 	</select>
 
-	<insert id="insertUsers" parameterType="UsersVO">
-		INSERT INTO users (u_id, u_pwd, u_name, u_email, u_gender, u_email_code)
-		VALUES(#{u_id}, #{u_pwd}, #{u_name}, #{u_email}, #{u_gender}, #{u_email_code})
-	</insert>
-
-	<update id="updateUsers" parameterType="UsersVO">
-		UPDATE users
-		SET
-		u_name = #{u_name}, u_email = #{u_email}
-		WHERE
-		u_id = #{u_id} AND u_pwd = #{u_pwd}
-	</update>
-
-	<delete id="deleteUsers" parameterType="UsersVO">
-		DELETE FROM users WHERE
-		u_id = #{u_id}
-	</delete>
-	
 </mapper>

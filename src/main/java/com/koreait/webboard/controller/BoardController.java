@@ -7,10 +7,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.koreait.webboard.common.paging.PageCriteriaSearch;
 import com.koreait.webboard.common.paging.PageMaker;
@@ -19,6 +20,7 @@ import com.koreait.webboard.vo.BoardVO;
 import com.koreait.webboard.vo.UsersVO;
 
 @Controller
+@SessionAttributes("url")
 public class BoardController {
 	@Autowired
 	private BoardService boardService;
@@ -34,11 +36,6 @@ public class BoardController {
 		return null;
 	}
 	
-	public String boardTotalCount() {
-		
-		return null;
-	}
-	
 	// *** 유저 영역 ***
 	// Home - index
 	@RequestMapping({"/", "/index"})
@@ -48,17 +45,20 @@ public class BoardController {
 		
 		model.addAttribute("pageMaker", pageMaker);
 		model.addAttribute("boardList", boardService.selectAllBoard(pageCriteria));
-//		model.addAttribute("sort", sort);
 		
-		System.out.println(pageCriteria);
+		// readBoard에서 index로 돌아갈 때 사용
+		String url = pageMaker.makeQuery(pageCriteria.getPage()) +"&sort="+pageCriteria.getSort();
+		model.addAttribute("url", url);
+		
 		return "index";
 	}
 	
 	// 게시판 글 상세보기
 	@RequestMapping("/board/readBoard")
 	public String selectBoard(BoardVO vo, Model model) {
-		boardService.updateReadCount(vo);	
+		boardService.updateReadCount(vo);
 		model.addAttribute("board", boardService.selectBoard(vo));
+		
 		return "board/readBoard";
 	}
 	

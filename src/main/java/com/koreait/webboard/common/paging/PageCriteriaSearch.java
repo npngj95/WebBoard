@@ -3,7 +3,7 @@ package com.koreait.webboard.common.paging;
 public class PageCriteriaSearch extends PageCriteria {
 	private String condition;
 	private String keyword;
-	private String sort="b_num";
+	private String sort="b_regdate";
 
 	public String getCondition() {
 		return condition;

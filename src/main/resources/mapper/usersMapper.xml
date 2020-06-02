@@ -4,31 +4,37 @@
 
 <mapper namespace="UsersDAO">
 	
+	<!-- 로그인 시, 개인정보 변경 시  비밀번호를 화인 -->
 	<select id="usersCheck" parameterType="UsersVO" resultType="UsersVO">
 		SELECT * FROM users
 		WHERE u_id = #{u_id} AND u_pwd = #{u_pwd}
 	</select>
 
+	<!-- 개인 정보 조회 -->
 	<select id="selectUsers" parameterType="UsersVO" resultType="UsersVO">
 		SELECT * FROM users
 		WHERE u_id = #{u_id}
 	</select>
 
+	<!-- admin -->
 	<select id="selectAllUsers" resultType="UsersVO">
 		SELECT * FROM users
 		ORDER BY u_inputdate DESC
 	</select>
 
+	<!-- 회원 가입 -->
 	<insert id="insertUsers" parameterType="UsersVO">
 		INSERT INTO users (u_id, u_pwd, u_name, u_email, u_gender, u_email_code)
 		VALUES(#{u_id}, #{u_pwd}, #{u_name}, #{u_email}, #{u_gender}, "임시값")
 	</insert>
 	
+	<!-- ID 중복 체크 -->
 	<select id="idCheck" resultType="String">
 		SELECT count(*) FROM users
 		WHERE u_id = #{u_id}
 	</select>
 	
+	<!-- 개인 정보 수정 -->
 	<update id="updateUsers" parameterType="UsersVO">
 		UPDATE users
 		SET
@@ -37,6 +43,7 @@
 		u_id = #{u_id}
 	</update>
 	
+	<!-- 비밀번호 변경 -->
 	<update id="updatePwd" parameterType="UsersVO">
 		UPDATE users
 		SET
@@ -45,11 +52,13 @@
 		u_id = #{u_id}
 	</update>
 
+	<!-- 회원 탈퇴 -->
 	<delete id="deleteUsers" parameterType="UsersVO">
 		DELETE FROM users WHERE
 		u_id = #{u_id}
 	</delete>
 	
+	<!-- admin -->
 	<delete id="deleteUsersList" parameterType="UsersVO">
 		DELETE FROM users WHERE
 		u_id IN 

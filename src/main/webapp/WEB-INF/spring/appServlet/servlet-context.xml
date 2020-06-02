@@ -27,4 +27,24 @@
 	<!-- Annotation 스캔 -->
 	<context:component-scan base-package="com.koreait.webboard" />
 	
+	<!-- Interceptor 설정정보 -->
+	<beans:bean id="loginAuthInterceptor" class="com.koreait.webboard.common.interceptor.AuthInterceptor" />
+	
+	<interceptors>
+		<interceptor>
+			<mapping path="/board/writeBoard" />
+			<mapping path="/board/updateBoard" />
+			<mapping path="/board/deleteBoard" />
+			<mapping path="/board/writeReply" />
+			<mapping path="/board/deleteReply" />
+			<mapping path="/board/updateLike" />
+			<mapping path="/board/updateHate" />
+			<mapping path="/user/selectUser" />
+			<mapping path="/user/updatePwd" />
+			<mapping path="/user/updateUser" />
+			<mapping path="/user/deleteUser" />
+			<beans:ref bean="loginAuthInterceptor"/>
+		</interceptor>
+	</interceptors>
+	
 </beans:beans>
