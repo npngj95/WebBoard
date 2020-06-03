@@ -25,11 +25,6 @@ public class UsersServiceImpl implements UsersService {
 	}
 	
 	@Override
-	public List<UsersVO> selectAllUsers() {
-		return usersDAO.selectAllUsers();
-	}
-	
-	@Override
 	public void insertUsers(UsersVO vo) {
 		usersDAO.insertUsers(vo);
 	}
@@ -52,11 +47,6 @@ public class UsersServiceImpl implements UsersService {
 	@Override // 회원이 직접 탈퇴시
 	public void deleteUsers(UsersVO vo) {
 		usersDAO.deleteUsers(vo);
-	}
-
-	@Override // 관리자가 회원을 강제탈퇴시
-	public void deleteUsers(List<UsersVO> usersList) {
-		usersDAO.deleteUsers(usersList);
 	}
 
 }

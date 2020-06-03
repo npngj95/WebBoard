@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 <%@include file="../common/common_top.jsp"%>
 <link href="${pageContext.request.contextPath }/resources/css/userManagement.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath }/resources/css/paging.css" rel="stylesheet">
 </head>
 <body>
 <%@include file="../module/top.jsp"%>
@@ -44,7 +45,7 @@
 		<button class="btn btn-danger" data-toggle="modal" data-target="#myModal">선택 삭제</button>
 	</div>
 	
-	<form name="managementUser" action="deleteUser" method="post">
+	<form name="managementUser" action="deleteUserList" method="post">
 	<table class="table border border-dark text-center">
 		<thead>
 			<tr>
@@ -55,11 +56,11 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${usersList }" var="user">
+			<c:forEach items="${userList }" var="user">
 				<tr>
 					<td>
 						<div class="custom-control custom-checkbox p-0 text-left">
-			                <input type="checkbox" id="${user.u_id }"  name="userCheck" value="${user.u_id }" class="custom-control-input p-0" >
+			                <input type="checkbox" id="${user.u_id }"  name="u_idList" value="${user.u_id }" class="custom-control-input p-0" >
 			                <label class="custom-control-label" for="${user.u_id }" style="cursor: pointer"></label>
 			            </div>
 					</td>
@@ -71,6 +72,26 @@
 		</tbody>
 	</table>
 	</form>
+	
+	<!-- Paging -->
+	<nav aria-label="Page navigation example" style="text-align: center;">
+		<ul class="pagination" style="width: 100%;">
+			<li class="page-item <c:if test="${!pageMaker.prev }">disabled</c:if>"><a class="page-link" href="managementUser${pageMaker.makeQuery(1) }">First</a></li>
+			<li class="page-item <c:if test="${!pageMaker.prev }">disabled</c:if>"><a class="page-link" href="managementUser${pageMaker.makeQuery(pageMaker.startBlock-1) }">Prev</a></li>
+			
+			<c:forEach begin="${pageMaker.startBlock }"  end="${pageMaker.endBlock }" var="i">
+				<c:if test="${pageMaker.pc.page == i}">
+					<li class="page-item active disabled"><a class="page-link white-text">${i}</a></li>
+				</c:if>
+				<c:if test="${pageMaker.pc.page != i}">
+					<li class="page-item"><a class="page-link" href="managementUser${pageMaker.makeQuery(i) }">${i}</a></li>
+				</c:if>
+			</c:forEach>
+			
+			<li class="page-item <c:if test="${!pageMaker.next }">disabled</c:if>"><a class="page-link" href="managementUser${pageMaker.makeQuery(pageMaker.endBlock+1) }">Next</a></li>
+			<li class="page-item <c:if test="${!pageMaker.next }">disabled</c:if>"><a class="page-link" href="managementUser${pageMaker.makeQuery(pageMaker.totalBlock) }">Last</a></li>
+		</ul>
+	</nav>
 </div>
 <%@include file="../module/bottom.jsp"%>
 <%@include file="../common/common_bottom.jsp"%>

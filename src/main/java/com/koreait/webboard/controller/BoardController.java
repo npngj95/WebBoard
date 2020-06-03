@@ -27,16 +27,6 @@ public class BoardController {
 	@Autowired
 	private PageMaker pageMaker;
 	
-	// *** 관리자 영역 ***
-	//BoardVO 안에 정렬조건, 검색조건, 검색키워드를 포함하여 vo로 받고
-	//페이징에 필요한 Limit 절의 시작Row를 start 변수에 할당
-	//페이징에 필요한 Limit 절의 크기를 size 변수에 할당
-	public String selectAllBoard(BoardVO vo, int start, int size) {
-		
-		return null;
-	}
-	
-	// *** 유저 영역 ***
 	// Home - index
 	@RequestMapping({"/", "/index"})
 	public String home(Model model, PageCriteriaSearch pageCriteria) {
@@ -49,6 +39,10 @@ public class BoardController {
 		// readBoard에서 index로 돌아갈 때 사용
 		String url = pageMaker.makeQuery(pageCriteria.getPage()) +"&sort="+pageCriteria.getSort();
 		model.addAttribute("url", url);
+		
+		if (pageCriteria.getPage() == 1) {
+			model.addAttribute("noticeList", boardService.selectNotice());
+		}
 		
 		return "index";
 	}

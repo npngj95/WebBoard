@@ -11,7 +11,7 @@
 	</select>
 
 	<!-- 개인 정보 조회 -->
-	<select id="selectUsers" parameterType="UsersVO" resultType="UsersVO">
+	<select id="selectUsers" resultType="UsersVO">
 		SELECT * FROM users
 		WHERE u_id = #{u_id}
 	</select>
@@ -20,7 +20,21 @@
 	<select id="selectAllUsers" resultType="UsersVO">
 		SELECT * FROM users
 		ORDER BY u_inputdate DESC
+		LIMIT #{pageStart}, #{pageSize}
 	</select>
+	
+	<select id="selectTotalCount" resultType="Integer">
+		SELECT COUNT(*) FROM users
+	</select>
+	
+	<delete id="deleteUserList" parameterType="java.util.List">
+		DELETE FROM users
+		WHERE u_id IN
+		<!-- collection은 데이터 타입 -->
+		<foreach collection="list" item="u_id" open="(" separator="," close=")"> 
+			#{u_id}
+		</foreach>
+	</delete>
 
 	<!-- 회원 가입 -->
 	<insert id="insertUsers" parameterType="UsersVO">

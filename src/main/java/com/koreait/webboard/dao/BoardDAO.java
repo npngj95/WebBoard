@@ -15,16 +15,36 @@ public class BoardDAO {
 	@Autowired
 	private SqlSession mybatis;
 
-//	public List<BoardVO> selectAllBoard(BoardVO vo, int start, int size) {
-//		return mybatis.selectList("BoardDAO.selectAllBoard", vo, new RowBounds(start, size));
-//	}
+	// *** 관리자 영역 ***
+	
+	public void deleteBoardList(List<String> b_numList) {
+		mybatis.delete("BoardDAO.deleteBoardList", b_numList);
+	}
+	
+	public void writeNotice(BoardVO vo) {
+		mybatis.insert("BoardDAO.insertBoard", vo);
+	}
+	
+	public void updateNotice(BoardVO vo) {
+		mybatis.update("BoardDAO.updateBoard", vo);
+	}
+	
+	public BoardVO selectNotice(BoardVO vo) {
+		return mybatis.selectOne("BoardDAO.selectBoard", vo);
+	}
+	
+	public List<BoardVO> selectNoticeList() {
+		return mybatis.selectList("BoardDAO.selectNoticeList");
+	}
+	
+	// *** 유저 영역 ***
 	
 	public List<BoardVO> selectAllBoard(PageCriteriaSearch pc) {
 		return mybatis.selectList("BoardDAO.selectAllBoard", pc);
 	}
 	
-	public int boardTotalCount(PageCriteriaSearch pageCriteria) {
-		return mybatis.selectOne("BoardDAO.selectTotalCount", pageCriteria);
+	public int boardTotalCount(PageCriteriaSearch pc) {
+		return mybatis.selectOne("BoardDAO.selectTotalCount", pc);
 	}
 	
 	public BoardVO selectBoard(BoardVO vo) {
@@ -63,4 +83,7 @@ public class BoardDAO {
 		mybatis.delete("BoardDAO.deleteBoard", vo);
 	}
 
+	public List<BoardVO> selectNotice() {
+		return mybatis.selectList("BoardDAO.selectNotice");
+	}
 }

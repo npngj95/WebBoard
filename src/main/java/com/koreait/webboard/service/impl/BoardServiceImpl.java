@@ -15,11 +15,6 @@ import com.koreait.webboard.vo.BoardVO;
 public class BoardServiceImpl implements BoardService {
 	@Autowired
 	private BoardDAO boardDAO;
-	
-//	@Override
-//	public List<BoardVO> selectAllBoard(BoardVO vo, int start, int size) {
-//		return boardDAO.selectAllBoard(vo, start, size);
-//	}
 
 	@Override
 	public List<BoardVO> selectAllBoard(PageCriteriaSearch pc) {
@@ -27,8 +22,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public int boardTotalCount(PageCriteriaSearch pageCriteria) {
-		return boardDAO.boardTotalCount(pageCriteria);
+	public int boardTotalCount(PageCriteriaSearch pc) {
+		return boardDAO.boardTotalCount(pc);
 	}
 	
 	@Override
@@ -75,6 +70,11 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void deleteBoard(BoardVO vo) {
 		boardDAO.deleteBoard(vo);
+	}
+
+	@Override
+	public List<BoardVO> selectNotice() {
+		return boardDAO.selectNotice();
 	}
 
 }

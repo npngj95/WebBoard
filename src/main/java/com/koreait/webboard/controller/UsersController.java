@@ -1,7 +1,5 @@
 package com.koreait.webboard.controller;
 
-import java.util.List;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,20 +23,6 @@ import com.koreait.webboard.vo.UsersVO;
 public class UsersController {
 	@Autowired
 	private UsersService usersService;
-	
-	// 관리자 - 유저 정보보기
-	@RequestMapping("/admin/userManagement")
-	public String selectAllUsers(Model model) {
-		model.addAttribute("usersList", usersService.selectAllUsers());
-		return "admin/managementUser";
-	}
-	
-	// 관리자 - 유저 정보삭제
-	
-	public String deleteUsers(List<UsersVO> usersList) {
-		usersService.deleteUsers(usersList);
-		return null;
-	}
 	
 	// 로그인 (로그인한 후, index가 아닌 로그인을 하기 전 페이지로 돌아가게 구현) == 쿠키사용
 	@RequestMapping(value="/login", method=RequestMethod.GET)
@@ -87,8 +71,12 @@ public class UsersController {
 	@RequestMapping("/logout")
 	public String logout(SessionStatus sessionStatus, HttpServletRequest request) {
 		String prevUrl = request.getHeader("referer");
-		String serverPath = request.getContextPath() + "/";
-		String moveUrl = prevUrl.substring(prevUrl.indexOf(serverPath)+serverPath.length()); 
+		String serverPath = request.getContextPath() + "/"; 
+		String moveUrl = prevUrl.substring(prevUrl.indexOf(serverPath)+serverPath.length());  
+
+		if(moveUrl.equals("")) { // localhost/{serverPath}/ 로 들어왔을 때
+			moveUrl = "index";
+		}
 		
 		sessionStatus.setComplete();
 		return "redirect:" + moveUrl;

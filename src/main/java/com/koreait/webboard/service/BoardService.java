@@ -3,7 +3,6 @@
 import java.util.HashMap;
 import java.util.List;
 
-import com.koreait.webboard.common.paging.PageCriteria;
 import com.koreait.webboard.common.paging.PageCriteriaSearch;
 import com.koreait.webboard.vo.BoardVO;
 
@@ -15,7 +14,7 @@ public interface BoardService {
 //	List<BoardVO> selectAllBoard(BoardVO vo, int start, int size);
 	List<BoardVO> selectAllBoard(PageCriteriaSearch pc);
 	
-	int boardTotalCount(PageCriteriaSearch pageCriteria);
+	int boardTotalCount(PageCriteriaSearch pc);
 	
 	BoardVO selectBoard(BoardVO vo);
 	
@@ -35,5 +34,5 @@ public interface BoardService {
 	
 	void deleteBoard(BoardVO vo);
 	
-	
+	List<BoardVO> selectNotice();
 }

@@ -6,31 +6,36 @@
 <meta charset="UTF-8">
 <title>Notice Write</title>
 <%@include file="../common/common_top.jsp"%>
-<link href="${pageContext.request.contextPath }/resources/css/board.css" rel="stylesheet"> 
+<link href="${pageContext.request.contextPath }/resources/css/board.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath }/resources/summerNote/summernote-bs4.min.css" rel="stylesheet">
 </head>
 <body>
 <%@include file="../module/top.jsp"%>
 <div class="container wrapper">
 <!-- Default form contact -->
-<p class="h2 mb-4 text-center"><a href="./adminMain.jsp">Admin Main</a></p>
-<form class="text-center border border-light p-5" action="writeBoard.do">
+<p class="h2 mb-4 text-center"><a href="adminMain">Admin Main</a></p>
+<form class="text-center border border-light p-5" action="writeNotice" method="post" onsubmit="return empCheck()">
 
     <p class="h4 mb-4">Notice Write</p>
 
     <!-- Name -->
-    <input type="text" name="b_writer" class="form-control mb-4" value="${admin.a_id }" readonly>
+    <input type="text" name="b_writer" class="form-control mb-4" value="관리자" readonly>
 	
 	<!-- Category -->
-    <input type="text" name="b_category" class="form-control mb-4" value="공지" readonly>
-    
+	<input class="form-control mb-4" type="text" value="공지" readonly>
+    <input type="hidden" name="b_category" value="3">    
+
 	<hr>
 	
+    <!-- Email -->
+    <input type="text" id="b_email" name="b_email" class="form-control mb-4" placeholder="E-mail" value="" required>
+	
 	<!-- Title -->
-    <input type="text" name="b_title" class="form-control mb-4" placeholder="Title">
+    <input type="text" name="b_title" class="form-control mb-4" placeholder="Title" required>
     
     <!-- Content -->
-    <div class="form-group">
-        <textarea name="b_content" class="form-control rounded-0 mb-4" rows="10" placeholder="Content"></textarea>
+    <div class="form-group text-left">
+        <textarea id="b_content" name="b_content" class="form-control rounded-0 mb-4" rows="10" placeholder="Content"></textarea>
     </div>
 
 	<hr>
@@ -42,5 +47,7 @@
 </div>
 <%@include file="../module/bottom.jsp"%>
 <%@include file="../common/common_bottom.jsp"%>
+<script src="${pageContext.request.contextPath }/resources/summerNote/summernote-bs4.min.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/writeNotice.js"></script>
 </body>
 </html>

@@ -24,6 +24,10 @@
 				<c:choose>
 					<c:when test="${admin != null}">
 						<li class="nav-item">
+							<a class="nav-link" href="${pageContext.request.contextPath }/admin/adminMain">
+							관리자메인 </a>
+						</li>
+						<li class="nav-item">
 							<a class="nav-link" href="${pageContext.request.contextPath }/admin/logout">
 							로그아웃</a>
 						</li>
@@ -57,7 +61,6 @@
 					</c:otherwise>
 				</c:choose>
 			</ul>
-			<!-- Links -->
 		</div>
 	</nav>
 </body>

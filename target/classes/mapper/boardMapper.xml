@@ -3,13 +3,15 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="BoardDAO">
+	
+	<!-- ******************************** ADMIN 영역 ******************************** -->
 	<!-- 글 목록 보기 -->
 	<!-- 생략가능한 parameterType을 준 이유 : xml파일만 보고 어떤 클래스인지 명시. -->
 	<select id="selectAllBoard" resultType="BoardVO">
 		SELECT * FROM board 
-		
+		WHERE b_category != 3
 		<if test="condition != null">
-			WHERE ${condition} like '%${keyword}%'
+			AND ${condition} like '%${keyword}%'
 		</if>
 		
 		ORDER BY ${sort} DESC
@@ -17,10 +19,34 @@
 		LIMIT #{pageStart}, #{pageSize}
 	</select>
 	
+	<delete id="deleteBoardList" parameterType="java.util.List">
+		DELETE FROM board
+		WHERE b_num IN
+		<!-- collection은 데이터 타입 -->
+		<foreach collection="list" item="b_num" open="(" separator="," close=")"> 
+			#{b_num}
+		</foreach>
+	</delete>
+	
+	<select id="selectNoticeList" resultType="BoardVO">
+		SELECT * FROM board
+		WHERE b_category = 3
+		ORDER BY b_regdate DESC		
+	</select>
+	
+	
+	<!-- ******************************** USER 영역 ******************************** -->
+	<select id="selectNotice" resultType="BoardVO">
+		SELECT * FROM board
+		WHERE b_category = 3
+		ORDER BY b_regdate DESC
+		LIMIT 0, 3
+	</select>
+	
 	<!-- 글 전체 개수 구하기 -->
 	<select id="selectTotalCount" resultType="int">
 		SELECT count(*)	FROM board
-		
+		WHERE b_category != 3
 		<if test="condition != null">
 			WHERE ${condition} like '%${keyword}%'
 		</if>
@@ -39,10 +65,9 @@
 		WHERE b_num=#{b_num}
 	</update>
 
-
 	<insert id="insertBoard" parameterType="BoardVO" useGeneratedKeys="true" keyProperty="b_num">
 		INSERT INTO board (b_category, b_writer, b_email, b_title, b_content)
-		VALUES(#{b_category},#{b_writer},#{b_email},#{b_title},#{b_content})
+		VALUES(#{b_category}, #{b_writer}, #{b_email}, #{b_title}, #{b_content})
 	</insert>
 
 	<delete id="deleteBoard" parameterType="BoardVO">
@@ -85,5 +110,7 @@
     		SELECT b_hate FROM board WHERE b_num=#{b_num}
   		</selectKey>
 	</update>
+
+	
 
 </mapper>

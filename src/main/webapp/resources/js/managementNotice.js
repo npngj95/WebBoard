@@ -1,5 +1,11 @@
 $(document).ready(function() {
 	
+	$('.toggleButton').each(function(index, item) {
+		$(item).click(function() {
+			$('.toggleContent' + index).slideToggle();
+		});
+	});
+	
 	var flag = true;
 	$("#checkAll").click(function() {
 		var checkLength = $("input:checkbox[name=noticeCheck]").legnth;

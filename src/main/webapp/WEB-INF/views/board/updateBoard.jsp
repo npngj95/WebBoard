@@ -6,7 +6,9 @@
 <meta charset="UTF-8">
 <title>글 내용 수정</title>
 <%@include file="../common/common_top.jsp"%>
-<link href="${pageContext.request.contextPath }/resources/css/board.css" rel="stylesheet"> 
+<link href="${pageContext.request.contextPath }/resources/css/board.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath }/resources/summerNote/summernote-bs4.min.css" rel="stylesheet">
+ 
 </head>
 <body>
 <%@include file="../module/top.jsp"%>
@@ -26,8 +28,8 @@
     <input type="text" name="b_title" class="form-control mb-4" placeholder="Title" value="${board.b_title }">
     
     <!-- Content -->
-    <div class="form-group">
-        <textarea class="form-control rounded-0" name="b_content" rows="10" placeholder="Content" style="resize: none;">${board.b_content }</textarea>
+    <div class="form-group text-left">
+        <textarea class="form-control rounded-0" id="b_content" name="b_content" rows="10" placeholder="Content" style="resize: none;">${board.b_content }</textarea>
     </div>
 	
 	<div class="container text-right">
@@ -38,5 +40,16 @@
 </div>
 <%@include file="../module/bottom.jsp"%>
 <%@include file="../common/common_bottom.jsp"%>
+
+<script src="${pageContext.request.contextPath }/resources/summerNote/summernote-bs4.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#b_content').summernote({
+    	lang: 'ko-KR', // default: 'en-US'
+    	tabsize: 2,
+        height: 400
+    });
+});
+</script>
 </body>
 </html>

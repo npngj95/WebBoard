@@ -27,7 +27,7 @@
 	<!-- Annotation 스캔 -->
 	<context:component-scan base-package="com.koreait.webboard" />
 	
-	<!-- Interceptor 설정정보 -->
+	<!-- UserInterceptor 설정정보 -->
 	<beans:bean id="loginAuthInterceptor" class="com.koreait.webboard.common.interceptor.AuthInterceptor" />
 	
 	<interceptors>
@@ -44,6 +44,24 @@
 			<mapping path="/user/updateUser" />
 			<mapping path="/user/deleteUser" />
 			<beans:ref bean="loginAuthInterceptor"/>
+		</interceptor>
+	</interceptors>
+	
+	<!-- AdminInterceptor 설정정보 -->
+	<beans:bean id="AdminloginAuthInterceptor" class="com.koreait.webboard.common.interceptor.AdminInterceptor" />
+	
+	<interceptors>
+		<interceptor>
+			<mapping path="/admin/adminMain" />
+			<mapping path="/admin/writeNotice" />
+			<mapping path="/admin/updateNotice" />
+			<mapping path="/admin/managementNotice" />
+			<mapping path="/admin/managementUser" />
+			<mapping path="/admin/managementBoard" />
+			<mapping path="/admin/deleteNoticeList" />
+			<mapping path="/admin/deleteBoardList" />
+			<mapping path="/admin/deleteUserList" />
+			<beans:ref bean="AdminloginAuthInterceptor"/>
 		</interceptor>
 	</interceptors>
 	

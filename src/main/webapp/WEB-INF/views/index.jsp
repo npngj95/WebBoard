@@ -9,6 +9,7 @@
 <title>Home</title>
 <%@include file="common/common_top.jsp" %>
 <link href="${pageContext.request.contextPath }/resources/css/main.css"	rel="stylesheet">
+<link href="${pageContext.request.contextPath }/resources/css/paging.css" rel="stylesheet">
 </head>
 <body>
 	<%@include file="module/top.jsp"%>
@@ -52,12 +53,23 @@
 				</tr>
 			</thead>
 			<tbody>
+				<c:forEach items="${noticeList }" var="notice">
+				<tr class="text-danger">
+					<th class="text-center font-weight-bold" scope="row">공지</th>
+					
+					<td><a class="text-danger font-weight-bold" href="board/readBoard${pageMaker.makeQuery(pageMaker.pc.page) }&sort=${pageMaker.pc.sort}&b_num=${notice.b_num }">${notice.b_title }</a></td>
+					<td class="text-center font-weight-bold">관리자</td>
+					<td class="text-center font-weight-bold"><fmt:formatDate pattern="yyyy-MM-dd" value="${notice.b_regdate }"/></td>
+					<td class="text-center font-weight-bold">${notice.b_readcount }</td>
+					<td class="text-center font-weight-bold">${notice.b_like }</td>
+				</tr>
+				</c:forEach>
+				
 				<c:forEach items="${boardList }" var="board">
 				<tr>
 					<th class="text-center" scope="row">
 						<c:if test="${board.b_category == 1}">질문</c:if>
 						<c:if test="${board.b_category == 2}">후기</c:if>
-						<c:if test="${board.b_category == 3}">공지</c:if>
 					</th>
 					
 					<td><a href="board/readBoard${pageMaker.makeQuery(pageMaker.pc.page) }&sort=${pageMaker.pc.sort}&b_num=${board.b_num }">${board.b_title }</a></td>

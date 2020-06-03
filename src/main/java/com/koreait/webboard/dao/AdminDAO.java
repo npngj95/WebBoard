@@ -14,17 +14,5 @@ public class AdminDAO {
 	public AdminVO adminCheck(AdminVO vo) {
 		return mybatis.selectOne("AdminDAO.adminCheck", vo);
 	}
-
-	public void insertAdmin(AdminVO vo) {
-		mybatis.insert("UsersDAO.insertAdmin", vo);
-	}
-
-	public void updateAdmin(AdminVO vo) {
-		mybatis.update("AdminDAO.updateAdmin", vo);
-	}
-
-	public void deleteAdmin(AdminVO vo) {
-		mybatis.delete("AdminDAO.deleteAdmin", vo);
-	}
 	
 }

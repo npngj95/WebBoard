@@ -33,7 +33,7 @@
 				<p class="h4 m-0 py-3 bg-primary text-white"><i class="fas fa-user prefix mr-3"></i>회원</p>
 				<div class="row-sm">
 					<button type="button" class="h4 btn border-bottom border-linght waves-effect mx-0 my-0 w-100"
-						onclick="location='userManagement'">
+						onclick="location='managementUser'">
 					회원 관리</button>
 				</div>
 				<div class="row-sm">

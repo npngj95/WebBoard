@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +9,7 @@
 <title>Notice List</title>
 <%@include file="../common/common_top.jsp"%>
 <link href="${pageContext.request.contextPath }/resources/css/board.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath }/resources/css/paging.css" rel="stylesheet">
 <script>
 
 </script>
@@ -15,7 +18,7 @@
 <%@include file="../module/top.jsp"%>
 
 <!-- main_content -->
-<div class="container wrapper vh-100">
+<div class="container wrapper">
 	<!-- modal  -->
 	<div class="modal" id="selectModal">
 		<div class="modal-dialog" role="document">
@@ -41,6 +44,28 @@
 	<!-- Admin Main 이동 -->
 	<p class="h2 mb-4 text-center"><a href="/WebBoard/admin/adminMain">Admin Main</a></p>
 	
+	<nav class="navbar navbar-expand-lg  md-color">
+		<!-- Navbar brand -->
+		<div class="mb-2">
+			<a class="navbar-brand" href="managementBoard${pageMaker.makeQuery(1) }&sort=b_regdate">작성일순</a>
+			<a class="navbar-brand"	href="managementBoard${pageMaker.makeQuery(1) }&sort=b_like">좋아요순</a> 
+			<a class="navbar-brand" href="managementBoard${pageMaker.makeQuery(1) }&sort=b_readcount">조회수순</a>
+		</div>
+		
+		<form class="form-inline ml-auto" action="managementBoard" method="get">
+			<select name="condition" class="browser-default custom-select mr-2 mb-2">
+			  <option value="b_title" <c:if test="${pageMaker.pc.condition=='b_title'}">selected</c:if> >제목</option>
+			  <option value="b_writer" <c:if test="${pageMaker.pc.condition=='b_writer' }">selected</c:if> >글쓴이</option>
+			  <option value="b_content" <c:if test="${pageMaker.pc.condition=='b_content' }">selected</c:if> >내용</option>
+			</select>
+			<div class="row mx-0">
+				<input class="col form-control mt-1" type="text" name="keyword" placeholder="Search" value="${pageMaker.pc.keyword }">
+				<button class="col btn btn-default my-0 mb-2 ml-3" type="submit">Search</button>
+			</div>
+		</form>
+		<!-- Collapsible content -->
+	</nav>
+	
 	<div class="bg-default py-2 mb-3 d-flex justify-content-between align-items-center">
 		<!-- 전체 선택 -->
 		<div>
@@ -60,7 +85,7 @@
   
   	<!-- table -->
     <div class="table-wrapper">
-		<form name="managementBoard" action="deleteBoard.jsp" method="post">
+		<form name="managementBoard" action="deleteBoardList" method="post">
 		    <table class="table table-hover mb-3">
 				<!--Table head-->
 			    <thead>
@@ -74,30 +99,50 @@
 	        	</thead>
 	        	<!--Table body-->
 	        	<tbody>
+	        		<c:forEach items="${boardList }" var="board" varStatus="i">
 	          		<tr>
 		            	<th class="position-relative">
-							<input class="form-check-input m-0 w-50 h-50" type="checkbox" name="boardCheck" value="게시글번호1">
+							<input class="form-check-input m-0 w-50 h-50" type="checkbox" name="b_numList" value="${board.b_num }">
 						</th>
-	            		<td class="h6 text-center">질문</td>
-	            		<td class="h6">####집 어때요?</td>
-	            		<td class="h6 text-center">@mdo</td>
-	            		<td class="h6 text-center">2020-05-15</td>
+	            		<td class="h6 text-center">
+	            			<c:if test="${board.b_category == 1}">질문</c:if>
+	            			<c:if test="${board.b_category == 2}">후기</c:if>
+	            		</td>
+	            		<td class="h6 toggleButton" style="cursor: pointer">${board.b_title }</td>
+	            		<td class="h6 text-center">${board.b_writer }</td>
+	            		<td class="h6 text-center"><fmt:formatDate pattern="yyyy-MM-dd" value="${board.b_regdate }"/></td>
 	          		</tr>
-	          		<tr>
-	            		<th class="position-relative">
-							<input class="form-check-input m-0 w-50 h-50" type="checkbox" name="boardCheck" value="게시글번호1">
-						</th>
-	            		<td class="h6 text-center">리뷰</td>
-	            		<td class="h6"><a href="../board/readBoard.jsp">@@@집 후기입니다 ~</a></td>
-	            		<td class="h6 text-center">@fat</td>
-	            		<td class="h6 text-center">2020-05-14</td>
+	          		<tr class="toggleContent${i.index }" style="display: none;">
+	          			<td class="toggleContent${i.index }" colspan="5" style="display: none;"><div class="toggleContent${i.index }" style="display: none;">${board.b_content }</div></td>
 	          		</tr>
+	          		</c:forEach>
 	        	</tbody>
+	        	
 	        	<!--Table body-->
 	    	</table>
 	    	<!--Table-->
 	    </form>
     </div>
+    
+    <!-- Paging -->
+	<nav aria-label="Page navigation example" style="text-align: center;">
+		<ul class="pagination" style="width: 100%;">
+			<li class="page-item <c:if test="${!pageMaker.prev }">disabled</c:if>"><a class="page-link" href="managementBoard${pageMaker.makeQuery(1) }&sort=${pageMaker.pc.sort}">First</a></li>
+			<li class="page-item <c:if test="${!pageMaker.prev }">disabled</c:if>"><a class="page-link" href="managementBoard${pageMaker.makeQuery(pageMaker.startBlock-1) }&sort=${pageMaker.pc.sort}">Prev</a></li>
+			
+			<c:forEach begin="${pageMaker.startBlock }"  end="${pageMaker.endBlock }" var="i">
+				<c:if test="${pageMaker.pc.page == i}">
+					<li class="page-item active disabled"><a class="page-link white-text">${i}</a></li>
+				</c:if>
+				<c:if test="${pageMaker.pc.page != i}">
+					<li class="page-item"><a class="page-link" href="managementBoard${pageMaker.makeQuery(i) }&sort=${pageMaker.pc.sort}">${i}</a></li>
+				</c:if> 
+			</c:forEach>
+			
+			<li class="page-item <c:if test="${!pageMaker.next }">disabled</c:if>"><a class="page-link" href="managementBoard${pageMaker.makeQuery(pageMaker.endBlock+1) }&sort=${pageMaker.pc.sort}">Next</a></li>
+			<li class="page-item <c:if test="${!pageMaker.next }">disabled</c:if>"><a class="page-link" href="managementBoard${pageMaker.makeQuery(pageMaker.totalBlock) }&sort=${pageMaker.pc.sort}">Last</a></li>
+		</ul>
+	</nav>
 </div>
 <!-- Table with panel -->
 <%@include file="../module/bottom.jsp"%>

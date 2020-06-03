@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,13 +9,10 @@
 <title>Notice List</title>
 <%@include file="../common/common_top.jsp"%>
 <link href="${pageContext.request.contextPath }/resources/css/board.css" rel="stylesheet">
-<script>
-
-</script>
 </head>
 <body>
 <%@include file="../module/top.jsp"%>
-<div class="container wrapper vh-100">
+<div class="container wrapper">
 	<!-- modal -->
 	<div class="modal" id="selectModal">
 		<div class="modal-dialog" role="document">
@@ -38,7 +37,7 @@
 	</div>
 	
 	<!-- Admin Main 이동 -->
-	<p class="h2 mb-4 text-center"><a href="./adminMain.jsp">Admin Main</a></p>
+	<p class="h2 mb-4 text-center"><a href="adminMain">Admin Main</a></p>
 	
 	<div class="bg-default py-2 mb-3 d-flex justify-content-between align-items-center">
 		<!-- 전체 선택 -->
@@ -52,14 +51,14 @@
 		<div>
 			<button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2 mr-4" id="deleteBtn" 
 				data-toggle="modal" data-target="#selectModal">
-				<i class="far fa-trash-alt mt-0"></i>
+				<i class="far fa-trash-alt m-0 h6"></i>
 			</button>
 		</div>
 	</div>
 
 	<!-- table -->
 	<div class="table-wrapper">
-		<form name="managementNotice" action="deleteNotice.jsp"	method="post">
+		<form name="managementNotice" action="deleteNoticeList"	method="post">
 			<table class="table table-hover mb-3">
 				<!--Table head-->
 				<thead>
@@ -68,29 +67,27 @@
 						<th width="5%" class="h6 text-center">Category</th>
 						<th class="text-left h6">Title</th>
 						<th width="10%" class="h6 text-center">Writer</th>
-						<th width="10%" class="h6 text-center">Input Date</th>
+						<th width="10%" class="h6 text-center">RegDate</th>
+						<th width="10%" class="text-center">Edit Notice</th>
 					</tr>
 				</thead>
 				<!--Table body-->
 				<tbody>
-					<tr>
-						<th class="position-relative">
-							<input class="form-check-input m-0 w-50 h-50" type="checkbox" name="noticeCheck" value="게시글번호1">
-						</th>
-						<td class="h6 text-center">공지</td>
-						<td class="h6"><a href="updateNotice.jsp">게시판 이용수칙</a></td>
-						<td class="h6 text-center">@admin</td>
-						<td class="h6 text-center">2020-05-15</td>
-					</tr>
-					<tr>
-						<th class="position-relative">
-							<input class="form-check-input m-0 w-50 h-50" type="checkbox" name="noticeCheck" value="게시글번호2">
-						</th>
-						<td class="h6 text-center">공지</td>
-						<td class="h6"><a href="updateNotice.jsp">제재 회원 목록</a></td>
-						<td class="h6 text-center">@admin</td>
-						<td class="h6 text-center">2020-05-14</td>
-					</tr>
+					<c:forEach items="${noticeList }" var="notice" varStatus="i">
+						<tr>
+							<th class="position-relative">
+								<input class="form-check-input m-0 w-50 h-50" type="checkbox" name="b_numList" value="${notice.b_num }">
+							</th>
+							<td class="h6 text-center">공지</td>
+							<td class="h6 toggleButton" style="cursor: pointer;">${notice.b_title }</td>
+							<td class="h6 text-center">${notice.b_writer }</td>
+							<td class="text-center"><fmt:formatDate pattern="yyyy-MM-dd" value="${notice.b_regdate }"/></td>
+							<td class="text-center"><i class="fas fa-edit m-0 h5" style="cursor: pointer;" onclick="location.href='updateNotice?b_num=${notice.b_num }'"></i></td>
+						</tr>
+						<tr class="toggleContent${i.index }" style="display: none;">
+	          				<td class="toggleContent${i.index }" colspan="6" style="display: none;"><div class="toggleContent${i.index }" style="display: none;">${notice.b_content }</div></td>
+	          			</tr>
+					</c:forEach>
 				</tbody>
 				<!--Table body-->
 			</table>
