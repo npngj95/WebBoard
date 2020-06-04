@@ -16,7 +16,7 @@
 <!-- Default form contact -->
 	<p class="h2 mb-4 text-center"><a href="managementNotice">공지글 관리</a></p>
 	
-<form class="text-center border border-light p-5" action="updateNotice" method="post">
+<form class="text-center border border-light p-5" action="updateNotice" method="post" onsubmit="return empCheck()">
 	<input type="hidden" name="b_num" value="${notice.b_num }">
 	<input type="hidden" name="b_category" value="${notice.b_category }">
 	
@@ -62,6 +62,14 @@ $(document).ready(function() {
     });
 });
 
+function empCheck() {
+	if($("#b_content").summernote("isEmpty")) {
+		alert("내용을 입력해주세요.");
+		return false;
+	}
+	
+	return true;
+}
 </script>
 </body>
 </html>

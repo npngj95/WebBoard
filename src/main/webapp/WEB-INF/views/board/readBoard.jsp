@@ -9,6 +9,7 @@
 <title>글 내용 조회</title>
 <%@include file="../common/common_top.jsp"%>
 <link href="${pageContext.request.contextPath }/resources/css/board.css" rel="stylesheet"> 
+<link href="${pageContext.request.contextPath }/resources/summerNote/summernote-bs4.min.css" rel="stylesheet">
 </head>
 <body>
 <%@include file="../module/top.jsp"%>
@@ -99,8 +100,9 @@
 	    <div class="form-control mb-4 text-left" style="margin-right: 5%; display: inline-block;">${board.b_title }</div>
 	    
 	    <!-- Content -->
-		<pre class="form-control rounded-0 mb-3 text-left" style="overflow: auto; white-space: pre-wrap; min-height:300px; height:100%;">${board.b_content }</pre>
-	    
+	    <div class="text-left mb-3">
+			<textarea id="b_content" class="form-control rounded-0" readonly>${board.b_content }</textarea>
+	    </div>
 	    <!-- 수정 / 삭제 버튼 -->
 		    <div class="text-right mb-3">
 				<button type="button" style="float: left;" class="btn btn-dark mb-3" onclick="location='../index${url }'">게시글 목록</button>
@@ -150,10 +152,28 @@
 </div>
 <%@include file="../module/bottom.jsp"%>
 <%@include file="../common/common_bottom.jsp"%>
+<script src="${pageContext.request.contextPath }/resources/summerNote/summernote-bs4.min.js"></script>
 <script>
 	var u_id = '${users.u_id}';
 	var b_num = "${board.b_num}";
 </script>
 <script src="${pageContext.request.contextPath}/resources/js/readBoard.js"></script>
+<script>
+$(document).ready(function() {
+    $("#b_content").summernote({
+    	lang: 'ko-KR', // default: 'en-US'
+    	tabsize: 2,
+        height: 400,
+        disableDragAndDrop: true,
+        toolbar: false,
+        disable: true
+    });
+    
+    $("#b_content").summernote("disable");
+  	$(".note-editable").css("background", "white");
+  	
+});
+
+</script>
 </body>
 </html>

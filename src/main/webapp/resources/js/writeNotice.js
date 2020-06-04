@@ -14,7 +14,7 @@ function empCheck() {
 	}
 	
 	if($("#b_content").summernote("isEmpty")) {
-		alert("내용은 공란이 될 수 없습니다.");
+		alert("내용을 입력해주세요.");
 		return false;
 	}
 	

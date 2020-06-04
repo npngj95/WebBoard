@@ -48,7 +48,7 @@
 		SELECT count(*)	FROM board
 		WHERE b_category != 3
 		<if test="condition != null">
-			WHERE ${condition} like '%${keyword}%'
+			AND ${condition} like '%${keyword}%'
 		</if>
 	</select>
 	

@@ -13,7 +13,7 @@
 <body>
 <%@include file="../module/top.jsp"%>
 <div class="container wrapper text-center border border-light p-5">
-<form action="updateBoard" method="post">
+<form action="updateBoard" method="post" onsubmit="return empCheck()">
 	<input type="hidden" name="b_num" value="${board.b_num }">
 	
     <p class="h4 mb-4">Update Board</p>
@@ -49,7 +49,17 @@ $(document).ready(function() {
     	tabsize: 2,
         height: 400
     });
+    
 });
+
+function empCheck() {
+	if($('#b_content').summernote('isEmpty')) {
+		alert('내용을 입력해주세요.');
+		return false;
+	}
+	
+	return true;
+}
 </script>
 </body>
 </html>

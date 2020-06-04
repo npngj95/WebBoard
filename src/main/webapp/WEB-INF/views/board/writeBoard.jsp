@@ -12,7 +12,7 @@
 <body>
 <%@include file="../module/top.jsp"%>
 <div class="container wrapper">
-	<form class="text-center border border-light p-5" id="writeBoardForm" action="writeBoard" method="post" onsubmit="return empCheck()">
+	<form class="text-center border border-light p-5" action="writeBoard" method="post" onsubmit="return empCheck()">
 	
 	    <p class="h4 mb-4">Write Board</p>
 	
@@ -60,7 +60,7 @@ $(document).ready(function() {
 
 function empCheck() {
 	if($('#b_content').summernote('isEmpty')) {
-		alert('내용은 공란이 될 수 없습니다.');
+		alert('내용을 입력해주세요.');
 		return false;
 	}
 	
