@@ -30,19 +30,35 @@ public class UsersController {
 		String prevUrl = request.getHeader("referer"); //요청된 이전 페이지의 URL을 구함
 		String serverPath = request.getContextPath() + "/"; //최상위 서버 path 이름을 지정 ("/WebBoard" + "/" : subString시의 시작인덱스를 구하기위해 + "/"를 함)
 		String moveUrl = prevUrl.substring(prevUrl.indexOf(serverPath)+serverPath.length()); //이동할 URL 주소를 잘라냄 
-
+		
 		if(moveUrl.equals("")) {	// localhost/{serverPath}/ 로 들어왔을 때
 			moveUrl = "index";
 		}
-		System.out.println(moveUrl);
 		
 		response.addCookie(new Cookie("moveUrl", moveUrl)); //잘라낸 URL을 쿠키에 추가
+		
+		
+//		----------------------
+//		UsersVO vo = new UsersVO();
+//		Cookie[] cookies = request.getCookies();
+//		for(Cookie c : cookies) {
+//			if(c.getName().equals("u_id")) vo.setU_id(c.getValue());
+//			if(c.getName().equals("u_pwd")) vo.setU_pwd(c.getValue());
+//			response.addCookie(c);
+//			
+//			
+//		} 
+//		
+//		if() return "redirect:login";
+//		else return "user/login";
+//		----------------------
+		
 		
 		return "user/login";
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String login(UsersVO vo, Model model, HttpServletRequest request, HttpServletResponse response) {
+	public String login(UsersVO vo, Model model, HttpServletRequest request, HttpServletResponse response, @RequestParam boolean rememberMe) {
 		String moveUrl = "";
 		Cookie[] cookies = request.getCookies(); //로그인 페이지에서 얻을 수 있는 모든 쿠키획득
 		
@@ -52,13 +68,30 @@ public class UsersController {
 			for(Cookie c : cookies) {
 				if(c.getName().equals("moveUrl")) { //이동 URL을 저장하는 쿠키일때
 					moveUrl = c.getValue();
-					System.out.println(moveUrl);
 					c.setMaxAge(0); //setMaxAge(0) == 삭제될 쿠키로 설정
 					response.addCookie(c); // response에 추가해서 쿠키에 설정된 옵션들 처리(삭제)
 				}
 			}
 			model.addAttribute("users", user);
-			System.out.println(moveUrl);
+			
+			
+			
+//			----------------------
+			if(rememberMe) {
+				Cookie u_id = new Cookie("u_id", user.getU_id());
+				Cookie u_pwd = new Cookie("u_pwd", user.getU_pwd());
+				
+				u_id.setMaxAge(60*60*24*10); // 초 * 분 * 시 * 일
+				u_pwd.setMaxAge(60*60*24*10); // 초 * 분 * 시 * 일
+				
+				response.addCookie(u_id);
+				response.addCookie(u_pwd);
+			}
+//			----------------------
+			
+			
+			
+			
 			
 			return "redirect:" + moveUrl;
 		} else {
