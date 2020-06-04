@@ -59,7 +59,7 @@
 					
 					<td>
 						<a class="text-danger font-weight-bold" href="board/readBoard${pageMaker.makeQuery(pageMaker.pc.page) }&sort=${pageMaker.pc.sort}&b_num=${notice.b_num }">${notice.b_title }</a>
-						<c:if test="${notice.b_replycount != 0}"> <small>[${notice.b_replycount }]</small></c:if>
+						<c:if test="${notice.b_replycount != 0}"> <small>[ ${notice.b_replycount } ]</small> </c:if>
 					</td>
 					<td class="text-center font-weight-bold">관리자</td>
 					<td class="text-center font-weight-bold"><fmt:formatDate pattern="yyyy-MM-dd" value="${notice.b_regdate }"/></td>
@@ -77,7 +77,7 @@
 					
 					<td>
 						<a href="board/readBoard${pageMaker.makeQuery(pageMaker.pc.page) }&sort=${pageMaker.pc.sort}&b_num=${board.b_num }">${board.b_title }</a>
-					 	<c:if test="${board.b_replycount != 0}"> <small>[${board.b_replycount }]</small></c:if>
+					 	<c:if test="${board.b_replycount != 0}"> <small class="text-danger">[ ${board.b_replycount } ]</small></c:if>
 					</td>
 					<td class="text-center">${board.b_writer }</td>
 					<td class="text-center"><fmt:formatDate pattern="yyyy-MM-dd" value="${board.b_regdate }"/></td>

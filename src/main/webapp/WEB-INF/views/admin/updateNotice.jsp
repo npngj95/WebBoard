@@ -28,7 +28,7 @@
 	<hr>
     <!-- Category -->
     <div class="text-left mb-4"><i class="fas fa-clone"></i> 공지</div>
-	
+    
 	<!-- Title -->
     <div style="text-align: left;">
 	    <input type="text" name="b_title" class="form-control mb-4" placeholder="Title" style="margin-right: 5%; display: inline-block;" value="${notice.b_title }">
@@ -51,25 +51,6 @@
 <%@include file="../module/bottom.jsp"%>
 <%@include file="../common/common_bottom.jsp"%>
 <script src="${pageContext.request.contextPath }/resources/summerNote/summernote-bs4.min.js"></script>
-
-<script>
-//summernote
-$(document).ready(function() {
-    $("#b_content").summernote({
-    	lang: 'ko-KR', // default: 'en-US'
-    	tabsize: 2,
-        height: 400
-    });
-});
-
-function empCheck() {
-	if($("#b_content").summernote("isEmpty")) {
-		alert("내용을 입력해주세요.");
-		return false;
-	}
-	
-	return true;
-}
-</script>
+<script src="${pageContext.request.contextPath }/resources/js/updateNotice.js"></script>
 </body>
 </html>

@@ -26,7 +26,7 @@ public class BoardController {
 	@Autowired
 	private PageMaker pageMaker;
 	
-	// Home - index
+	// Home, index
 	@RequestMapping({"/", "/index"})
 	public String home(Model model, PageCriteriaSearch pageCriteria) {
 		pageMaker.setPc(pageCriteria);
@@ -46,7 +46,9 @@ public class BoardController {
 		return "index";
 	}
 	
-	// 게시판 글 상세보기
+//────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+	
+	// 게시글 상세보기
 	@RequestMapping("/board/readBoard")
 	public String selectBoard(BoardVO vo, Model model) {
 		boardService.updateReadCount(vo);
@@ -55,7 +57,41 @@ public class BoardController {
 		return "board/readBoard";
 	}
 	
-	// 게시판 글 좋아요 기능
+	// 게시글 작성(GET)
+	@RequestMapping(value="/board/writeBoard", method=RequestMethod.GET)
+	public String insertBoard() {
+		return "board/writeBoard";
+	}
+	// 게시글 작성(POST)
+	@RequestMapping(value="/board/writeBoard", method=RequestMethod.POST)
+	public String insertBoard(BoardVO vo) {
+		boardService.insertBoard(vo);
+		return "redirect:readBoard?b_num=" + vo.getB_num();
+	}
+	
+	// 게시글 수정(GET)
+	@RequestMapping(value="/board/updateBoard", method=RequestMethod.GET)
+	public String updateBoard(BoardVO vo, Model model) {
+		model.addAttribute("board", boardService.selectBoard(vo));
+		return "board/updateBoard";
+	}
+	// 게시글 수정(POST)
+	@RequestMapping(value="/board/updateBoard", method=RequestMethod.POST)
+	public String updateBoard(BoardVO vo) {
+		boardService.updateBoard(vo);
+		return "redirect:readBoard?b_num=" + vo.getB_num();
+	}
+	
+	// 게시글 삭제
+	@RequestMapping("/board/deleteBoard")
+	public String deleteBoard(BoardVO vo) {
+		boardService.deleteBoard(vo);
+		return "redirect:/index";
+	}
+	
+//────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+	
+	// 게시글 좋아요 기능
 	@RequestMapping("/board/updateLike")
 	@ResponseBody
 	public String updateLike(BoardVO vo, HttpSession session) {
@@ -75,7 +111,7 @@ public class BoardController {
 		return String.valueOf(vo.getB_like());
 	}
 
-	// 게시판 글 싫어요 기능
+	// 게시글 싫어요 기능
 	@RequestMapping("/board/updateHate")
 	@ResponseBody
 	public String updateHate(BoardVO vo, HttpSession session) {
@@ -94,38 +130,4 @@ public class BoardController {
 		
 		return String.valueOf(vo.getB_hate());
 	}
-	
-	// 게시판 글 쓰기
-	@RequestMapping(value="/board/writeBoard", method=RequestMethod.GET)
-	public String insertBoard() {
-		return "board/writeBoard";
-	}
-	
-	@RequestMapping(value="/board/writeBoard", method=RequestMethod.POST)
-	public String insertBoard(BoardVO vo) {
-		boardService.insertBoard(vo);
-		System.out.println(vo);
-		return "redirect:readBoard?b_num=" + vo.getB_num();
-	}
-	
-	// 게시판 글 수정
-	@RequestMapping(value="/board/updateBoard", method=RequestMethod.GET)
-	public String updateBoard(BoardVO vo, Model model) {
-		model.addAttribute("board", boardService.selectBoard(vo));
-		return "board/updateBoard";
-	}
-	
-	@RequestMapping(value="/board/updateBoard", method=RequestMethod.POST)
-	public String updateBoard(BoardVO vo) {
-		boardService.updateBoard(vo);
-		return "redirect:readBoard?b_num=" + vo.getB_num();
-	}
-	
-	// 게시판 글 삭제
-	@RequestMapping("/board/deleteBoard")
-	public String deleteBoard(BoardVO vo) {
-		boardService.deleteBoard(vo);
-		return "redirect:/index";
-	}
-	
 }

@@ -10,9 +10,6 @@
 <%@include file="../common/common_top.jsp"%>
 <link href="${pageContext.request.contextPath }/resources/css/board.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath }/resources/css/paging.css" rel="stylesheet">
-<script>
-
-</script>
 </head>
 <body>
 <%@include file="../module/top.jsp"%>

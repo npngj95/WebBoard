@@ -42,24 +42,6 @@
 <%@include file="../common/common_bottom.jsp"%>
 
 <script src="${pageContext.request.contextPath }/resources/summerNote/summernote-bs4.min.js"></script>
-<script>
-$(document).ready(function() {
-    $('#b_content').summernote({
-    	lang: 'ko-KR', // default: 'en-US'
-    	tabsize: 2,
-        height: 400
-    });
-    
-});
-
-function empCheck() {
-	if($('#b_content').summernote('isEmpty')) {
-		alert('내용을 입력해주세요.');
-		return false;
-	}
-	
-	return true;
-}
-</script>
+<script src="${pageContext.request.contextPath }/resources/js/updateBoard.js"></script>
 </body>
 </html>

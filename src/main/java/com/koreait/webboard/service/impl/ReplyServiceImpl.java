@@ -25,15 +25,14 @@ public class ReplyServiceImpl implements ReplyService {
 	
 	@Override
 	public void insertReply(ReplyVO vo) {
-		replyDAO.insertReply(vo);
-		BoardVO board = new BoardVO();
-		board.setB_num(vo.getB_num());
-		boardDAO.updateReplyCount(board);
+		boardDAO.upReplyCount(vo);		//board테이블 댓글수 증가
+		replyDAO.insertReply(vo);		//댓글테이블에 댓글 삽입
 	}
 
 	@Override
 	public void deleteReply(ReplyVO vo) {
-		replyDAO.deleteReply(vo);
+		boardDAO.downReplyCount(vo);	//board테이블 댓글수 감소 (서브쿼리 사용)
+		replyDAO.deleteReply(vo);		//댓글테이블에 댓글 삭제
 	}
 	
 }

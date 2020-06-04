@@ -27,23 +27,20 @@ public class AdminController {
 	@Autowired
 	private PageMaker pageMaker;
 	
-	// 관리자 페이지 (매핑이 필요함)
+	// 관리자 메인
 	@RequestMapping("/admin/adminMain")
 	public String adminMain() {
 		return "admin/adminMain";
 	}
 	
-	// 관리자 페이지
+	// 관리자 로그인(GET)
 	@RequestMapping(value="/admin/login", method=RequestMethod.GET)
 	public String adminLogin() {
-		
 		return "admin/adminLogin";
 	}
-	
-	// 관리자 페이지
+	// 관리자 로그인(POST)
 	@RequestMapping(value="/admin/login", method=RequestMethod.POST)
 	public String adminLogin(AdminVO vo, Model model) {
-		
 		AdminVO admin = adminService.adminCheck(vo);
 		
 		if(admin != null) {
@@ -54,64 +51,65 @@ public class AdminController {
 			return "admin/adminLogin";
 		}
 	}
-
-	@RequestMapping(value="/admin/logout", method=RequestMethod.GET)
+	
+	// 관리자 로그아웃
+	@RequestMapping("/admin/logout")
 	public String selectUsers(SessionStatus sessionStatus) {
 		sessionStatus.setComplete();
 		return "redirect:login";
 	}
 	
+//────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+	
+	// 공지 관리
 	@RequestMapping("/admin/managementNotice")
 	public String managementNotice(Model model) {
-		
 		model.addAttribute("noticeList", adminService.selectNoticeList());
-		
 		return "admin/managementNotice";
 	}
 	
+	// 공지 작성(GET)
 	@RequestMapping(value="/admin/writeNotice", method=RequestMethod.GET)
 	public String writeNotice() {		
 		return "admin/writeNotice";
 	}
-	
+	// 공지 작성(POST)
 	@RequestMapping(value="/admin/writeNotice", method=RequestMethod.POST)
 	public String writeNotice(BoardVO vo) {
 		adminService.writeNotice(vo);
-		
 		return "redirect:managementNotice";
 	}
 	
+	// 공지 수정(GET)
 	@RequestMapping(value="/admin/updateNotice", method=RequestMethod.GET)
 	public String updateNotice(Model model, BoardVO vo) {
 		model.addAttribute("notice", adminService.selectNotice(vo));
-		
 		return "/admin/updateNotice";
 	}
-	
+	// 공지 수정(POST)
 	@RequestMapping(value="/admin/updateNotice", method=RequestMethod.POST)
 	public String updateNotice(BoardVO vo) {
 		adminService.updateNotice(vo);
-		
 		return "redirect:managementNotice";
 	}
 	
-	
+	// 공지 삭제(CheckBox 활용)
 	@RequestMapping("/admin/deleteNoticeList")
 	public String deleteNoticeList(HttpServletRequest request) {
 		List<String> b_numList = new ArrayList<>();
 		
 		String[] tmp = request.getParameterValues("b_numList");
-		
 		for (int i = 0; i < tmp.length; i++) {
 			b_numList.add(tmp[i]);
 		}
-		
 		adminService.deleteBoardList(b_numList);
 		
 		return "redirect:managementNotice";
 	}
 	
+//────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 	
+	// 유저 관리
 	@RequestMapping("/admin/managementUser")
 	public String selectAllUsers(Model model,  PageCriteriaSearch pc) {
 		pageMaker.setPc(pc);
@@ -123,21 +121,23 @@ public class AdminController {
 		return "admin/managementUser";
 	}
 	
+	// 유저 탈퇴(CheckBox 활용)
 	@RequestMapping("/admin/deleteUserList")
 	public String deleteUserList(HttpServletRequest request) {
 		List<String> u_idList = new ArrayList<>();
 		
 		String[] tmp = request.getParameterValues("u_idList");
-		
 		for (int i = 0; i < tmp.length; i++) {
 			u_idList.add(tmp[i]);
 		}
-		
 		adminService.deleteUserList(u_idList);
 		
 		return "redirect:managementUser";
 	}
 	
+//────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+	
+	// 게시글 관리
 	@RequestMapping("/admin/managementBoard")
 	public String selectAllBoards(Model model, PageCriteriaSearch pc) {
 		pageMaker.setPc(pc);
@@ -149,17 +149,15 @@ public class AdminController {
 		return "admin/managementBoard";
 	}
 	
-	
+	// 게시글 삭제(CheckBox 활용)
 	@RequestMapping("/admin/deleteBoardList")
 	public String deleteBoardList(HttpServletRequest request) {
 		List<String> b_numList = new ArrayList<>();
 		
 		String[] tmp = request.getParameterValues("b_numList");
-		
 		for (int i = 0; i < tmp.length; i++) {
 			b_numList.add(tmp[i]);
 		}
-		
 		adminService.deleteBoardList(b_numList);
 		
 		return "redirect:managementBoard";

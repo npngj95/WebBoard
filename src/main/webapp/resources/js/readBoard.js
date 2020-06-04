@@ -1,3 +1,22 @@
+
+// summerNote
+$(document).ready(function() {
+    $("#b_content").summernote({
+    	lang: 'ko-KR', // default: 'en-US'
+    	tabsize: 2,
+    	minHeight: 400,
+        disableDragAndDrop: true,
+        toolbar: false,
+        disable: true
+    });
+    
+    $("#b_content").summernote("disable");
+  	$(".note-editable").css("background", "white");
+  	
+});
+
+//************************************************************************************************************************************
+
 //게시글 관련 메서드 (좋아요, 싫어요 버튼)
 function updateLike(b_num, u_id) {
 	now_like = $("#like").text();
@@ -71,6 +90,7 @@ function updateHate(b_num, u_id) {
 	});
 	
 }
+
 //************************************************************************************************************************************
 
 //댓글 관련 메서드

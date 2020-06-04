@@ -153,27 +153,7 @@
 <%@include file="../module/bottom.jsp"%>
 <%@include file="../common/common_bottom.jsp"%>
 <script src="${pageContext.request.contextPath }/resources/summerNote/summernote-bs4.min.js"></script>
-<script>
-	var u_id = '${users.u_id}';
-	var b_num = "${board.b_num}";
-</script>
 <script src="${pageContext.request.contextPath}/resources/js/readBoard.js"></script>
-<script>
-$(document).ready(function() {
-    $("#b_content").summernote({
-    	lang: 'ko-KR', // default: 'en-US'
-    	tabsize: 2,
-        height: 400,
-        disableDragAndDrop: true,
-        toolbar: false,
-        disable: true
-    });
-    
-    $("#b_content").summernote("disable");
-  	$(".note-editable").css("background", "white");
-  	
-});
-
-</script>
+<script>var u_id = '${users.u_id}', b_num = '${board.b_num}';</script>
 </body>
 </html>

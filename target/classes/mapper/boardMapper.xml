@@ -111,10 +111,16 @@
   		</selectKey>
 	</update>
 
-	<update id="updateReplyCount" parameterType="BoardVO">
+	<update id="upReplyCount" parameterType="ReplyVO">
 		UPDATE board
 		SET b_replycount = b_replycount+1
 		WHERE b_num = #{b_num}
 	</update>
 
+	<update id="downReplyCount" parameterType="ReplyVO">
+		UPDATE board
+		SET b_replycount = b_replycount-1
+		WHERE b_num = (SELECT b_num FROM reply WHERE r_num = #{r_num})
+	</update>
+	
 </mapper>

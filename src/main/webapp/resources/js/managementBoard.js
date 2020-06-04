@@ -20,7 +20,11 @@ $(document).ready(function() {
 	});
 	
 	$("#deleteBoard").click(function() {
-		document.managementBoard.submit();
-	});
+		if($("input:checkbox[name=b_numList]:checked").length == 0) {
+			alert("선택된 게시글이 없습니다");
+		} else {
+			document.managementBoard.submit();
+		}
+	})
 	
 });
