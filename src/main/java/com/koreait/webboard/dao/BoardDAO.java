@@ -86,4 +86,10 @@ public class BoardDAO {
 	public List<BoardVO> selectNotice() {
 		return mybatis.selectList("BoardDAO.selectNotice");
 	}
+	
+	// 댓글 입력시 글의 댓글수 + 1
+	public void updateReplyCount(BoardVO vo) {
+		mybatis.update("BoardDAO.updateReplyCount", vo);
+	}
+	
 }
