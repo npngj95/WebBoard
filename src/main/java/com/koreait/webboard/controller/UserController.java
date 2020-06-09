@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,14 +16,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-import com.koreait.webboard.service.UsersService;
-import com.koreait.webboard.vo.UsersVO;
+import com.koreait.webboard.common.mail.MailAuthKeyGenerator;
+import com.koreait.webboard.common.mail.MailHandler;
+import com.koreait.webboard.service.UserService;
+import com.koreait.webboard.vo.UserVO;
 
 @Controller
-@SessionAttributes("users") 
-public class UsersController {
+@SessionAttributes("user") 
+public class UserController {
 	@Autowired
-	private UsersService usersService;
+	private UserService userService;
+	@Autowired
+	private JavaMailSender mailSender;
 	
 	// 유저 로그인(GET) : 로그인한 후, index가 아닌 로그인을 하기 전 페이지로 돌아가게 구현 <쿠키 사용>
 	@RequestMapping(value="/login", method=RequestMethod.GET)
@@ -54,40 +59,62 @@ public class UsersController {
 	
 	// 유저 로그인(POST)
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String login(UsersVO vo, Model model, HttpServletRequest request, HttpServletResponse response, @RequestParam(defaultValue = "false") boolean rememberMe) {
+	public String login(UserVO vo, Model model, HttpServletRequest request, HttpServletResponse response, @RequestParam(defaultValue = "false") boolean rememberMe) {
 		String moveUrl = "";
 		Cookie[] cookies = request.getCookies(); //로그인 페이지에서 얻을 수 있는 모든 쿠키획득
-		UsersVO user = usersService.usersCheck(vo);
+		
+		UserVO user = userService.userCheck(vo);
 		
 		if(user != null) {
-			for(Cookie c : cookies) {
-				if(c.getName().equals("moveUrl")) { //이동 URL을 저장하는 쿠키일때
-					moveUrl = c.getValue();
-					c.setMaxAge(0); //setMaxAge(0) == 삭제될 쿠키로 설정
-					response.addCookie(c); // response에 추가해서 쿠키에 설정된 옵션들 처리(삭제)
-					break;
-				}
-			}
-			model.addAttribute("users", user);
-			
-			if(rememberMe) {
-				Cookie cookie = new Cookie("rememberId", user.getU_id());
-				cookie.setMaxAge(60*60*24*10); // 초 * 분 * 시 * 일
-				response.addCookie(cookie);
+			if(user.getU_status().equals("inactivate")) {
+				// 메일 인증하는 페이지를 하나 만들어 그쪽으로 가게 return
+				model.addAttribute("authUser", user);
+				
+				return "user/authEmailCode"; // url이 login으로 그대로 남음
 			} else {
+				
 				for(Cookie c : cookies) {
-					if(c.getName().equals("rememberId")) {						
-						c.setMaxAge(0);
-						response.addCookie(c);
+					if(c.getName().equals("moveUrl")) { //이동 URL을 저장하는 쿠키일때
+						moveUrl = c.getValue();
+						c.setMaxAge(0); //setMaxAge(0) == 삭제될 쿠키로 설정
+						response.addCookie(c); // response에 추가해서 쿠키에 설정된 옵션들 처리(삭제)
 						break;
 					}
 				}
+				
+				userService.updateLoginDate(user);
+				model.addAttribute("user", user);
+				
+				if(rememberMe) {
+					Cookie cookie = new Cookie("rememberId", user.getU_id());
+					cookie.setMaxAge(60*60*24*10); // 초 * 분 * 시 * 일
+					response.addCookie(cookie);
+				} else {
+					for(Cookie c : cookies) {
+						if(c.getName().equals("rememberId")) {						
+							c.setMaxAge(0);
+							response.addCookie(c);
+							break;
+						}
+					}
+				}
+				
+				return "redirect:" + moveUrl;
 			}
-			return "redirect:" + moveUrl;
 		} else {
 			model.addAttribute("alert", "가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.");
 			return "user/login";
 		}
+	}
+	
+	@RequestMapping("/authEmailCode")
+	public String authEmailCode(Model model, UserVO vo) {
+		int result = userService.updateUserStatus(vo);
+			
+		model.addAttribute("result", result);
+		model.addAttribute("authUser", vo);
+		
+		return "user/authEmailCode";
 	}
 	
 	// 유저 로그아웃
@@ -113,16 +140,33 @@ public class UsersController {
 	}
 	// 유저 회원가입(POST)
 	@RequestMapping(value="/signUp", method=RequestMethod.POST)
-	public String insertUsers(UsersVO vo) {
-		usersService.insertUsers(vo);	
+	public String insertUser(UserVO vo) {
+		String mailAuthKeyCode =  new MailAuthKeyGenerator().executeGenerate(); 
+		
+		try {
+			MailHandler mailHandler = new MailHandler(mailSender) ;
+			
+			mailHandler.setSuject("WebBoard 회원가입 인증 코드");
+			mailHandler.setText("이메일 인증 코드 : " + mailAuthKeyCode);
+			mailHandler.setFrom("WebBoard", "WebBoard운영자");
+			mailHandler.setTo(vo.getU_email());
+			
+			mailHandler.send();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		vo.setU_email_code(mailAuthKeyCode);
+		userService.insertUser(vo);
+		
 		return "redirect:index";
 	}
 	
 	// 유저 정보 조회
 	@RequestMapping(value="/user/selectUser")
-	public String selectUsers(HttpSession session, UsersVO vo, Model model) {
-		vo = (UsersVO) session.getAttribute("users");
-		model.addAttribute("users", usersService.selectUsers(vo)); 
+	public String selectUser(HttpSession session, UserVO vo, Model model) {
+		vo = (UserVO) session.getAttribute("user");
+		model.addAttribute("user", userService.selectUser(vo)); 
 		return "user/selectUser";
 	}
 	
@@ -133,10 +177,10 @@ public class UsersController {
 	}
 	// 유저 비밀번호 수정(POST)
 	@RequestMapping(value="/user/updatePwd", method=RequestMethod.POST)
-	public String updatePwd(UsersVO vo, HttpSession session) {
-		UsersVO user = (UsersVO)session.getAttribute("users");
+	public String updatePwd(UserVO vo, HttpSession session) {
+		UserVO user = (UserVO)session.getAttribute("user");
 		user.setU_pwd(vo.getU_pwd());
-		usersService.updatePwd(user);
+		userService.updatePwd(user);
 		
 		return "redirect:/user/selectUser";
 	}
@@ -148,15 +192,15 @@ public class UsersController {
 	}
 	// 유저 정보 수정(POST)
 	@RequestMapping(value="/user/updateUser", method=RequestMethod.POST)
-	public String updateUsers(UsersVO vo) {
-		usersService.updateUsers(vo);
+	public String updateUser(UserVO vo) {
+		userService.updateUser(vo);
 		return "redirect:/user/selectUser";
 	}
 	
 	// 유저 회원 탈퇴
 	@RequestMapping("/user/deleteUser")
-	public String deleteUsers(UsersVO vo, SessionStatus sessionStatus) {
-		usersService.deleteUsers(vo);
+	public String deleteUser(UserVO vo, SessionStatus sessionStatus) {
+		userService.deleteUser(vo);
 		sessionStatus.setComplete();
 		
 		return "redirect:/index";
@@ -168,14 +212,14 @@ public class UsersController {
 	@RequestMapping(value="/idCheck")
 	@ResponseBody
 	public String idCheck(@RequestParam String u_id) {
-		return usersService.idCheck(u_id);
+		return userService.idCheck(u_id);
 	}
 	
 	// 유저 비밀번호 체크
-	@RequestMapping(value="/user/usersCheck")
+	@RequestMapping(value="/user/userCheck")
 	@ResponseBody
-	public String usersCheck(UsersVO vo) {
-		UsersVO user = usersService.usersCheck(vo);
+	public String userCheck(UserVO vo) {
+		UserVO user = userService.userCheck(vo);
 		
 		if(user != null) {
 			return "1";

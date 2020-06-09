@@ -7,7 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.koreait.webboard.common.paging.PageCriteriaSearch;
+import com.koreait.webboard.common.paging.PageCriteria;
 import com.koreait.webboard.vo.BoardVO;
 import com.koreait.webboard.vo.ReplyVO;
 
@@ -22,7 +22,7 @@ public class BoardDAO {
 		mybatis.insert("BoardDAO.insertBoard", vo);
 	}
 	
-	// 공지 상세 보기
+	// 공지 상세 보기(수정 페이지)
 	public BoardVO selectNotice(BoardVO vo) {
 		return mybatis.selectOne("BoardDAO.selectBoard", vo);
 	}
@@ -32,7 +32,7 @@ public class BoardDAO {
 		return mybatis.selectList("BoardDAO.selectNoticeList");
 	}
 	
-	// 공지 수정
+	// 공지 수정(수정 처리)
 	public void updateNotice(BoardVO vo) {
 		mybatis.update("BoardDAO.updateBoard", vo);
 	}
@@ -45,6 +45,11 @@ public class BoardDAO {
 //────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 	
 	// *** 유저 영역 ***
+	// 게시판에 공지 조회
+	public List<BoardVO> userSelectNoticeList() {
+		return mybatis.selectList("BoardDAO.userSelectNoticeList");
+	}
+	
 	// 게시글 작성
 	public void insertBoard(BoardVO vo) {
 		mybatis.insert("BoardDAO.insertBoard", vo);
@@ -56,7 +61,7 @@ public class BoardDAO {
 	}
 	
 	// 게시글 일괄 조회
-	public List<BoardVO> selectAllBoard(PageCriteriaSearch pc) {
+	public List<BoardVO> selectAllBoard(PageCriteria pc) {
 		return mybatis.selectList("BoardDAO.selectAllBoard", pc);
 	}
 	
@@ -70,11 +75,6 @@ public class BoardDAO {
 		mybatis.delete("BoardDAO.deleteBoard", vo);
 	}
 	
-	// 게시판에 공지 조회
-	public List<BoardVO> selectNotice() {
-		return mybatis.selectList("BoardDAO.selectNotice");
-	}
-	
 	//==========================
 	
 	// 게시글 조회수 증가
@@ -83,7 +83,7 @@ public class BoardDAO {
 	}
 	
 	// 게시글 개수 획득
-	public int boardTotalCount(PageCriteriaSearch pc) {
+	public int boardTotalCount(PageCriteria pc) {
 		return mybatis.selectOne("BoardDAO.selectTotalCount", pc);
 	}
 	

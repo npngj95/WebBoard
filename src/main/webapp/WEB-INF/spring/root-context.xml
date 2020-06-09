@@ -9,8 +9,19 @@
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 	
-	
-	<!-- Root Context: defines shared resources visible to all other web components -->
-	<!-- 메일 bean 등록  -->
+	<!-- 메일 bean 등록  --> 
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com"/>
+		<property name="port" value="587" />
+		<property name="username" value="Host-E_Mail"/>
+		<property name="password" value="Host-Password"/>
+		
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop><!--  mail.smtp.ssl.enable 프로퍼티를 주어 값을 true로 주어야 SSL 접속이 가능 -->
+			</props>
+		</property>
+	</bean>
 	
 </beans>

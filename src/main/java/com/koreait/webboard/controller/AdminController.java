@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-import com.koreait.webboard.common.paging.PageCriteriaSearch;
+import com.koreait.webboard.common.paging.PageCriteria;
 import com.koreait.webboard.common.paging.PageMaker;
 import com.koreait.webboard.service.AdminService;
 import com.koreait.webboard.vo.AdminVO;
@@ -54,7 +54,7 @@ public class AdminController {
 	
 	// 관리자 로그아웃
 	@RequestMapping("/admin/logout")
-	public String selectUsers(SessionStatus sessionStatus) {
+	public String adminLogout(SessionStatus sessionStatus) {
 		sessionStatus.setComplete();
 		return "redirect:login";
 	}
@@ -102,7 +102,7 @@ public class AdminController {
 		for (int i = 0; i < tmp.length; i++) {
 			b_numList.add(tmp[i]);
 		}
-		adminService.deleteBoardList(b_numList);
+		adminService.deleteNoticeList(b_numList);
 		
 		return "redirect:managementNotice";
 	}
@@ -111,12 +111,12 @@ public class AdminController {
 	
 	// 유저 관리
 	@RequestMapping("/admin/managementUser")
-	public String selectAllUsers(Model model,  PageCriteriaSearch pc) {
+	public String selectAllUsers(Model model,  PageCriteria pc) {
 		pageMaker.setPc(pc);
-		pageMaker.setTotalCount(adminService.usersTotalCount(pc));
+		pageMaker.setTotalCount(adminService.userTotalCount(pc));
 		
 		model.addAttribute("pageMaker", pageMaker);
-		model.addAttribute("userList", adminService.selectAllUsers(pc));
+		model.addAttribute("userList", adminService.selectAllUser(pc));
 		
 		return "admin/managementUser";
 	}
@@ -139,7 +139,7 @@ public class AdminController {
 	
 	// 게시글 관리
 	@RequestMapping("/admin/managementBoard")
-	public String selectAllBoards(Model model, PageCriteriaSearch pc) {
+	public String selectAllBoards(Model model, PageCriteria pc) {
 		pageMaker.setPc(pc);
 		pageMaker.setTotalCount(adminService.boardTotalCount(pc));
 		

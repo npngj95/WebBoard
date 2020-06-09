@@ -17,10 +17,10 @@
 	    <p class="h4 mb-4">Write Board</p>
 	
 	    <!-- Name -->
-	    <input type="text" name="b_writer" class="form-control mb-4" placeholder="Writer" value="${users.u_id }" readonly>
+	    <input type="text" name="b_writer" class="form-control mb-4" placeholder="Writer" value="${user.u_id }" readonly>
 	
 	    <!-- Email -->
-	    <input type="email" name="b_email" class="form-control mb-4" placeholder="E-mail" value="${users.u_email }" readonly>
+	    <input type="email" name="b_email" class="form-control mb-4" placeholder="E-mail" value="${user.u_email }" readonly>
 		
 		<hr>
 	    <!-- Category -->

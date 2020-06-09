@@ -17,17 +17,17 @@
     <p class="h4 mb-4">회원 정보 수정</p>
 	<form action="updateUser" method="post" onsubmit="return updateUser()">
 		<!-- ID -->
-	    <input type="text" id="u_id" name="u_id" class="form-control mb-4" placeholder="ID" value="${users.u_id }" readonly>
+	    <input type="text" id="u_id" name="u_id" class="form-control mb-4" placeholder="ID" value="${user.u_id }" readonly>
 	    
 	    <!-- Name -->
 	    <div class="mb-4">
-		    <input type="text" id="u_name" name="u_name" class="form-control" placeholder="Name" value="${users.u_name }" onblur="nameCheck()">
+		    <input type="text" id="u_name" name="u_name" class="form-control" placeholder="Name" value="${user.u_name }" onblur="nameCheck()">
 		    <p id="alertName" class="text-danger text-left"></p>
 	    </div>
 	 	
 	    <!-- E-mail -->
 	    <div class="mb-4">
-		    <input type="email" id="u_email" name="u_email" class="form-control" placeholder="E-mail" value="${users.u_email }" onblur="emailCheck()">
+		    <input type="email" id="u_email" name="u_email" class="form-control" placeholder="E-mail" value="${user.u_email }" onblur="emailCheck()">
 		    <p id="alertEmail" class="text-danger text-left"></p>
 	    </div>
 		

@@ -7,9 +7,9 @@ import com.koreait.webboard.vo.ReplyVO;
 
 public interface ReplyService {
 	
-	List<ReplyVO> selectReply(BoardVO vo);
-	
 	void insertReply(ReplyVO vo);
+
+	List<ReplyVO> selectReply(BoardVO vo);
 	
 	void deleteReply(ReplyVO vo);
 	

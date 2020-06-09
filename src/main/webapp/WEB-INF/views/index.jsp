@@ -15,14 +15,14 @@
 	<%@include file="module/top.jsp"%>
 
 	<div class="container wrapper">
-		<h2 style="margin-top: 60px; display: inline-block;">게시판 메인</h2>
+		<h2 style="margin-top: 60px; display: inline-block;">맛집 정보 게시판</h2>
 
 		<nav class="navbar navbar-expand-lg  md-color">
 			<!-- Navbar brand -->
 			<div class="mb-2">
 				<a class="navbar-brand" href="index${pageMaker.makeQuery(1) }&sort=b_regdate">작성일순</a>
-				<a class="navbar-brand"	href="index${pageMaker.makeQuery(1) }&sort=b_like">좋아요순</a> 
 				<a class="navbar-brand" href="index${pageMaker.makeQuery(1) }&sort=b_readcount">조회수순</a>
+				<a class="navbar-brand"	href="index${pageMaker.makeQuery(1) }&sort=b_like">추천순</a> 
 			</div>
 			
 			<form class="form-inline ml-auto" action="index" method="get">

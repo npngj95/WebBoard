@@ -106,7 +106,7 @@
 	    <!-- 수정 / 삭제 버튼 -->
 		    <div class="text-right mb-3">
 				<button type="button" style="float: left;" class="btn btn-dark mb-3" onclick="location='../index${url }'">게시글 목록</button>
-				 <c:if test="${board.b_writer == users.u_id}">
+				 <c:if test="${board.b_writer == user.u_id}">
 					<button type="button" class="btn btn-dark mb-3" onclick="location='updateBoard?b_num=${board.b_num }'">글수정</button>
 					<button type="button" class="btn btn-dark mb-3" data-toggle="modal" data-target="#myModal">글삭제</button>
 				</c:if>
@@ -118,10 +118,10 @@
 	<div id="like-log" class="text-center mb-5" style="clear:both;">
 		<div id="like-hate-btn">
 			<!-- Thumbs up -->
-		     <button type="button" class="btn btn-primary px-4" onclick="updateLike(${board.b_num}, '${users.u_id}')">
+		     <button type="button" class="btn btn-primary px-4" onclick="updateLike(${board.b_num}, '${user.u_id}')">
 		     	<i class="far fa-thumbs-up mr-2" aria-hidden="true"></i> <span id="like">${board.b_like }</span>
 		     </button>
-		     <button type="button" class="btn btn-danger px-4" onclick="updateHate(${board.b_num}, '${users.u_id}')">
+		     <button type="button" class="btn btn-danger px-4" onclick="updateHate(${board.b_num}, '${user.u_id}')">
 		     	<i class="far fa-thumbs-down mr-2" aria-hidden="true"></i> <span id="hate">${board.b_hate }</span>
 		     </button>
 	     </div>
@@ -138,12 +138,12 @@
 			</tbody>
 		  	<tfoot>
 			    <tr>
-			   	  <th width="15%" class="pt-4 font-weight-bold">${users.u_id }</th> 	  
+			   	  <th width="15%" class="pt-4 font-weight-bold">${user.u_id }</th> 	  
 			   	  <td  colspan="2">
-			   	  	<input type="text" id="r_content" class="form-control" placeholder="ReplyContent" onfocus="writeReplyLogin('${users.u_id }')" >
+			   	  	<input type="text" id="r_content" class="form-control" placeholder="ReplyContent" onfocus="writeReplyLogin('${user.u_id }')" >
 			   	  </td>
 			   	  <td width="5%">
-			   	  	<button style="width: 100px; padding:5px;" class="btn btn-dark mb-3" type="button" onclick="writeReply(${board.b_num}, '${users.u_id }')">댓글 입력</button>
+			   	  	<button style="width: 100px; padding:5px;" class="btn btn-dark mb-3" type="button" onclick="writeReply(${board.b_num}, '${user.u_id }')">댓글 입력</button>
 			   	  </td>
 			    </tr>
 			</tfoot>
@@ -154,6 +154,6 @@
 <%@include file="../common/common_bottom.jsp"%>
 <script src="${pageContext.request.contextPath }/resources/summerNote/summernote-bs4.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/readBoard.js"></script>
-<script>var u_id = '${users.u_id}', b_num = '${board.b_num}';</script>
+<script>var u_id = '${user.u_id}', b_num = '${board.b_num}';</script>
 </body>
 </html>

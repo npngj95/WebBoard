@@ -10,7 +10,7 @@
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 		<a class="navbar-brand"
-			href="${pageContext.request.contextPath }/index">## 게시판</a>
+			href="${pageContext.request.contextPath }/index">Web Board</a>
 	
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarColor01" aria-controls="navbarColor01"
@@ -34,7 +34,7 @@
 					</c:when>
 					
 					<c:otherwise>
-						<c:if test="${users == null}">
+						<c:if test="${user == null}">
 							<li class="nav-item">
 								<a class="nav-link" href="${pageContext.request.contextPath }/login">
 								로그인 </a>
@@ -45,9 +45,9 @@
 							</li>				
 						</c:if>
 						
-						<c:if test="${users != null}">
+						<c:if test="${user != null}">
 							<li class="nav-item">
-								<div class="text-white p-2">${users.u_name }님</div>
+								<div class="text-white p-2">${user.u_name }님</div>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" href="${pageContext.request.contextPath }/user/selectUser">

@@ -44,9 +44,9 @@ public class PageMaker {
 		UriComponents uri = null;
 		UriComponentsBuilder uriComponent = UriComponentsBuilder.newInstance().queryParam("page", page);
 		
-		if(((PageCriteriaSearch)pc).getKeyword() != null) {
-			uriComponent.queryParam("condition", ((PageCriteriaSearch)pc).getCondition());
-			uriComponent.queryParam("keyword", ((PageCriteriaSearch)pc).getKeyword());
+		if(((PageCriteria)pc).getKeyword() != null) {
+			uriComponent.queryParam("condition", ((PageCriteria)pc).getCondition());
+			uriComponent.queryParam("keyword", ((PageCriteria)pc).getKeyword());
 		}
 		
 		uri = uriComponent.build();

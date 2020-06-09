@@ -14,14 +14,14 @@ public class ReplyDAO {
 	@Autowired
 	private SqlSession mybatis;
 
+	public void insertReply(ReplyVO vo) {
+		mybatis.insert("ReplyDAO.insertReply", vo);
+	}
+	
 	public List<ReplyVO> selectReply(BoardVO vo) {
 		return mybatis.selectList("ReplyDAO.selectReply", vo);
 	}
 	
-	public void insertReply(ReplyVO vo) {
-		mybatis.insert("ReplyDAO.insertReply", vo);
-	}
-
 	public void deleteReply(ReplyVO vo) {
 		mybatis.delete("ReplyDAO.deleteReply", vo);
 	}

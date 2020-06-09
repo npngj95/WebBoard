@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.koreait.webboard.common.paging.PageCriteriaSearch;
+import com.koreait.webboard.common.paging.PageCriteria;
 import com.koreait.webboard.dao.BoardDAO;
 import com.koreait.webboard.service.BoardService;
 import com.koreait.webboard.vo.BoardVO;
@@ -16,20 +16,45 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	private BoardDAO boardDAO;
 
+	// 게시판에서 보여지는 공지글 (
 	@Override
-	public List<BoardVO> selectAllBoard(PageCriteriaSearch pc) {
-		return boardDAO.selectAllBoard(pc);
+	public List<BoardVO> userSelectNoticeList() {
+		return boardDAO.userSelectNoticeList();
+	}
+	
+//────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+	
+	@Override
+	public void insertBoard(BoardVO vo) {
+		boardDAO.insertBoard(vo);
 	}
 	
 	@Override
-	public int boardTotalCount(PageCriteriaSearch pc) {
-		return boardDAO.boardTotalCount(pc);
+	public List<BoardVO> selectAllBoard(PageCriteria pc) {
+		return boardDAO.selectAllBoard(pc);
 	}
 	
 	@Override
 	public BoardVO selectBoard(BoardVO vo) {
 		return boardDAO.selectBoard(vo);
 	}
+	
+	@Override
+	public void updateBoard(BoardVO vo) {
+		boardDAO.updateBoard(vo);
+	}
+	
+	@Override
+	public void deleteBoard(BoardVO vo) {
+		boardDAO.deleteBoard(vo);
+	}
+	
+	@Override
+	public int boardTotalCount(PageCriteria pc) {
+		return boardDAO.boardTotalCount(pc);
+	}
+	
+//────────────────────────────────────────────────────────────────────────────────────────────────────────────────────	
 	
 	@Override
 	public void updateReadCount(BoardVO vo) {
@@ -54,27 +79,6 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void updateHate(BoardVO vo) {
 		boardDAO.updateHate(vo);
-	}
-	
-	
-	@Override
-	public void insertBoard(BoardVO vo) {
-		boardDAO.insertBoard(vo);
-	}
-
-	@Override
-	public void updateBoard(BoardVO vo) {
-		boardDAO.updateBoard(vo);
-	}
-
-	@Override
-	public void deleteBoard(BoardVO vo) {
-		boardDAO.deleteBoard(vo);
-	}
-
-	@Override
-	public List<BoardVO> selectNotice() {
-		return boardDAO.selectNotice();
 	}
 
 }

@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.koreait.webboard.common.paging.PageCriteriaSearch;
+import com.koreait.webboard.common.paging.PageCriteria;
 import com.koreait.webboard.common.paging.PageMaker;
 import com.koreait.webboard.service.BoardService;
 import com.koreait.webboard.vo.BoardVO;
-import com.koreait.webboard.vo.UsersVO;
+import com.koreait.webboard.vo.UserVO;
 
 @Controller
 @SessionAttributes("url")
@@ -28,7 +28,7 @@ public class BoardController {
 	
 	// Home, index
 	@RequestMapping({"/", "/index"})
-	public String home(Model model, PageCriteriaSearch pageCriteria) {
+	public String home(Model model, PageCriteria pageCriteria) {
 		pageMaker.setPc(pageCriteria);
 		pageMaker.setTotalCount(boardService.boardTotalCount(pageCriteria));
 		
@@ -40,7 +40,7 @@ public class BoardController {
 		model.addAttribute("url", url);
 		
 		if (pageCriteria.getPage() == 1) {
-			model.addAttribute("noticeList", boardService.selectNotice());
+			model.addAttribute("noticeList", boardService.userSelectNoticeList());
 		}
 		
 		return "index";
@@ -95,10 +95,10 @@ public class BoardController {
 	@RequestMapping("/board/updateLike")
 	@ResponseBody
 	public String updateLike(BoardVO vo, HttpSession session) {
-		UsersVO user = (UsersVO)session.getAttribute("users");
+		UserVO user = (UserVO)session.getAttribute("user");
 		HashMap<String, Object> map = new HashMap<>();
 		
-		map.put("users", user.getU_id());
+		map.put("user", user.getU_id());
 		map.put("board", vo.getB_num());
 		
 		if(boardService.selectLike_log(map) < 1) {	// 아직 추천 X
@@ -115,10 +115,10 @@ public class BoardController {
 	@RequestMapping("/board/updateHate")
 	@ResponseBody
 	public String updateHate(BoardVO vo, HttpSession session) {
-		UsersVO user = (UsersVO)session.getAttribute("users");
+		UserVO user = (UserVO)session.getAttribute("user");
 		HashMap<String, Object> map = new HashMap<>();
 		
-		map.put("users", user.getU_id());
+		map.put("user", user.getU_id());
 		map.put("board", vo.getB_num());
 		
 		if(boardService.selectLike_log(map) < 1) {	// 아직 추천 X

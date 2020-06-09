@@ -19,14 +19,14 @@ public class ReplyServiceImpl implements ReplyService {
 	private BoardDAO boardDAO;
 
 	@Override
-	public List<ReplyVO> selectReply(BoardVO vo) {
-		return replyDAO.selectReply(vo);
-	}
-	
-	@Override
 	public void insertReply(ReplyVO vo) {
 		boardDAO.upReplyCount(vo);		//board테이블 댓글수 증가
 		replyDAO.insertReply(vo);		//댓글테이블에 댓글 삽입
+	}
+	
+	@Override
+	public List<ReplyVO> selectReply(BoardVO vo) {
+		return replyDAO.selectReply(vo);
 	}
 
 	@Override

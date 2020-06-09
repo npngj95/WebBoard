@@ -5,14 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.koreait.webboard.common.paging.PageCriteriaSearch;
+import com.koreait.webboard.common.paging.PageCriteria;
 import com.koreait.webboard.dao.AdminDAO;
 import com.koreait.webboard.dao.BoardDAO;
-import com.koreait.webboard.dao.UsersDAO;
+import com.koreait.webboard.dao.UserDAO;
 import com.koreait.webboard.service.AdminService;
 import com.koreait.webboard.vo.AdminVO;
 import com.koreait.webboard.vo.BoardVO;
-import com.koreait.webboard.vo.UsersVO;
+import com.koreait.webboard.vo.UserVO;
 
 @Service("adminService")
 public class AdminServiceImpl implements AdminService {
@@ -21,21 +21,18 @@ public class AdminServiceImpl implements AdminService {
 	@Autowired
 	private BoardDAO boardDAO;
 	@Autowired
-	private UsersDAO usersDAO;
+	private UserDAO userDAO;
 	
 	@Override
 	public AdminVO adminCheck(AdminVO vo) {
 		return adminDAO.adminCheck(vo);
 	}
+
+//────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 	
 	@Override
 	public void writeNotice(BoardVO vo) {
 		boardDAO.writeNotice(vo);		
-	}
-	
-	@Override
-	public void updateNotice(BoardVO vo) {
-		boardDAO.updateNotice(vo);
 	}
 	
 	@Override
@@ -48,36 +45,48 @@ public class AdminServiceImpl implements AdminService {
 		return boardDAO.selectNoticeList();
 	}
 	
-	
 	@Override
-	public int usersTotalCount(PageCriteriaSearch pc) {
-		return usersDAO.usersTotalCount(pc);
+	public void updateNotice(BoardVO vo) {
+		boardDAO.updateNotice(vo);
 	}
 	
 	@Override
-	public List<UsersVO> selectAllUsers(PageCriteriaSearch pc) {
-		return usersDAO.selectAllUsers(pc);
+	public void deleteNoticeList(List<String> b_numList) {
+		boardDAO.deleteBoardList(b_numList);
+	}
+	
+//────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+	
+	@Override
+	public List<UserVO> selectAllUser(PageCriteria pc) {
+		return userDAO.selectAllUser(pc);
 	}
 	
 	@Override // 관리자가 회원을 강제탈퇴시
 	public void deleteUserList(List<String> u_idList) {
-		usersDAO.deleteUserList(u_idList);
+		userDAO.deleteUserList(u_idList);
 	}
 	
 	@Override
-	public int boardTotalCount(PageCriteriaSearch pc) {
-		return boardDAO.boardTotalCount(pc);
+	public int userTotalCount(PageCriteria pc) {
+		return userDAO.userTotalCount(pc);
 	}
 	
+//────────────────────────────────────────────────────────────────────────────────────────────────────────────────────	
+	
 	@Override
-	public List<BoardVO> selectAllBoard(PageCriteriaSearch pc) {
+	public List<BoardVO> selectAllBoard(PageCriteria pc) {
 		return boardDAO.selectAllBoard(pc);
 	}
-
 
 	@Override
 	public void deleteBoardList(List<String> b_numList) {
 		boardDAO.deleteBoardList(b_numList);
+	}
+	
+	@Override
+	public int boardTotalCount(PageCriteria pc) {
+		return boardDAO.boardTotalCount(pc);
 	}
 	
 }
