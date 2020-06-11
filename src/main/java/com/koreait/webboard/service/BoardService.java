@@ -19,8 +19,7 @@ public interface BoardService {
 	int boardTotalCount(PageCriteria pc);
 	void updateReadCount(BoardVO vo);
 	int selectLike_log(HashMap<String, Object> map);
-	void insertLike_log(HashMap<String, Object> map);
-	void updateLike(BoardVO vo);
-	void updateHate(BoardVO vo);
+	void updateLike(BoardVO vo, HashMap<String, Object> map);
+	void updateHate(BoardVO vo, HashMap<String, Object> map);
 	
 }

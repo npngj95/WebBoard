@@ -102,8 +102,7 @@ public class BoardController {
 		map.put("board", vo.getB_num());
 		
 		if(boardService.selectLike_log(map) < 1) {	// 아직 추천 X
-			boardService.updateLike(vo); // 해당 글의 추천수를 1증가
-			boardService.insertLike_log(map); // 추천한 유저ID와 글번호를 하나의 Entry로 DB에 저장 
+			boardService.updateLike(vo, map); // 해당 글의 추천수를 1증가, 추천한 유저ID와 글번호를 하나의 Entry로 DB에 저장 
 		} else { // 이미 추천했으면 if문을 수행하지 않음
 			vo = boardService.selectBoard(vo);
 		}
@@ -122,8 +121,7 @@ public class BoardController {
 		map.put("board", vo.getB_num());
 		
 		if(boardService.selectLike_log(map) < 1) {	// 아직 추천 X
-			boardService.updateHate(vo); // 해당 글의 추천수를 1증가
-			boardService.insertLike_log(map); // 추천한 유저ID와 글번호를 하나의 Entry로 DB에 저장 
+			boardService.updateHate(vo, map); // 해당 글의 추천수를 1증가, 추천한 유저ID와 글번호를 하나의 Entry로 DB에 저장
 		} else { // 이미 추천했으면 if문을 수행하지 않음
 			vo = boardService.selectBoard(vo);
 		}

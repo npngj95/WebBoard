@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.koreait.webboard.common.paging.PageCriteria;
 import com.koreait.webboard.dao.BoardDAO;
@@ -67,18 +68,17 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public void insertLike_log(HashMap<String, Object> map) {
+	@Transactional
+	public void updateLike(BoardVO vo, HashMap<String, Object> map) {
+		boardDAO.updateLike(vo);
 		boardDAO.insertLike_log(map);
 	}
 	
 	@Override
-	public void updateLike(BoardVO vo) {
-		boardDAO.updateLike(vo);
-	}
-	
-	@Override
-	public void updateHate(BoardVO vo) {
+	@Transactional
+	public void updateHate(BoardVO vo, HashMap<String, Object> map) {
 		boardDAO.updateHate(vo);
+		boardDAO.insertLike_log(map);
 	}
 
 }
