@@ -140,7 +140,7 @@ public class UserController {
 	}
 	// 유저 회원가입(POST)
 	@RequestMapping(value="/signUp", method=RequestMethod.POST)
-	public String insertUser(UserVO vo) {
+	public String insertUser(UserVO vo) throws Exception {
 		String mailAuthKeyCode =  new MailAuthKeyGenerator().executeGenerate(); 
 		
 		try {
@@ -150,14 +150,14 @@ public class UserController {
 			mailHandler.setText("이메일 인증 코드 : " + mailAuthKeyCode);
 			mailHandler.setFrom("WebBoard", "WebBoard운영자");
 			mailHandler.setTo(vo.getU_email());
+
+			vo.setU_email_code(mailAuthKeyCode);
+			userService.insertUser(vo);
 			
 			mailHandler.send();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-		vo.setU_email_code(mailAuthKeyCode);
-		userService.insertUser(vo);
 		
 		return "redirect:index";
 	}

@@ -3,6 +3,18 @@ var isPass = [false, false, false, false, false];
 
 
 function signUp() {
+	idCheck();
+	
+	// 로딩 표시
+	if(isPass[0] && isPass[1] && isPass[2] && isPass[3] && isPass[4]) {
+		$(":submit").after($('<div>', {
+			class : 'spinner-border text-info btn-block',
+			html : '<span class="sr-only">Loading...</span>'
+		}));
+		$(":submit").after($('<br>'));
+		$(":submit").remove();
+	}
+	
 	return (isPass[0] && isPass[1] && isPass[2] && isPass[3] && isPass[4]);
 }
 

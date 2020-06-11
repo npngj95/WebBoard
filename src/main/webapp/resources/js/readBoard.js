@@ -191,8 +191,14 @@ function writeReply(b_num, u_id) {
 			$("#r_content").val("");
 		},
 		
-		error : function() {
-			location.href="../login";
+		error : function(request) {
+			if(request.status == 500) {
+				alert('현재 게시글이 존재하지않습니다.');
+				location.href="../index";
+			} else {
+				location.href="../login";
+			}
+			
 		}
 		
 	});
@@ -222,9 +228,15 @@ function deleteReply(r_num) {
 			closeModal(1);
 		},
 		
-		error : function() {
-			location.href="../login";
+		error : function(request) {
+			if(request.status == 500) {
+				alert('현재 게시글이 존재하지않습니다.');
+				location.href="../index";
+			} else {
+				location.href="../login";
+			}
 		}
+		
 	});
 }
 

@@ -11,6 +11,6 @@ public interface ReplyService {
 
 	List<ReplyVO> selectReply(BoardVO vo);
 	
-	void deleteReply(ReplyVO vo);
+	void deleteReply(ReplyVO vo) throws Exception;
 	
 }

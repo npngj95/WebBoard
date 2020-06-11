@@ -22,8 +22,8 @@ public class ReplyDAO {
 		return mybatis.selectList("ReplyDAO.selectReply", vo);
 	}
 	
-	public void deleteReply(ReplyVO vo) {
-		mybatis.delete("ReplyDAO.deleteReply", vo);
+	public int deleteReply(ReplyVO vo) {
+		return mybatis.delete("ReplyDAO.deleteReply", vo);
 	}
 
 }
