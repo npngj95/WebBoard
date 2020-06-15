@@ -59,7 +59,8 @@ public class UserController {
 	
 	// 유저 로그인(POST)
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String login(UserVO vo, Model model, HttpServletRequest request, HttpServletResponse response, @RequestParam(defaultValue = "false") boolean rememberMe) {
+	public String login(UserVO vo, Model model, HttpServletRequest request, HttpServletResponse response, 
+			@RequestParam(defaultValue = "false") boolean rememberMe) {
 		String moveUrl = "";
 		Cookie[] cookies = request.getCookies(); //로그인 페이지에서 얻을 수 있는 모든 쿠키획득
 		

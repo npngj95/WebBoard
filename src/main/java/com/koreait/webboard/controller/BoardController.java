@@ -51,7 +51,6 @@ public class BoardController {
 	// 게시글 상세보기
 	@RequestMapping("/board/readBoard")
 	public String selectBoard(BoardVO vo, Model model) {
-		boardService.updateReadCount(vo);
 		model.addAttribute("board", boardService.selectBoard(vo));
 		
 		return "board/readBoard";

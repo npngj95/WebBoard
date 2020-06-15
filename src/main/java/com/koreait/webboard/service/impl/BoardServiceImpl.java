@@ -36,7 +36,9 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
+	@Transactional
 	public BoardVO selectBoard(BoardVO vo) {
+		boardDAO.updateReadCount(vo);
 		return boardDAO.selectBoard(vo);
 	}
 	
@@ -56,11 +58,6 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 //────────────────────────────────────────────────────────────────────────────────────────────────────────────────────	
-	
-	@Override
-	public void updateReadCount(BoardVO vo) {
-		boardDAO.updateReadCount(vo);
-	}
 	
 	@Override
 	public int selectLike_log(HashMap<String, Object> map) {
