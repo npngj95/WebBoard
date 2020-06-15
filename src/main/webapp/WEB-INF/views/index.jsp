@@ -91,7 +91,6 @@
 						<td colspan="6" class="text-center h5">현재 작성된 게시글이 없습니다.</td>
 					</tr>
 				</c:if>
-				
 			</tbody>
 		</table>
 		

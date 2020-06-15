@@ -98,6 +98,10 @@
 	        	</thead>
 	        	<!--Table body-->
 	        	<tbody>
+					<c:if test="${userList[0] == null }">
+						<tr><td colspan="7" class="text-center h5">작성된 게시글이 없습니다.</td></tr>
+					</c:if>	
+			
 	        		<c:forEach items="${boardList }" var="board" varStatus="i">
 	          		<tr>
 		            	<th class="position-relative">

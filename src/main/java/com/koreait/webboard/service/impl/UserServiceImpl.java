@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
 
 //────────────────────────────────────────────────────────────────────────────────────────────────────────────────────	
 	
-	@Override // 회원가입시 아이디 중복체크
+	@Override // 아이디 중복체크
 	public String idCheck(String u_id) {
 		return userDAO.idCheck(u_id);
 	}

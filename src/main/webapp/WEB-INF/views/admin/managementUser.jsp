@@ -56,6 +56,10 @@
 			</tr>
 		</thead>
 		<tbody>
+			<c:if test="${userList[0] == null }">
+				<tr><td colspan="4" class="text-center h5">가입된 회원이 없습니다.</td></tr>
+			</c:if>	
+		
 			<c:forEach items="${userList }" var="user">
 				<tr>
 					<td>

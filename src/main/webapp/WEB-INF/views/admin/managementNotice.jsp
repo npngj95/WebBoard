@@ -73,6 +73,10 @@
 				</thead>
 				<!--Table body-->
 				<tbody>
+					<c:if test="${noticeList[0] == null }">
+						<tr><td colspan="6" class="text-center h5">작성된 공지글이 없습니다.</td></tr>
+					</c:if>	
+				
 					<c:forEach items="${noticeList }" var="notice" varStatus="i">
 						<tr>
 							<th class="position-relative">
