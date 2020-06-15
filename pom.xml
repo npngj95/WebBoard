@@ -75,8 +75,6 @@
 		    <version>1.9.5</version>
 		</dependency>
 		
-		
-		
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
