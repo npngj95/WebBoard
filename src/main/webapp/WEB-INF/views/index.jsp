@@ -15,7 +15,7 @@
 	<%@include file="module/top.jsp"%>
 
 	<div class="container wrapper">
-		<h2 style="margin-top: 60px; display: inline-block;">맛집 정보 게시판</h2>
+		<h2 style="margin-top: 60px; display: inline-block;">정보 게시판</h2>
 
 		<nav class="navbar navbar-expand-lg  md-color">
 			<!-- Navbar brand -->

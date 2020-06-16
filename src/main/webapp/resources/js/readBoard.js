@@ -40,9 +40,6 @@ function updateLike(b_num, u_id) {
 		},
 		
 		success : function(result) {
-			// ajax처리 이후, html Body의 일부분 (div영역)만 리로딩 하기 위해 .load()함수를 사용
-			//$("#like-log").load(window.location.href + " #like-hate-btn");
-			// == $("#like-log").load(document.URL + " #like-hate-btn")
 			if(now_like == result){
 				openModal(2);
 			}

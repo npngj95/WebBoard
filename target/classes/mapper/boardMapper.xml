@@ -5,19 +5,7 @@
 <mapper namespace="BoardDAO">
 	
 	<!-- ******************************** ADMIN 영역 ******************************** -->
-	<!-- 글 목록 보기 -->
 	<!-- 생략가능한 parameterType을 준 이유 : xml파일만 보고 어떤 클래스인지 명시. -->
-	<select id="selectAllBoard" resultType="BoardVO">
-		SELECT * FROM board 
-		WHERE b_category != 3
-		<if test="condition != null">
-			AND ${condition} like '%${keyword}%'
-		</if>
-		
-		ORDER BY ${sort} DESC
-		
-		LIMIT #{pageStart}, #{pageSize}
-	</select>
 	
 	<select id="selectNoticeList" resultType="BoardVO">
 		SELECT * FROM board
@@ -34,7 +22,10 @@
 		</foreach>
 	</delete>
 	
+<!--────────────────────────────────────────────────────────────────────────────────────────────────────────────────────-->
+	
 	<!-- ******************************** USER 영역 ******************************** -->
+	
 	<select id="userSelectNoticeList" resultType="BoardVO">
 		SELECT * FROM board
 		WHERE b_category = 3
@@ -42,10 +33,24 @@
 		LIMIT 0, 3
 	</select>
 	
+	
 	<insert id="insertBoard" parameterType="BoardVO" useGeneratedKeys="true" keyProperty="b_num">
 		INSERT INTO board (b_category, b_writer, b_email, b_title, b_content)
 		VALUES(#{b_category}, #{b_writer}, #{b_email}, #{b_title}, #{b_content})
 	</insert>
+	
+	<!-- 글 목록 보기 -->
+	<select id="selectAllBoard" resultType="BoardVO">
+		SELECT * FROM board 
+		WHERE b_category != 3
+		<if test="condition != null">
+			AND ${condition} like '%${keyword}%'
+		</if>
+		
+		ORDER BY ${sort} DESC
+		
+		LIMIT #{pageStart}, #{pageSize}
+	</select>
 	
 	<!-- 글상세보기 -->
 	<select id="selectBoard" parameterType="BoardVO" resultType="BoardVO">
@@ -94,18 +99,6 @@
 		WHERE b_num = (SELECT b_num FROM reply WHERE r_num = #{r_num})
 	</update>
 
-<!--────────────────────────────────────────────────────────────────────────────────────────────────────────────────────-->	
-	
-	<select id="selectLike_log" parameterType="HashMap" resultType="int">
-		SELECT count(*) FROM like_log
-		WHERE u_id=#{user} AND b_num=#{board}
-	</select>
-
-	<insert id="insertLike_log" parameterType="HashMap">
-		INSERT like_log
-		VALUES (#{user}, #{board})
-	</insert>
-
 <!--────────────────────────────────────────────────────────────────────────────────────────────────────────────────────-->
 
 	<update id="updateLike" parameterType="BoardVO">
@@ -128,4 +121,16 @@
   		</selectKey>
 	</update>
 
+<!--────────────────────────────────────────────────────────────────────────────────────────────────────────────────────-->	
+	
+	<select id="selectLike_log" parameterType="HashMap" resultType="int">
+		SELECT count(*) FROM like_log
+		WHERE u_id=#{user} AND b_num=#{board}
+	</select>
+
+	<insert id="insertLike_log" parameterType="HashMap">
+		INSERT like_log
+		VALUES (#{user}, #{board})
+	</insert>
+	
 </mapper>

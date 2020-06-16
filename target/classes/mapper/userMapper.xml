@@ -4,7 +4,7 @@
 
 <mapper namespace="UserDAO">
 	
-	<!-- admin -->
+	<!-- ******************************** ADMIN 영역 ******************************** -->
 	<select id="selectAllUser" resultType="UserVO">
 		SELECT * FROM users
 		ORDER BY u_inputdate DESC
@@ -27,6 +27,7 @@
 
 <!--────────────────────────────────────────────────────────────────────────────────────────────────────────────────────-->
 	
+	<!-- ******************************** USER 영역 ******************************** -->
 	<!-- 로그인 시, 개인정보 변경 시  비밀번호를 화인 -->
 	<select id="userCheck" parameterType="UserVO" resultType="UserVO">
 		SELECT * FROM users
@@ -65,7 +66,7 @@
 		WHERE u_id = #{u_id}
 	</delete>
 
-	<!-- ID 중복 체크 -->
+	<!-- 아이디 중복 체크 -->
 	<select id="idCheck" resultType="String">
 		SELECT count(*) FROM users
 		WHERE u_id = #{u_id}

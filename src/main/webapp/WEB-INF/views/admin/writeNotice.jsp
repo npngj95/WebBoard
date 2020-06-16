@@ -16,7 +16,7 @@
 <p class="h2 mb-4 text-center"><a href="adminMain">Admin Main</a></p>
 <form class="text-center border border-light p-5" action="writeNotice" method="post" onsubmit="return empCheck()">
 
-    <p class="h4 mb-4">Notice Write</p>
+    <p class="h4 mb-4">공지글 작성</p>
 
     <!-- Name -->
     <input type="text" name="b_writer" class="form-control mb-4" value="관리자" readonly>
