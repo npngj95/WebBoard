@@ -19,6 +19,12 @@
 		LIMIT #{pageStart}, #{pageSize}
 	</select>
 	
+	<select id="selectNoticeList" resultType="BoardVO">
+		SELECT * FROM board
+		WHERE b_category = 3
+		ORDER BY b_regdate DESC		
+	</select>
+	
 	<delete id="deleteBoardList" parameterType="java.util.List">
 		DELETE FROM board
 		WHERE b_num IN
@@ -28,29 +34,18 @@
 		</foreach>
 	</delete>
 	
-	<select id="selectNoticeList" resultType="BoardVO">
-		SELECT * FROM board
-		WHERE b_category = 3
-		ORDER BY b_regdate DESC		
-	</select>
-	
-	
 	<!-- ******************************** USER 영역 ******************************** -->
-	<select id="selectNotice" resultType="BoardVO">
+	<select id="userSelectNoticeList" resultType="BoardVO">
 		SELECT * FROM board
 		WHERE b_category = 3
 		ORDER BY b_regdate DESC
 		LIMIT 0, 3
 	</select>
 	
-	<!-- 글 전체 개수 구하기 -->
-	<select id="selectTotalCount" resultType="int">
-		SELECT count(*)	FROM board
-		WHERE b_category != 3
-		<if test="condition != null">
-			WHERE ${condition} like '%${keyword}%'
-		</if>
-	</select>
+	<insert id="insertBoard" parameterType="BoardVO" useGeneratedKeys="true" keyProperty="b_num">
+		INSERT INTO board (b_category, b_writer, b_email, b_title, b_content)
+		VALUES(#{b_category}, #{b_writer}, #{b_email}, #{b_title}, #{b_content})
+	</insert>
 	
 	<!-- 글상세보기 -->
 	<select id="selectBoard" parameterType="BoardVO" resultType="BoardVO">
@@ -59,37 +54,59 @@
 		WHERE b_num = #{b_num}
 	</select>
 	
-	<update id="updateReadCount" parameterType="BoardVO">
-		UPDATE board
-		SET b_readcount=b_readcount+1
-		WHERE b_num=#{b_num}
-	</update>
-
-	<insert id="insertBoard" parameterType="BoardVO" useGeneratedKeys="true" keyProperty="b_num">
-		INSERT INTO board (b_category, b_writer, b_email, b_title, b_content)
-		VALUES(#{b_category}, #{b_writer}, #{b_email}, #{b_title}, #{b_content})
-	</insert>
-
-	<delete id="deleteBoard" parameterType="BoardVO">
-		DELETE FROM board
-		WHERE b_num = #{b_num}
-	</delete>
-	
 	<update id="updateBoard" parameterType="BoardVO">
 		UPDATE board
 		SET b_category=#{b_category}, b_title=#{b_title}, b_content=#{b_content}
 		WHERE b_num = #{b_num}
 	</update>
+	
+	<delete id="deleteBoard" parameterType="BoardVO">
+		DELETE FROM board
+		WHERE b_num = #{b_num}
+	</delete>
 
+	<!-- 글 전체 개수 구하기 -->
+	<select id="selectTotalCount" resultType="int">
+		SELECT count(*)	FROM board
+		WHERE b_category != 3
+		<if test="condition != null">
+			AND ${condition} like '%${keyword}%'
+		</if>
+	</select>
+	
+<!--────────────────────────────────────────────────────────────────────────────────────────────────────────────────────-->
+	
+	<update id="updateReadCount" parameterType="BoardVO">
+		UPDATE board
+		SET b_readcount=b_readcount+1
+		WHERE b_num=#{b_num}
+	</update>
+	
+	<update id="upReplyCount" parameterType="ReplyVO">
+		UPDATE board
+		SET b_replycount = b_replycount+1
+		WHERE b_num = #{b_num}
+	</update>
+
+	<update id="downReplyCount" parameterType="ReplyVO">
+		UPDATE board
+		SET b_replycount = b_replycount-1
+		WHERE b_num = (SELECT b_num FROM reply WHERE r_num = #{r_num})
+	</update>
+
+<!--────────────────────────────────────────────────────────────────────────────────────────────────────────────────────-->	
+	
 	<select id="selectLike_log" parameterType="HashMap" resultType="int">
 		SELECT count(*) FROM like_log
-		WHERE u_id=#{users} AND b_num=#{board}
+		WHERE u_id=#{user} AND b_num=#{board}
 	</select>
 
 	<insert id="insertLike_log" parameterType="HashMap">
 		INSERT like_log
-		VALUES (#{users}, #{board})
+		VALUES (#{user}, #{board})
 	</insert>
+
+<!--────────────────────────────────────────────────────────────────────────────────────────────────────────────────────-->
 
 	<update id="updateLike" parameterType="BoardVO">
 		UPDATE board
@@ -109,12 +126,6 @@
 		<selectKey keyProperty="b_hate" resultType="int" order="AFTER">
     		SELECT b_hate FROM board WHERE b_num=#{b_num}
   		</selectKey>
-	</update>
-
-	<update id="updateReplyCount" parameterType="BoardVO">
-		UPDATE board
-		SET b_replycount = b_replycount+1
-		WHERE b_num = #{b_num}
 	</update>
 
 </mapper>

@@ -10,9 +10,6 @@
 <%@include file="../common/common_top.jsp"%>
 <link href="${pageContext.request.contextPath }/resources/css/board.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath }/resources/css/paging.css" rel="stylesheet">
-<script>
-
-</script>
 </head>
 <body>
 <%@include file="../module/top.jsp"%>
@@ -48,8 +45,8 @@
 		<!-- Navbar brand -->
 		<div class="mb-2">
 			<a class="navbar-brand" href="managementBoard${pageMaker.makeQuery(1) }&sort=b_regdate">작성일순</a>
-			<a class="navbar-brand"	href="managementBoard${pageMaker.makeQuery(1) }&sort=b_like">좋아요순</a> 
-			<a class="navbar-brand" href="managementBoard${pageMaker.makeQuery(1) }&sort=b_readcount">조회수순</a>
+			<a class="navbar-brand"	href="managementBoard${pageMaker.makeQuery(1) }&sort=b_like">추천순</a> 
+			<a class="navbar-brand" href="managementBoard${pageMaker.makeQuery(1) }&sort=b_hate">비추천순</a>
 		</div>
 		
 		<form class="form-inline ml-auto" action="managementBoard" method="get">
@@ -95,6 +92,8 @@
 				        <th class="text-left h6">Title</th>
 				        <th width="10%" class="h6 text-center">Writer</th>
 				    	<th width="10%" class="h6 text-center">Input Date</th>
+				        <th width="5%" class="h6 text-center">Like</th>
+				        <th width="5%" class="h6 text-center">Hate</th>
 		          	</tr>
 	        	</thead>
 	        	<!--Table body-->
@@ -111,6 +110,8 @@
 	            		<td class="h6 toggleButton" style="cursor: pointer">${board.b_title }</td>
 	            		<td class="h6 text-center">${board.b_writer }</td>
 	            		<td class="h6 text-center"><fmt:formatDate pattern="yyyy-MM-dd" value="${board.b_regdate }"/></td>
+	            		<td class="h6 text-center">${board.b_like }</td>
+	            		<td class="h6 text-center">${board.b_hate }</td>
 	          		</tr>
 	          		<tr class="toggleContent${i.index }" style="display: none;">
 	          			<td class="toggleContent${i.index }" colspan="5" style="display: none;"><div class="toggleContent${i.index }" style="display: none;">${board.b_content }</div></td>

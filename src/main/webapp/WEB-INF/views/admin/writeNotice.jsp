@@ -28,7 +28,7 @@
 	<hr>
 	
     <!-- Email -->
-    <input type="text" id="b_email" name="b_email" class="form-control mb-4" placeholder="E-mail" value="" required>
+    <input type="text" id="b_email" name="b_email" class="form-control mb-4" placeholder="E-mail" value="${admin.a_id }@webboard.com" required>
 	
 	<!-- Title -->
     <input type="text" name="b_title" class="form-control mb-4" placeholder="Title" required>

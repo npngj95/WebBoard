@@ -33,10 +33,24 @@ public class PageMaker {
 			endBlock = totalBlock;
 		}
 		
-		
 		//1 페이지인 경우 이전(false)  
 		prev = startBlock == 1 ? false : true;
 		next = endBlock * pc.getPageSize() >= totalCount ? false : true;
+	}
+	
+	// jsp에서 페이징 처리를 위해
+	// 페이지에 따라 a태그를 이용해서 href 링크를 정의하는 URL경로 설정을 위해 스프링에서 지원하는 UriCommponent객체를 활용
+	public String makeQuery(int page) {
+		UriComponents uri = null;
+		UriComponentsBuilder uriComponent = UriComponentsBuilder.newInstance().queryParam("page", page);
+		
+		if(((PageCriteria)pc).getKeyword() != null) {
+			uriComponent.queryParam("condition", ((PageCriteria)pc).getCondition());
+			uriComponent.queryParam("keyword", ((PageCriteria)pc).getKeyword());
+		}
+		
+		uri = uriComponent.build();
+		return uri.toString();
 	}
 	
 	public PageCriteria getPc() {
@@ -97,22 +111,6 @@ public class PageMaker {
 
 	public int getTotalCount() {
 		return totalCount;
-	}
-
-	// jsp에서 페이징 처리를 위해
-	// 페이지에 따라 a태그를 이용해서 href 링크를 정의하는 URL경로 설정을 위해 스프링에서 지원하는 UriCommponent객체를 활용
-	public String makeQuery(int page) {
-		UriComponents uri = null;
-		
-		UriComponentsBuilder uriComponent = UriComponentsBuilder.newInstance().queryParam("page", page);
-		if(((PageCriteriaSearch)pc).getKeyword() != null) {
-			uriComponent.queryParam("condition", ((PageCriteriaSearch)pc).getCondition());
-			uriComponent.queryParam("keyword", ((PageCriteriaSearch)pc).getKeyword());
-		}
-		
-		uri = uriComponent.build();
-		
-		return uri.toString();
 	}
 		
 	@Override

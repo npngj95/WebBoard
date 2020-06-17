@@ -26,8 +26,8 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 		
 		HttpSession session = request.getSession();
 		
-		//세션에 저장된 users정보를 획득 (로그인 정보가 존재하는지)
-		Object obj = session.getAttribute("users");
+		//세션에 저장된 user정보를 획득 (로그인 정보가 존재하는지)
+		Object obj = session.getAttribute("user");
 		
 		if(obj == null) { // 로그인이 되어있지 않은 상태
 			if(isAjaxRequest(request)) { // Intercepter로 들어온 요청이 Ajax요청인지 검사
@@ -38,7 +38,6 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 				return false;
 			}
 		}
-		System.out.println("no 에러");
 		return true; // 조건문에 걸리지않으면 (로그인 상태이면) 컨트롤러에 요청정보를 전송하게 됨
 	}
 	

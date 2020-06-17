@@ -12,15 +12,15 @@
 <body>
 <%@include file="../module/top.jsp"%>
 <div class="container wrapper">
-	<form class="text-center border border-light p-5" id="writeBoardForm" action="writeBoard" method="post" onsubmit="return empCheck()">
+	<form class="text-center border border-light p-5" action="writeBoard" method="post" onsubmit="return empCheck()">
 	
 	    <p class="h4 mb-4">Write Board</p>
 	
 	    <!-- Name -->
-	    <input type="text" name="b_writer" class="form-control mb-4" placeholder="Writer" value="${users.u_id }" readonly>
+	    <input type="text" name="b_writer" class="form-control mb-4" placeholder="Writer" value="${user.u_id }" readonly>
 	
 	    <!-- Email -->
-	    <input type="email" name="b_email" class="form-control mb-4" placeholder="E-mail" value="${users.u_email }" readonly>
+	    <input type="email" name="b_email" class="form-control mb-4" placeholder="E-mail" value="${user.u_email }" readonly>
 		
 		<hr>
 	    <!-- Category -->
@@ -49,24 +49,6 @@
 
 
 <script src="${pageContext.request.contextPath }/resources/summerNote/summernote-bs4.min.js"></script>
-<script>
-$(document).ready(function() {
-    $('#b_content').summernote({
-    	lang: 'ko-KR', // default: 'en-US'
-    	tabsize: 2,
-        height: 400
-    });
-});
-
-function empCheck() {
-	if($('#b_content').summernote('isEmpty')) {
-		alert('내용은 공란이 될 수 없습니다.');
-		return false;
-	}
-	
-	return true;
-}
-</script>
-
+<script src="${pageContext.request.contextPath }/resources/js/writeBoard.js"></script>
 </body>
 </html>

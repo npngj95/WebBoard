@@ -13,7 +13,7 @@
 <body>
 <%@include file="../module/top.jsp"%>
 <div class="container wrapper text-center border border-light p-5">
-<form action="updateBoard" method="post">
+<form action="updateBoard" method="post" onsubmit="return empCheck()">
 	<input type="hidden" name="b_num" value="${board.b_num }">
 	
     <p class="h4 mb-4">Update Board</p>
@@ -42,14 +42,6 @@
 <%@include file="../common/common_bottom.jsp"%>
 
 <script src="${pageContext.request.contextPath }/resources/summerNote/summernote-bs4.min.js"></script>
-<script>
-$(document).ready(function() {
-    $('#b_content').summernote({
-    	lang: 'ko-KR', // default: 'en-US'
-    	tabsize: 2,
-        height: 400
-    });
-});
-</script>
+<script src="${pageContext.request.contextPath }/resources/js/updateBoard.js"></script>
 </body>
 </html>

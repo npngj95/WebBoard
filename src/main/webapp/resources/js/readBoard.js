@@ -1,3 +1,22 @@
+
+// summerNote
+$(document).ready(function() {
+    $("#b_content").summernote({
+    	lang: 'ko-KR', // default: 'en-US'
+    	tabsize: 2,
+    	minHeight: 400,
+        disableDragAndDrop: true,
+        toolbar: false,
+        disable: true
+    });
+    
+    $("#b_content").summernote("disable");
+  	$(".note-editable").css("background", "white");
+  	
+});
+
+//************************************************************************************************************************************
+
 //게시글 관련 메서드 (좋아요, 싫어요 버튼)
 function updateLike(b_num, u_id) {
 	now_like = $("#like").text();
@@ -21,9 +40,6 @@ function updateLike(b_num, u_id) {
 		},
 		
 		success : function(result) {
-			// ajax처리 이후, html Body의 일부분 (div영역)만 리로딩 하기 위해 .load()함수를 사용
-			//$("#like-log").load(window.location.href + " #like-hate-btn");
-			// == $("#like-log").load(document.URL + " #like-hate-btn")
 			if(now_like == result){
 				openModal(2);
 			}
@@ -71,6 +87,7 @@ function updateHate(b_num, u_id) {
 	});
 	
 }
+
 //************************************************************************************************************************************
 
 //댓글 관련 메서드
@@ -171,12 +188,16 @@ function writeReply(b_num, u_id) {
 			$("#r_content").val("");
 		},
 		
-		error : function() {
-			location.href="../login";
+		error : function(request) {
+			if(request.status == 500) {
+				alert('현재 게시글이 존재하지않습니다.');
+				location.href="../index";
+			} else {
+				location.href="../login";
+			}
+			
 		}
-		
 	});
-	
 }
 
 //댓글 삭제확인 Modal.show 
@@ -202,8 +223,13 @@ function deleteReply(r_num) {
 			closeModal(1);
 		},
 		
-		error : function() {
-			location.href="../login";
+		error : function(request) {
+			if(request.status == 500) {
+				alert('현재 게시글이 존재하지않습니다.');
+				location.href="../index";
+			} else {
+				location.href="../login";
+			}
 		}
 	});
 }

@@ -15,14 +15,14 @@
 	<%@include file="module/top.jsp"%>
 
 	<div class="container wrapper">
-		<h2 style="margin-top: 60px; display: inline-block;">게시판 메인</h2>
+		<h2 style="margin-top: 60px; display: inline-block;">맛집 정보 게시판</h2>
 
 		<nav class="navbar navbar-expand-lg  md-color">
 			<!-- Navbar brand -->
 			<div class="mb-2">
 				<a class="navbar-brand" href="index${pageMaker.makeQuery(1) }&sort=b_regdate">작성일순</a>
-				<a class="navbar-brand"	href="index${pageMaker.makeQuery(1) }&sort=b_like">좋아요순</a> 
 				<a class="navbar-brand" href="index${pageMaker.makeQuery(1) }&sort=b_readcount">조회수순</a>
+				<a class="navbar-brand"	href="index${pageMaker.makeQuery(1) }&sort=b_like">추천순</a> 
 			</div>
 			
 			<form class="form-inline ml-auto" action="index" method="get">
@@ -59,7 +59,7 @@
 					
 					<td>
 						<a class="text-danger font-weight-bold" href="board/readBoard${pageMaker.makeQuery(pageMaker.pc.page) }&sort=${pageMaker.pc.sort}&b_num=${notice.b_num }">${notice.b_title }</a>
-						<c:if test="${notice.b_replycount != 0}"> <small>[${notice.b_replycount }]</small></c:if>
+						<c:if test="${notice.b_replycount != 0}"> <small>[ ${notice.b_replycount } ]</small> </c:if>
 					</td>
 					<td class="text-center font-weight-bold">관리자</td>
 					<td class="text-center font-weight-bold"><fmt:formatDate pattern="yyyy-MM-dd" value="${notice.b_regdate }"/></td>
@@ -77,7 +77,7 @@
 					
 					<td>
 						<a href="board/readBoard${pageMaker.makeQuery(pageMaker.pc.page) }&sort=${pageMaker.pc.sort}&b_num=${board.b_num }">${board.b_title }</a>
-					 	<c:if test="${board.b_replycount != 0}"> <small>[${board.b_replycount }]</small></c:if>
+					 	<c:if test="${board.b_replycount != 0}"> <small class="text-danger">[ ${board.b_replycount } ]</small></c:if>
 					</td>
 					<td class="text-center">${board.b_writer }</td>
 					<td class="text-center"><fmt:formatDate pattern="yyyy-MM-dd" value="${board.b_regdate }"/></td>

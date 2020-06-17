@@ -6,7 +6,8 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- DataSource 설정 -->
-	<context:property-placeholder location="classpath:config/spring/db.properties" />
+	<!-- property-placeholder는 root-context에 있기때문에 이 페이지에서 필요없다.(명시적 확인을 위해 작성) -->
+	<context:property-placeholder location="classpath:config/spring/config.properties" />
 	
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="driverClassName" value="${jdbc.driverClassName}" />

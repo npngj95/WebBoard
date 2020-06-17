@@ -13,7 +13,7 @@
 </head>
 <body>
 <input id="path" type="hidden">
-<input id="u_id" type="hidden" value="${users.u_id }">
+<input id="u_id" type="hidden" value="${user.u_id }">
 <div class="container wrapper">
  	<!-- modal-check-pwd  -->
 	<div class="modal" id="myModal1">
@@ -55,7 +55,7 @@
 					<p>정말 탈퇴 하시겠습니까?</p>
 				</div>	
 				<div class="modal-footer">
-					<button type="button" class="btn btn-danger" onclick="location='deleteUser?u_id=${users.u_id }'">탈퇴</button>
+					<button type="button" class="btn btn-danger" onclick="location='deleteUser?u_id=${user.u_id }'">탈퇴</button>
 					<button type="button" class="btn btn-dark" data-dismiss="modal">취소</button>
 				</div>
 			</div>
@@ -68,23 +68,23 @@
     		
 		    <div class="text-left mb-4">
 		      <div>ID</div>
-		      <span class="form-control">${users.u_id }</span>
+		      <span class="form-control">${user.u_id }</span>
 		    </div>
 		    <div class="text-left mb-4">
 		      <div>Name</div>
-		      <span class="form-control">${users.u_name }</span>
+		      <span class="form-control">${user.u_name }</span>
 		    </div>
 		    <div class="text-left mb-4">
 		      <div>E-Mail</div>
-		      <span class="form-control">${users.u_email }</span>
+		      <span class="form-control">${user.u_email }</span>
 		    </div>
 		    <div class="text-left mb-4">
 		      <div>Gender</div>
-		      <span class="form-control">${users.u_gender }</span>
+		      <span class="form-control">${user.u_gender }</span>
 		    </div>
 		    <div class="text-left mb-5">
 		      <div>Input Date</div>
-		      <span class="form-control"><fmt:formatDate pattern="yyyy-MM-dd (E) a hh:mm:ss" value="${users.u_inputdate }"/></span>
+		      <span class="form-control"><fmt:formatDate pattern="yyyy-MM-dd (E) a hh:mm:ss" value="${user.u_inputdate }"/></span>
 		    </div>
 		    
 		    <!-- button -->

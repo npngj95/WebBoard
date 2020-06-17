@@ -12,7 +12,7 @@ function pwdCheck() {
 	$.ajax({
 		 
 		type : 'POST',
-		url : "usersCheck",
+		url : "userCheck",
 		data : {
 			"u_id": u_id,
 			"u_pwd":u_pwd

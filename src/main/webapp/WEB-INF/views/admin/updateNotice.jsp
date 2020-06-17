@@ -16,7 +16,7 @@
 <!-- Default form contact -->
 	<p class="h2 mb-4 text-center"><a href="managementNotice">공지글 관리</a></p>
 	
-<form class="text-center border border-light p-5" action="updateNotice" method="post">
+<form class="text-center border border-light p-5" action="updateNotice" method="post" onsubmit="return empCheck()">
 	<input type="hidden" name="b_num" value="${notice.b_num }">
 	<input type="hidden" name="b_category" value="${notice.b_category }">
 	
@@ -28,7 +28,7 @@
 	<hr>
     <!-- Category -->
     <div class="text-left mb-4"><i class="fas fa-clone"></i> 공지</div>
-	
+    
 	<!-- Title -->
     <div style="text-align: left;">
 	    <input type="text" name="b_title" class="form-control mb-4" placeholder="Title" style="margin-right: 5%; display: inline-block;" value="${notice.b_title }">
@@ -51,17 +51,6 @@
 <%@include file="../module/bottom.jsp"%>
 <%@include file="../common/common_bottom.jsp"%>
 <script src="${pageContext.request.contextPath }/resources/summerNote/summernote-bs4.min.js"></script>
-
-<script>
-//summernote
-$(document).ready(function() {
-    $("#b_content").summernote({
-    	lang: 'ko-KR', // default: 'en-US'
-    	tabsize: 2,
-        height: 400
-    });
-});
-
-</script>
+<script src="${pageContext.request.contextPath }/resources/js/updateNotice.js"></script>
 </body>
 </html>

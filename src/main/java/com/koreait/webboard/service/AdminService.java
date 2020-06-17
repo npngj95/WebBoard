@@ -2,34 +2,30 @@
 
 import java.util.List;
 
-import com.koreait.webboard.common.paging.PageCriteriaSearch;
+import com.koreait.webboard.common.paging.PageCriteria;
 import com.koreait.webboard.vo.AdminVO;
 import com.koreait.webboard.vo.BoardVO;
-import com.koreait.webboard.vo.UsersVO;
+import com.koreait.webboard.vo.UserVO;
 
 public interface AdminService {
 	
 	AdminVO adminCheck(AdminVO vo);
 	
+	
 	void writeNotice(BoardVO vo);
-	
-	void updateNotice(BoardVO vo);
-	
 	BoardVO selectNotice(BoardVO vo);
-	
 	List<BoardVO> selectNoticeList();
+	void updateNotice(BoardVO vo);
+	void deleteNoticeList(List<String> b_numList);
 	
-	int usersTotalCount(PageCriteriaSearch pc);
 	
-	List<UsersVO> selectAllUsers(PageCriteriaSearch pc);
-
+	List<UserVO> selectAllUser(PageCriteria pc);
 	void deleteUserList(List<String> u_idList);
+	int userTotalCount(PageCriteria pc);
 	
 	
-	int boardTotalCount(PageCriteriaSearch pc);
-	
-	List<BoardVO> selectAllBoard(PageCriteriaSearch pc);
-	
+	List<BoardVO> selectAllBoard(PageCriteria pc);
 	void deleteBoardList(List<String> b_numList);
+	int boardTotalCount(PageCriteria pc);
 	
 }

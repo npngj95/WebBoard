@@ -15,7 +15,7 @@
 <%@include file="../module/top.jsp"%>
 
 <!-- main_content -->
-<div class="container wrapper vh-100">
+<div class="container wrapper">
 	<!-- modal  -->
 	<div class="modal" id="myModal">
 		<div class="modal-dialog" role="document">

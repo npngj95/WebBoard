@@ -11,6 +11,7 @@ public class AdminDAO {
 	@Autowired
 	private SqlSession mybatis;
 	
+	// 관리자 확인
 	public AdminVO adminCheck(AdminVO vo) {
 		return mybatis.selectOne("AdminDAO.adminCheck", vo);
 	}

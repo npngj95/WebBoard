@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,8 +16,8 @@
 	    <p class="h2 mb-4"><a href="index">Board Main</a></p>
 		<p class="h4 mb-4">로그인</p>
 		
-	    <!-- Email -->
-	    <input type="text" name="u_id" class="form-control mb-4" placeholder="ID">
+	    <!-- ID -->
+	    <input type="text" name="u_id" class="form-control mb-4" placeholder="ID" value="${rememberId }">
 	
 	    <!-- Password -->
 	    <input type="password" name="u_pwd" class="form-control mb-4" placeholder="Password">
@@ -26,8 +27,8 @@
 	        <div>
 	            <!-- Remember me -->
 	            <div class="custom-control custom-checkbox text-left">
-	                <input type="checkbox" class="custom-control-input" id="RememberMe">
-	                <label class="custom-control-label" for="RememberMe">Remember me</label>
+	                <input type="checkbox" class="custom-control-input" id="rememberMe" name="rememberMe" <c:if test="${rememberId != null }">checked</c:if>>
+	                <label class="custom-control-label" for="rememberMe">Remember me</label>
 	            </div>
 	        </div>
 	    </div>

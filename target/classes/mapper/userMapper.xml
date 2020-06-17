@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UserDAO">
+	
+	<!-- admin -->
+	<select id="selectAllUser" resultType="UserVO">
+		SELECT * FROM users
+		ORDER BY u_inputdate DESC
+		LIMIT #{pageStart}, #{pageSize}
+	</select>
+	
+	<delete id="deleteUserList" parameterType="java.util.List">
+		DELETE FROM users
+		WHERE u_id 
+		IN
+		<!-- collection은 데이터 타입 -->
+		<foreach collection="list" item="u_id" open="(" separator="," close=")"> 
+			#{u_id}
+		</foreach>
+	</delete>
+	
+	<select id="selectTotalCount" resultType="Integer">
+		SELECT COUNT(*) FROM users
+	</select>
+
+<!--────────────────────────────────────────────────────────────────────────────────────────────────────────────────────-->
+	
+	<!-- 로그인 시, 개인정보 변경 시  비밀번호를 화인 -->
+	<select id="userCheck" parameterType="UserVO" resultType="UserVO">
+		SELECT * FROM users
+		WHERE u_id = #{u_id} AND u_pwd = #{u_pwd}
+	</select>
+
+	<!-- 회원 가입 -->
+	<insert id="insertUser" parameterType="UserVO">
+		INSERT INTO users (u_id, u_pwd, u_name, u_email, u_gender, u_email_code)
+		VALUES(#{u_id}, #{u_pwd}, #{u_name}, #{u_email}, #{u_gender}, #{u_email_code})
+	</insert>
+	
+	<!-- 개인 정보 조회 -->
+	<select id="selectUser" resultType="UserVO">
+		SELECT * FROM users
+		WHERE u_id = #{u_id}
+	</select>
+
+	<!-- 개인 정보 수정 -->
+	<update id="updateUser" parameterType="UserVO">
+		UPDATE users
+		SET u_name = #{u_name}, u_email = #{u_email}
+		WHERE u_id = #{u_id}
+	</update>
+	
+	<!-- 비밀번호 변경 -->
+	<update id="updatePwd" parameterType="UserVO">
+		UPDATE users
+		SET	u_pwd = #{u_pwd}
+		WHERE u_id = #{u_id}
+	</update>
+	
+	<!-- 회원 탈퇴 -->
+	<delete id="deleteUser" parameterType="UserVO">
+		DELETE FROM users
+		WHERE u_id = #{u_id}
+	</delete>
+
+	<!-- ID 중복 체크 -->
+	<select id="idCheck" resultType="String">
+		SELECT count(*) FROM users
+		WHERE u_id = #{u_id}
+	</select>
+	
+	<update id="updateLoginDate" parameterType="UserVO">
+		UPDATE users
+		SET u_logindate = now()
+		WHERE u_id = #{u_id}
+	</update>
+	
+	<update id="updateUserStatus" parameterType="UserVO">
+		UPDATE users
+		SET u_status = 'activate'
+		WHERE u_id = #{u_id} AND u_email_code = #{u_email_code}
+	</update>
+
+</mapper>

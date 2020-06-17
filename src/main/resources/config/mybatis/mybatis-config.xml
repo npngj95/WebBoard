@@ -8,18 +8,18 @@
 		<typeAlias type="com.koreait.webboard.vo.AdminVO" alias="AdminVO" />
 		<typeAlias type="com.koreait.webboard.vo.BoardVO" alias="BoardVO" />
 		<typeAlias type="com.koreait.webboard.vo.ReplyVO" alias="ReplyVO" />
-		<typeAlias type="com.koreait.webboard.vo.UsersVO" alias="UsersVO" />
+		<typeAlias type="com.koreait.webboard.vo.UserVO" alias="UserVO" />
 		<typeAlias type="com.koreait.webboard.common.paging.PageCriteria" alias="PageCriteria" />
 	</typeAliases>
 
 	<mappers>
 			<mapper resource="mapper/adminMapper.xml" />
-			<mapper resource="mapper/replyMapper.xml" />
 			<mapper resource="mapper/boardMapper.xml" />
-			<mapper resource="mapper/usersMapper.xml" />
+			<mapper resource="mapper/replyMapper.xml" />
+			<mapper resource="mapper/userMapper.xml" />
 			
 			<!-- 같은 결과 -->
-			<!-- <mapper url="classpath:mapper/usersMapper.xml" /> -->
+			<!-- <mapper url="classpath:mapper/userMapper.xml" /> -->
 	</mappers>
 	
 </configuration>

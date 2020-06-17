@@ -16,21 +16,24 @@ public class ReplyController {
 	@Autowired
 	private ReplyService replyService;
 	
+	// 해당 글의 댓글 작성
+	@RequestMapping("/board/writeReply")
+	@ResponseBody
+	public void insertReply(ReplyVO vo) {
+		replyService.insertReply(vo);
+	}
+	
+	// 해당 글의 댓글 조회
 	@RequestMapping("/board/selectReply")
 	@ResponseBody
 	public List<ReplyVO> selectReply(BoardVO vo) {
 		return replyService.selectReply(vo);
 	}
 	
-	@RequestMapping("/board/writeReply")
-	@ResponseBody
-	public void insertReply(ReplyVO vo) {
-		replyService.insertReply(vo);
-	}
-
+	// 해당 글의 댓글 삭제
 	@RequestMapping("/board/deleteReply")
 	@ResponseBody
-	public void deleteReply(ReplyVO vo) {
+	public void deleteReply(ReplyVO vo) throws Exception{
 		replyService.deleteReply(vo);
 	}
 
