@@ -15,12 +15,12 @@
 	<%@include file="module/top.jsp"%>
 
 	<div class="container wrapper">
-		<h2 style="margin-top: 60px; display: inline-block;">정보 게시판</h2>
+		<h2 style="margin-top: 60px; display: inline-block;">Spring Web Board</h2>
 
 		<nav class="navbar navbar-expand-lg  md-color">
 			<!-- Navbar brand -->
 			<div class="mb-2">
-				<a class="navbar-brand" href="index${pageMaker.makeQuery(1) }&sort=b_regdate">작성일순</a>
+				<a class="navbar-brand" href="index${pageMaker.makeQuery(1) }&sort=b_regdate">최신순</a>
 				<a class="navbar-brand" href="index${pageMaker.makeQuery(1) }&sort=b_readcount">조회수순</a>
 				<a class="navbar-brand"	href="index${pageMaker.makeQuery(1) }&sort=b_like">추천순</a> 
 			</div>
