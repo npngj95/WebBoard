@@ -19,4 +19,5 @@ Spring_BoardWeb_TeamProject ( 팀원 3인 : 조상익 / 이규호 / 우치경 )
 - Tomcat 9
 - Maven 3.8 
 
-## 프로그램 구동 예시
+## 프로그램 구동 예시 (이미지 클릭 시 이동)
+[![Watch the video](https://img.youtube.com/vi/VBBJe7n8v6s/maxresdefault.jpg)](https://www.youtube.com/watch?v=VBBJe7n8v6s)
